@@ -1,0 +1,3738 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PJOK Smart – Media Pembelajaran Interaktif</title>
+<style>
+:root {
+  --orange: #17402F;
+  --orange-dark: #0F2A20;
+  --orange-light: #EAF2EC;
+  --navy: #F7F8F3;
+  --navy2: #EEF2EC;
+  --slate: #E2E8F0;
+  --gold: #F5B82E;
+  --red: #FF4757;
+  --white: #FFFFFF;
+  --gray: #64748B;
+  --gray-light: #F8FAFC;
+  --radius: 16px;
+  --shadow: 0 8px 32px rgba(0,0,0,0.12);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'DM Sans', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+  background: var(--navy);
+  color: #1A202C;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── SCREENS ── */
+.screen { display: none; min-height: 100vh; }
+.screen.active { display: flex; flex-direction: column; }
+
+/* ── SPLASH / LOGIN ── */
+/* ══ HERO LOGIN LAYOUT ══ */
+#screen-login {
+  background: #F8FAFC;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: stretch;
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+}
+
+/* LEFT PANEL – visual hero */
+.login-hero-panel {
+  flex: 1.1;
+  background: linear-gradient(160deg, #0f3460 0%, #16213e 40%, #1a1a2e 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 40px 44px;
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+}
+.login-hero-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(23,64,47,0.35) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(16,185,129,0.2) 0%, transparent 50%);
+}
+.login-hero-bg-shape {
+  position: absolute;
+  right: -80px; top: -80px;
+  width: 420px; height: 420px;
+  border-radius: 50%;
+  background: rgba(23,64,47,0.12);
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.login-hero-bg-shape2 {
+  position: absolute;
+  left: -60px; bottom: -60px;
+  width: 300px; height: 300px;
+  border-radius: 50%;
+  background: rgba(16,185,129,0.08);
+  border: 1px solid rgba(255,255,255,0.04);
+}
+.login-hero-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: relative; z-index: 1;
+}
+.login-hero-logo {
+  width: 40px; height: 40px;
+  background: linear-gradient(135deg, #17402F, #10B981);
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+}
+.login-hero-brand {
+  font-family: 'Syne', system-ui, 'Segoe UI', Roboto, Arial, sans-serif;
+  font-weight: 800; font-size: 18px;
+  color: #FFFFFF;
+}
+.login-hero-center {
+  position: relative; z-index: 1;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.login-hero-tag {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #34D399;
+  margin-bottom: 16px;
+}
+.login-hero-headline {
+  font-family: 'Syne', system-ui, 'Segoe UI', Roboto, Arial, sans-serif;
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 800;
+  color: #FFFFFF;
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+.login-hero-headline .hl {
+  background: linear-gradient(90deg, #34D399, #4C9A74);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 8px;
+}
+.login-hero-desc {
+  font-size: 14px;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.7;
+  max-width: 340px;
+  margin-bottom: 32px;
+}
+.login-hero-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.login-hero-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 20px;
+  padding: 7px 14px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.85);
+  font-weight: 500;
+}
+.login-hero-bottom {
+  position: relative; z-index: 1;
+  font-size: 11px;
+  color: rgba(255,255,255,0.3);
+}
+
+/* LARGE SPORT VISUAL */
+.login-sport-visual {
+  position: absolute;
+  right: -30px; top: 50%;
+  transform: translateY(-50%);
+  font-size: 220px;
+  opacity: 0.06;
+  pointer-events: none;
+  user-select: none;
+  line-height: 1;
+}
+
+/* RIGHT PANEL – form */
+.login-form-panel {
+  flex: 0 0 420px;
+  background: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 48px 44px;
+  position: relative;
+  box-shadow: -8px 0 40px rgba(0,0,0,0.06);
+  overflow-y: auto;
+}
+.login-form-header { margin-bottom: 32px; }
+.login-form-title {
+  font-family: 'Syne', system-ui, 'Segoe UI', Roboto, Arial, sans-serif;
+  font-size: 26px; font-weight: 800;
+  color: #0F172A;
+  margin-bottom: 6px;
+}
+.login-form-sub { font-size: 14px; color: #64748B; line-height: 1.5; }
+
+.login-divider {
+  height: 1px; background: #F1F5F9;
+  margin: 20px 0;
+}
+
+/* Mobile: stack vertically */
+@media (max-width: 720px) {
+  #screen-login { flex-direction: column; }
+  .login-hero-panel {
+    flex: none; min-height: 240px;
+    padding: 28px 24px;
+  }
+  .login-hero-headline { font-size: 28px; }
+  .login-sport-visual { font-size: 140px; }
+  .login-form-panel {
+    flex: none; padding: 32px 24px;
+    box-shadow: 0 -4px 24px rgba(0,0,0,0.06);
+  }
+  .login-hero-desc { display: none; }
+}
+
+/* ── OLD CARD (unused now but keep for guru screen) ── */
+.login-card {
+  background: #FFFFFF;
+  border: 1px solid rgba(23,64,47,0.2);
+  border-radius: 24px;
+  padding: 48px 40px;
+  width: 100%;
+  max-width: 420px;
+  position: relative;
+  z-index: 1;
+  animation: fadeUp 0.6s ease;
+}
+.logo-area { text-align: center; margin-bottom: 32px; }
+.logo-icon {
+  width: 72px; height: 72px;
+  background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+  border-radius: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  margin-bottom: 16px;
+  box-shadow: 0 0 40px rgba(255,107,43,0.3);
+}
+.app-title {
+  font-family: 'Syne', system-ui, 'Segoe UI', Roboto, Arial, sans-serif;
+  font-size: 28px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #17402F, #0F2A20);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.app-sub { color: #64748B; font-size: 14px; margin-top: 4px; }
+.form-group { margin-bottom: 18px; }
+.form-label { font-size: 13px; font-weight: 500; color: var(--gray); margin-bottom: 8px; display: block; }
+.form-input {
+  width: 100%;
+  padding: 14px 18px;
+  background: #FFFFFF;
+  border: 1px solid #CBD5E1;
+  border-radius: 12px;
+  color: #1A202C;
+  font-family: 'DM Sans', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.form-input:focus { border-color: var(--orange); box-shadow: 0 0 0 3px rgba(255,107,43,0.15); }
+.form-input::placeholder { color: #94A3B8; }
+.form-select {
+  width: 100%;
+  padding: 14px 18px;
+  background: #FFFFFF;
+  border: 1px solid #CBD5E1;
+  border-radius: 12px;
+  color: #1A202C;
+  font-family: 'DM Sans', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+  font-size: 15px;
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2317402F' stroke-width='2' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  transition: border-color 0.2s;
+}
+.form-select:focus { border-color: var(--orange); }
+.form-select option { background: #F8FAFC; color: #1A202C; }
+.btn-primary {
+  width: 100%;
+  padding: 15px;
+  background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+  border: none;
+  border-radius: 12px;
+  color: white;
+  font-family: 'Syne', system-ui, 'Segoe UI', Roboto, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+  box-shadow: 0 4px 20px rgba(255,107,43,0.35);
+  margin-top: 8px;
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(255,107,43,0.45); }
+.btn-primary:active { transform: translateY(0); }
+.login-note { text-align: center; margin-top: 16px; font-size: 12px; color: #64748B; }
+
+/* ── TOPBAR ── */
+.topbar {
+  background: rgba(255,255,255,0.97);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(23,64,47,0.15);
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky; top: 0; z-index: 100;
+}
+.topbar-left { display: flex; align-items: center; gap: 12px; }
+.topbar-logo {
+  width: 36px; height: 36px;
+  background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+}
+.topbar-title { font-family: 'Syne', system-ui, 'Segoe UI', Roboto, Arial, sans-serif; font-weight: 700; font-size: 18px; color: var(--orange); }
+.topbar-user { font-size: 13px; color: #64748B; }
+.topbar-user span { color: #1A202C; font-weight: 500; }
+.btn-back {
+  background: none; border: none; color: #64748B;
+  font-size: 22px; cursor: pointer; padding: 4px 8px;
+  transition: color 0.2s;
+}
+.btn-back:hover { color: var(--orange); }
+
+/* ── HOME DASHBOARD ── */
+#screen-home { background: var(--navy); }
+.home-hero {
+  background: linear-gradient(135deg, #DDEBE2, #EAF2EC);
+  padding: 28px 20px 32px;
+  position: relative;
+  overflow: hidden;
+}
+.home-hero::after {
+  content: '🏀';
+  position: absolute;
+  font-size: 120px;
+  right: -10px; top: 10px;
+  opacity: 0.08;
+}
+.hero-greeting { font-size: 13px; color: #17402F; font-weight: 500; text-transform: uppercase; letter-spacing: 1.5px; }
+.hero-name { font-family: 'Syne', system-ui, 'Segoe UI', Roboto, Arial, sans-serif; font-size: 26px; font-weight: 800; margin-top: 4px; }
+.hero-kelas { color: #64748B; font-size: 14px; margin-top: 2px; }
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(23,64,47,0.1);
+  border: 1px solid rgba(23,64,47,0.25);
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 12px;
+  color: var(--orange);
+  margin-top: 14px;
+}
+.progress-bar-wrap { margin-top: 16px; }
+.progress-label { font-size: 12px; color: var(--gray); margin-bottom: 6px; display: flex; justify-content: space-between; }
+.progress-bar { height: 6px; background: #E2E8F0; border-radius: 4px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, #17402F, #4C9A74); border-radius: 4px; transition: width 1s ease; }
+
+.home-section { padding: 20px; }
+.section-title {
+  font-family: 'Syne', system-ui, 'Segoe UI', Roboto, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: #64748B;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 14px;
+}
+.menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.menu-card {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: var(--radius);
+  padding: 22px 18px;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+.menu-card:hover { border-color: var(--orange); background: rgba(23,64,47,0.05); transform: translateY(-2px); }
+.menu-card.highlight { border-color: rgba(23,64,47,0.4); background: rgba(23,64,47,0.06); }
+.menu-icon { font-size: 32px; margin-bottom: 10px; }
+.menu-label { font-family: 'Syne', system-ui, 'Segoe UI', Roboto, Arial, sans-serif; font-weight: 700; font-size: 15px; }
+.menu-desc { font-size: 12px; color: #64748B; margin-top: 4px; line-height: 1.5; }
+.menu-badge-new {
+  position: absolute;
+  top: 12px; right: 12px;
+  background: var(--gold);
+  color: var(--navy);
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+.menu-card-wide {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 20px;
+}
+.menu-card-wide .menu-icon { font-size: 36px; margin-bottom: 0; }
+.menu-card-wide-text .menu-label { font-size: 16px; }
+
+/* ── MATERI SCREEN ── */
+#screen-materi { background: var(--navy); }
+.materi-hero {
+  background: linear-gradient(135deg, #DDEBE2 0%, #EAF2EC 100%);
+  padding: 20px;
+  text-align: center;
+}
+.materi-hero h2 { font-family: 'Syne', system-ui, 'Segoe UI', Roboto, Arial, sans-serif; font-size: 22px; font-weight: 800; }
+.materi-hero p { color: #64748B; font-size: 13px; margin-top: 6px; }
+
+.tab-bar {
+  display: flex;
+  overflow-x: auto;
+  gap: 8px;
+  padding: 16px 20px 0;
+  scrollbar-width: none;
+}
+.tab-bar::-webkit-scrollbar { display: none; }
+.tab-btn {
+  flex-shrink: 0;
+  padding: 8px 18px;
+  border: 1px solid #CBD5E1;
+  border-radius: 20px;
+  background: #F8FAFC;
+  color: #64748B;
+  font-family: 'DM Sans', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.tab-btn.active { background: var(--orange); border-color: var(--orange); color: white; font-weight: 600; }
+.tab-btn:hover:not(.active) { border-color: var(--orange); color: var(--orange); }
+
+.content-area { padding: 20px; flex: 1; }
+.tab-content { display: none; animation: fadeUp 0.3s ease; }
+.tab-content.active { display: block; }
+
+/* Cards */
+.info-card {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 14px;
+}
+.info-card h3 {
+  font-family: 'Syne', system-ui, 'Segoe UI', Roboto, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--orange);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.info-card p { font-size: 14px; line-height: 1.7; color: #374151; }
+.info-card ul { margin-left: 18px; }
+.info-card ul li { font-size: 14px; line-height: 1.8; color: #374151; margin-bottom: 4px; }
+.teknik-step {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 14px;
+  background: rgba(23,64,47,0.04);
+  border-radius: 12px;
+  border-left: 3px solid var(--orange);
+  margin-bottom: 12px;
+}
+.step-num {
+  width: 28px; height: 28px;
+  background: var(--orange);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 13px;
+  flex-shrink: 0;
+}
+.step-body h4 { font-weight: 600; font-size: 15px; }
+.step-body p { font-size: 13px; color: #6B7280; margin-top: 3px; line-height: 1.5; }
+.warning-card {
+  background: rgba(239,68,68,0.05);
+  border: 1px solid rgba(239,68,68,0.2);
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 10px;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+.warning-card p { font-size: 13px; color: #374151; line-height: 1.5; }
+.tip-card {
+  background: rgba(245,158,11,0.06);
+  border: 1px solid rgba(245,158,11,0.2);
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 10px;
+  display: flex;
+  gap: 10px;
+}
+.tip-card p { font-size: 13px; color: #374151; line-height: 1.5; }
+.servis-type-card {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 14px;
+  overflow: hidden;
+  margin-bottom: 14px;
+}
+.servis-type-header {
+  background: linear-gradient(90deg, rgba(23,64,47,0.08), transparent);
+  padding: 14px 18px;
+  font-family: 'Syne', system-ui, 'Segoe UI', Roboto, Arial, sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.servis-type-body { padding: 16px 18px; }
+.servis-type-body p { font-size: 13px; color: #374151; line-height: 1.6; margin-bottom: 8px; }
+.servis-badge {
+  display: inline-block;
+  background: rgba(23,64,47,0.1);
+  color: var(--orange);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 10px;
+  margin-right: 6px;
+  margin-bottom: 6px;
+}
+
+/* ── PANDUAN PROYEK ── */
+#screen-proyek { background: var(--navy); }
+.proyek-header {
+  background: linear-gradient(135deg, #DDEBE2, #F1F5F9);
+  padding: 24px 20px;
+  border-bottom: 1px solid rgba(23,64,47,0.12);
+}
+.proyek-title-area { display: flex; align-items: center; gap: 12px; margin-bottom: 6px; }
+.proyek-header h2 { font-family: 'Syne', system-ui, 'Segoe UI', Roboto, Arial, sans-serif; font-size: 22px; font-weight: 800; }
+.proyek-header p { color: #64748B; font-size: 13px; }
+.deadline-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(239,68,68,0.08);
+  border: 1px solid rgba(239,68,68,0.25);
+  color: #DC2626;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: 12px;
+}
+
+.fase-card {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 14px;
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+.fase-header {
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.fase-header:hover { background: rgba(23,64,47,0.04); }
+.fase-num {
+  width: 34px; height: 34px;
+  background: rgba(23,64,47,0.1);
+  border: 1px solid rgba(23,64,47,0.25);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Syne', system-ui, 'Segoe UI', Roboto, Arial, sans-serif;
+  font-weight: 800;
+  font-size: 14px;
+  color: var(--orange);
+  flex-shrink: 0;
+}
+.fase-header-text { flex: 1; }
+.fase-header-text strong { font-family: 'Syne', system-ui, 'Segoe UI', Roboto, Arial, sans-serif; font-size: 15px; display: block; }
+.fase-header-text span { font-size: 12px; color: #64748B; }
+.fase-chevron { font-size: 18px; color: #94A3B8; transition: transform 0.3s; }
+.fase-card.open .fase-chevron { transform: rotate(90deg); }
+.fase-body { display: none; padding: 0 18px 18px; }
+.fase-card.open .fase-body { display: block; }
+.fase-body ul { margin-left: 16px; }
+.fase-body ul li { font-size: 14px; line-height: 1.8; color: #374151; }
+.checklist-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.checklist-item:last-child { border-bottom: none; }
+.check-box {
+  width: 22px; height: 22px;
+  border: 2px solid rgba(23,64,47,0.35);
+  border-radius: 6px;
+  flex-shrink: 0;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s;
+  margin-top: 1px;
+}
+.check-box.checked { background: var(--orange); border-color: var(--orange); }
+.check-box.checked::after { content: '✓'; color: white; font-size: 12px; font-weight: 700; }
+.checklist-text { font-size: 14px; color: #374151; line-height: 1.5; }
+.checklist-text.checked-text { text-decoration: line-through; color: #94A3B8; }
+
+.rubrik-table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 12px; }
+.rubrik-table th {
+  background: rgba(23,64,47,0.1);
+  color: var(--orange);
+  padding: 10px 12px;
+  text-align: left;
+  font-weight: 600;
+}
+.rubrik-table td { padding: 10px 12px; border-bottom: 1px solid #F1F5F9; color: #374151; vertical-align: top; line-height: 1.4; }
+.rubrik-table tr:hover td { background: #F8FAFC; }
+
+/* ── KUIS ── */
+#screen-kuis { background: var(--navy); }
+.kuis-header {
+  background: linear-gradient(135deg, #EAF2EC, #F1F5F9);
+  padding: 24px 20px;
+  border-bottom: 1px solid rgba(23,64,47,0.15);
+}
+.kuis-header h2 { font-family: 'Syne', system-ui, 'Segoe UI', Roboto, Arial, sans-serif; font-size: 22px; font-weight: 800; }
+.kuis-header p { color: #64748B; font-size: 13px; margin-top: 4px; }
+.kuis-progress {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 14px;
+}
+.kuis-progress-bar { flex: 1; height: 6px; background: #E2E8F0; border-radius: 4px; overflow: hidden; }
+.kuis-progress-fill { height: 100%; background: linear-gradient(90deg, #2E6B4F, #17402F); transition: width 0.4s ease; }
+.kuis-num { font-size: 13px; color: #64748B; white-space: nowrap; }
+
+.question-card {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 16px;
+  padding: 22px 20px;
+  margin-bottom: 16px;
+}
+.question-text { font-family: 'Syne', system-ui, 'Segoe UI', Roboto, Arial, sans-serif; font-size: 16px; font-weight: 600; line-height: 1.5; margin-bottom: 18px; color: #1A202C; }
+.option-btn {
+  width: 100%;
+  padding: 14px 18px;
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  color: #1A202C;
+  font-family: 'DM Sans', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+  font-size: 14px;
+  text-align: left;
+  cursor: pointer;
+  margin-bottom: 10px;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.option-btn:hover:not(:disabled) { border-color: var(--orange); background: rgba(23,64,47,0.05); }
+.option-btn.selected { border-color: var(--orange); background: rgba(23,64,47,0.1); }
+.option-btn.correct { border-color: #10B981; background: rgba(16,185,129,0.1); }
+.option-btn.wrong { border-color: var(--red); background: rgba(255,71,87,0.15); }
+.option-letter {
+  width: 26px; height: 26px;
+  border-radius: 8px;
+  background: #E2E8F0;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 13px;
+  flex-shrink: 0;
+}
+.option-btn.selected .option-letter { background: var(--orange); }
+.option-btn.correct .option-letter { background: var(--orange); }
+.option-btn.wrong .option-letter { background: var(--red); }
+.feedback-box {
+  padding: 12px 16px;
+  border-radius: 10px;
+  font-size: 13px;
+  margin-top: 4px;
+  margin-bottom: 8px;
+  display: none;
+  line-height: 1.5;
+}
+.feedback-box.show { display: block; }
+.feedback-box.correct { background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.3); color: #065F46; }
+.feedback-box.wrong { background: rgba(255,71,87,0.1); border: 1px solid rgba(255,71,87,0.3); color: #B91C1C; }
+.btn-next {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+  border: none;
+  border-radius: 12px;
+  color: white;
+  font-family: 'Syne', system-ui, 'Segoe UI', Roboto, Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 8px;
+  display: none;
+}
+.btn-next.show { display: block; }
+
+/* RESULT */
+.result-screen {
+  padding: 40px 20px;
+  text-align: center;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.result-circle {
+  width: 120px; height: 120px;
+  border-radius: 50%;
+  border: 4px solid var(--orange);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  background: rgba(23,64,47,0.06);
+}
+.result-score { font-family: 'Syne', system-ui, 'Segoe UI', Roboto, Arial, sans-serif; font-size: 40px; font-weight: 800; color: var(--orange); }
+.result-label { font-size: 12px; color: var(--gray); }
+.result-title { font-family: 'Syne', system-ui, 'Segoe UI', Roboto, Arial, sans-serif; font-size: 22px; font-weight: 800; margin-bottom: 8px; }
+.result-desc { color: #64748B; font-size: 14px; margin-bottom: 28px; }
+.result-stats { display: flex; gap: 16px; margin-bottom: 28px; }
+.result-stat {
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  padding: 14px 20px;
+  flex: 1;
+  text-align: center;
+}
+.result-stat .val { font-family: 'Syne', system-ui, 'Segoe UI', Roboto, Arial, sans-serif; font-size: 24px; font-weight: 800; }
+.result-stat .lbl { font-size: 11px; color: var(--gray); margin-top: 2px; }
+.val.green { color: #10B981; }
+.val.red { color: var(--red); }
+
+/* ── REKAP SISWA ── */
+#screen-rekap { background: var(--navy); }
+.rekap-list { padding: 20px; }
+.rekap-item {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 14px;
+  padding: 16px 18px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.rekap-avatar {
+  width: 44px; height: 44px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--orange-dark), var(--orange));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Syne', system-ui, 'Segoe UI', Roboto, Arial, sans-serif;
+  font-weight: 800;
+  font-size: 16px;
+}
+.rekap-info { flex: 1; }
+.rekap-name { font-weight: 600; font-size: 15px; color: #1A202C; }
+.rekap-sub { font-size: 12px; color: #64748B; margin-top: 2px; }
+.rekap-score {
+  font-family: 'Syne', system-ui, 'Segoe UI', Roboto, Arial, sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--orange);
+}
+
+/* ── NAVBAR BOTTOM ── */
+.bottom-nav {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  background: rgba(255,255,255,0.97);
+  backdrop-filter: blur(20px);
+  border-top: 1px solid #E2E8F0;
+  display: none;
+  grid-template-columns: repeat(4, 1fr);
+  padding: 8px 0 max(8px, env(safe-area-inset-bottom));
+  z-index: 200;
+}
+.bottom-nav.show { display: grid; }
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 6px;
+  cursor: pointer;
+  transition: color 0.2s;
+  color: #64748B;
+  border: none;
+  background: none;
+}
+.nav-item.active { color: var(--orange); }
+.nav-icon { font-size: 22px; }
+.nav-label { font-size: 10px; font-weight: 500; }
+
+/* padding for bottom nav */
+.has-bottom-nav { padding-bottom: 80px; }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.anim { animation: fadeUp 0.35s ease both; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 480px) {
+  .login-card { padding: 36px 24px; }
+  .hero-name { font-size: 22px; }
+  .menu-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .menu-card { padding: 18px 14px; }
+}
+
+/* ── DIAGRAM ── */
+.diagram-wrap {
+  background: #FFFFFF;
+  border: 1px solid rgba(23,64,47,0.2);
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+.diagram-title {
+  background: rgba(255,107,43,0.1);
+  padding: 12px 18px;
+  font-family: 'Syne', system-ui, 'Segoe UI', Roboto, Arial, sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--orange);
+  display: flex; align-items: center; gap: 8px;
+}
+.diagram-body { padding: 16px; }
+.diagram-body svg { width: 100%; height: auto; display: block; }
+.diagram-caption { font-size: 12px; color: var(--gray); text-align: center; margin-top: 10px; line-height: 1.5; }
+.diagram-nav { display: flex; justify-content: center; gap: 8px; margin-top: 12px; }
+.diagram-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: rgba(255,255,255,0.15); cursor: pointer; border: none;
+  transition: background 0.2s;
+}
+.diagram-dot.active { background: var(--orange); }
+
+/* ── VIDEO GUIDE ── */
+#screen-video { background: var(--navy); }
+.video-guide-header {
+  background: linear-gradient(135deg, #EAF2EC, #F5F3FF);
+  padding: 24px 20px;
+  border-bottom: 1px solid rgba(23,64,47,0.12);
+}
+.video-guide-header h2 { font-family: 'Syne', system-ui, 'Segoe UI', Roboto, Arial, sans-serif; font-size: 22px; font-weight: 800; }
+.video-guide-header p { color: var(--gray); font-size: 13px; margin-top: 4px; }
+.vg-card {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 14px;
+  overflow: hidden;
+  margin-bottom: 14px;
+}
+.vg-card-header {
+  padding: 14px 18px;
+  font-family: 'Syne', system-ui, 'Segoe UI', Roboto, Arial, sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  display: flex; align-items: center; gap: 10px;
+  background: #F1F5F9;
+}
+.vg-card-body { padding: 4px 18px 16px; }
+.vg-row {
+  display: flex; gap: 12px; align-items: flex-start;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.vg-row:last-child { border-bottom: none; }
+.vg-icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+.vg-text strong { display: block; font-size: 14px; margin-bottom: 2px; }
+.vg-text span { font-size: 13px; color: #475569; line-height: 1.5; }
+.do-dont {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 4px;
+}
+.do-box, .dont-box {
+  border-radius: 10px; padding: 12px;
+}
+.do-box { background: rgba(16,185,129,0.06); border: 1px solid rgba(16,185,129,0.2); }
+.dont-box { background: rgba(255,71,87,0.08); border: 1px solid rgba(255,71,87,0.2); }
+.do-box .label { color: #047857; font-size: 11px; font-weight: 700; margin-bottom: 6px; }
+.dont-box .label { color: #B91C1C; font-size: 11px; font-weight: 700; margin-bottom: 6px; }
+.do-box ul, .dont-box ul { margin-left: 14px; }
+.do-box li, .dont-box li { font-size: 12px; line-height: 1.7; color: #1E293B; }
+.shot-list { margin-top: 8px; }
+.shot-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  font-size: 13px;
+}
+.shot-item:last-child { border-bottom: none; }
+.shot-badge {
+  background: rgba(23,64,47,0.1);
+  color: var(--orange);
+  font-size: 10px; font-weight: 700;
+  padding: 3px 8px; border-radius: 8px;
+  white-space: nowrap;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(23,64,47,0.25); border-radius: 4px; }
+
+.watermark {
+  position: fixed;
+  bottom: 20px;
+  right: 16px;
+  background: rgba(23,64,47,0.08);
+  border: 1px solid rgba(23,64,47,0.2);
+  border-radius: 20px;
+  padding: 5px 12px;
+  font-size: 11px;
+  color: rgba(23,64,47,0.7);
+  font-family: 'DM Sans', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+  z-index: 999;
+  pointer-events: none;
+  letter-spacing: 0.3px;
+  display: none;
+}
+
+
+
+/* ══ GURU LOGIN ══ */
+.guru-link {
+  text-align:center; margin-top:14px;
+  font-size:12px; color:var(--gray);
+}
+.guru-link a {
+  color:#17402F; cursor:pointer; text-decoration:underline; font-weight:600;
+}
+.guru-badge-pin {
+  background:rgba(23,64,47,0.06);
+  border:1px solid rgba(23,64,47,0.2);
+  border-radius:12px; padding:10px 14px;
+  font-size:12px; color:#17402F;
+  margin-top:12px; text-align:center;
+  display:none;
+}
+
+/* ══ DASHBOARD GURU ══ */
+#screen-guru { background:var(--navy); }
+.guru-hero {
+  background: linear-gradient(135deg,#DDEBE2,#F1F5F9);
+  padding:24px 20px 28px;
+  border-bottom:1px solid rgba(245,197,66,0.2);
+  position:relative; overflow:hidden;
+}
+.guru-hero::after {
+  content:'👨‍🏫';
+  position:absolute; font-size:100px;
+  right:-10px; top:5px; opacity:0.07;
+}
+.guru-hero-label { font-size:12px; color:#17402F; font-weight:600; text-transform:uppercase; letter-spacing:1.5px; }
+.guru-hero-title { font-family:'Syne',sans-serif; font-size:24px; font-weight:800; margin-top:6px; color:#1A202C; }
+.guru-hero-sub { color:#64748B; font-size:13px; margin-top:3px; }
+.guru-stat-row { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:18px; }
+.guru-stat {
+  background:#FFFFFF;
+  border:1px solid #E2E8F0;
+  border-radius:12px; padding:12px 10px; text-align:center;
+}
+.guru-stat .g-val { font-family:'Syne',sans-serif; font-size:22px; font-weight:800; color:var(--orange); }
+.guru-stat .g-lbl { font-size:10px; color:#64748B; margin-top:2px; }
+
+.guru-section { padding:16px 20px; }
+.guru-section-title {
+  font-family:'Syne',sans-serif; font-size:13px; font-weight:700;
+  color:#64748B; text-transform:uppercase; letter-spacing:1px;
+  margin-bottom:12px; display:flex; align-items:center; justify-content:space-between;
+}
+
+/* Guru filter bar */
+.filter-bar { display:flex; gap:8px; overflow-x:auto; padding-bottom:4px; scrollbar-width:none; margin-bottom:16px; }
+.filter-bar::-webkit-scrollbar { display:none; }
+.filter-chip {
+  flex-shrink:0; padding:6px 14px;
+  border:1px solid #CBD5E1;
+  border-radius:20px; background:#F8FAFC;
+  color:#64748B; font-size:12px; cursor:pointer;
+  font-family:'DM Sans',sans-serif; transition:all 0.2s;
+  white-space:nowrap;
+}
+.filter-chip.active { background:var(--orange); border-color:var(--orange); color:white; font-weight:600; }
+
+/* Guru table */
+.guru-table-wrap { overflow-x:auto; border-radius:14px; border:1px solid #E2E8F0; }
+.guru-table { width:100%; border-collapse:collapse; font-size:13px; }
+.guru-table th {
+  background:rgba(23,64,47,0.08); color:var(--orange);
+  padding:12px 14px; text-align:left; font-weight:600; white-space:nowrap;
+}
+.guru-table td { padding:11px 14px; border-bottom:1px solid #F1F5F9; color:#374151; vertical-align:middle; }
+.guru-table tr:last-child td { border-bottom:none; }
+.guru-table tr:hover td { background:rgba(23,64,47,0.02); }
+.score-pill {
+  display:inline-block; padding:3px 10px; border-radius:12px;
+  font-weight:700; font-size:12px; font-family:'Syne',sans-serif;
+}
+.score-pill.A { background:#D1FAE5; color:#047857; }
+.score-pill.B { background:#FEF3C7; color:#92400E; }
+.score-pill.C { background:#FFEDD5; color:#9A3412; }
+.score-pill.D { background:#FEE2E2; color:#B91C1C; }
+.rank-badge {
+  width:22px; height:22px; border-radius:50%;
+  display:inline-flex; align-items:center; justify-content:center;
+  font-size:11px; font-weight:800;
+}
+.rank-badge.gold { background:rgba(245,197,66,0.2); color:#B45309; }
+.rank-badge.silver { background:rgba(192,192,192,0.15); color:#CCC; }
+.rank-badge.bronze { background:rgba(205,127,50,0.15); color:#CD7F32; }
+.rank-badge.normal { background:#F1F5F9; color:var(--gray); }
+
+/* Guru chart bars */
+.dist-row { display:flex; align-items:center; gap:10px; margin-bottom:10px; }
+.dist-label { font-size:12px; width:28px; text-align:right; flex-shrink:0; }
+.dist-bar-wrap { flex:1; height:18px; background:#E2E8F0; border-radius:6px; overflow:hidden; }
+.dist-bar { height:100%; border-radius:6px; transition:width 0.8s ease; }
+.dist-count { font-size:12px; color:#64748B; width:40px; flex-shrink:0; }
+
+/* Guru export btn */
+.btn-export {
+  display:flex; align-items:center; gap:8px;
+  padding:11px 18px; border-radius:12px;
+  background:rgba(23,64,47,0.08); border:1px solid rgba(23,64,47,0.25);
+  color:var(--orange); font-family:'Syne',sans-serif; font-weight:700;
+  font-size:13px; cursor:pointer; transition:all 0.2s;
+  margin-bottom:16px;
+}
+.btn-export:hover { background:rgba(255,107,43,0.2); }
+.btn-logout-guru {
+  width:100%; padding:12px;
+  background:rgba(239,68,68,0.06); border:1px solid rgba(239,68,68,0.2);
+  border-radius:12px; color:#DC2626;
+  font-family:'Syne',sans-serif; font-weight:600; font-size:14px;
+  cursor:pointer; margin-top:8px; transition:all 0.2s;
+}
+.btn-logout-guru:hover { background:rgba(255,71,87,0.18); }
+
+/* Improved Rekap */
+.rekap-header-bar {
+  padding:16px 20px 0;
+  display:flex; align-items:center; justify-content:space-between;
+}
+.rekap-my-score {
+  background:rgba(23,64,47,0.06);
+  border:1px solid rgba(23,64,47,0.15);
+  border-radius:14px; padding:14px 18px;
+  margin:0 20px 16px; display:flex; align-items:center; gap:14px;
+}
+.rekap-my-circle {
+  width:54px; height:54px; border-radius:50%;
+  border:3px solid var(--orange);
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  flex-shrink:0;
+}
+.rekap-my-val { font-family:'Syne',sans-serif; font-size:20px; font-weight:800; color:var(--orange); line-height:1; }
+.rekap-my-lbl { font-size:9px; color:var(--gray); margin-top:1px; }
+.rekap-my-info h4 { font-family:'Syne',sans-serif; font-weight:700; font-size:15px; }
+.rekap-my-info p { font-size:12px; color:#64748B; margin-top:2px; }
+.rekap-rank-badge {
+  margin-left:auto; flex-shrink:0;
+  background:rgba(245,197,66,0.15); color:var(--gold);
+  border-radius:12px; padding:4px 12px;
+  font-size:12px; font-weight:700;
+}
+
+/* Timer in kuis */
+.kuis-timer {
+  display:flex; align-items:center; gap:6px;
+  font-family:'Syne',sans-serif; font-size:14px; font-weight:700;
+  color:#17402F;
+}
+.kuis-timer.warn { color:var(--red); }
+.timer-circle {
+  width:34px; height:34px; border-radius:50%;
+  border:2px solid #17402F; display:flex;
+  align-items:center; justify-content:center;
+  font-size:13px; font-weight:800;
+  transition:border-color 0.3s, color 0.3s;
+}
+.timer-circle.warn { border-color:var(--red); color:var(--red); }
+
+/* Kuis review */
+.review-card {
+  background:#FFFFFF; border:1px solid #E2E8F0;
+  border-radius:14px; padding:16px 18px; margin-bottom:12px;
+}
+.review-card .review-q { font-size:14px; font-weight:600; margin-bottom:10px; line-height:1.5; }
+.review-ans {
+  display:flex; align-items:flex-start; gap:8px;
+  padding:8px 12px; border-radius:10px;
+  font-size:13px; margin-bottom:6px;
+}
+.review-ans.correct { background:rgba(0,193,106,0.1); border:1px solid rgba(0,193,106,0.25); }
+.review-ans.wrong-pick { background:rgba(255,71,87,0.1); border:1px solid rgba(255,71,87,0.25); }
+.review-ans.neutral { background:#F8FAFC; border:1px solid #E2E8F0; }
+.review-fb { font-size:12px; color:#64748B; margin-top:6px; line-height:1.5; padding-top:8px; border-top:1px solid #F1F5F9; }
+
+</style>
+</head>
+<body>
+
+<!-- ══════════════════ SCREEN: LOGIN ══════════════════ -->
+<div id="screen-login" class="screen active">
+<style>
+#screen-login{display:block;background:#F7F8F3;padding:0;overflow:visible;min-height:100vh;font-family:'Inter','DM Sans',sans-serif;color:#1B2B24}
+#screen-login.screen:not(.active){display:none}
+.gl-hero{position:relative;background:radial-gradient(ellipse at 75% 20%,#2E6B4F 0,#17402F 45%,#0F2A20 100%);color:#fff;padding:0 6vw 70px;overflow:hidden}
+.gl-court{position:absolute;inset:0;width:100%;height:100%;opacity:.13;pointer-events:none}
+.gl-nav{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;padding:22px 0}
+.gl-logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px}
+.gl-logo i{font-style:normal;width:34px;height:34px;border-radius:10px;background:#F5B82E;display:grid;place-items:center}
+.gl-links{display:flex;align-items:center;gap:28px;font-size:13px}
+.gl-links a{color:#D7E6DD;text-decoration:none;cursor:pointer}
+.gl-links a:hover{color:#fff}
+.gl-cta{background:#F5B82E;color:#0F2A20!important;font-weight:700;border-radius:8px;padding:9px 18px}
+.gl-grid{position:relative;z-index:2;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(300px,380px);gap:48px;align-items:center;padding-top:56px}
+.gl-copy h1{font-size:clamp(34px,5vw,58px);font-weight:800;line-height:1.08;letter-spacing:-.02em;max-width:560px}
+.gl-copy p.lead{margin-top:18px;max-width:440px;color:#C9DCD0;font-size:15px;line-height:1.7}
+.gl-btns{display:flex;gap:12px;margin-top:30px;flex-wrap:wrap}
+.gl-b{border:0;border-radius:8px;padding:13px 24px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit}
+.gl-b.y{background:#F5B82E;color:#0F2A20}
+.gl-b.o{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.6)}
+.gl-card{background:#fff;color:#1B2B24;border-radius:16px;padding:26px 24px;box-shadow:0 24px 60px rgba(0,0,0,.28)}
+.gl-card h3{font-size:19px;font-weight:800}
+.gl-card .sub{font-size:12.5px;color:#6A7A72;margin:4px 0 16px;line-height:1.5}
+.gl-card .btn-primary{background:#17402F;box-shadow:none;border-radius:10px;font-family:inherit;font-size:14px;margin-top:4px}
+.gl-card .btn-primary:hover{background:#0F2A20;box-shadow:none}
+.gl-card .form-input,.gl-card .form-select{border-color:#D5DDD7;font-family:inherit}
+.gl-card .form-input:focus,.gl-card .form-select:focus{border-color:#17402F;box-shadow:0 0 0 3px rgba(23,64,47,.15)}
+.gl-card a{display:block;text-align:center;margin-top:14px;font-size:12px;color:#17402F;font-weight:600;cursor:pointer;text-decoration:underline}
+.gl-sec{padding:72px 6vw 0}
+.gl-eyebrow{font-size:12px;color:#6A7A72;margin-bottom:6px}
+.gl-sec h2{font-size:28px;font-weight:800;letter-spacing:-.01em}
+.gl-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:26px}
+.gl-svc{background:#fff;border:1px solid #E3E8E2;border-radius:14px;padding:20px 18px;cursor:pointer;transition:.2s}
+.gl-svc:hover{border-color:#17402F;transform:translateY(-3px)}
+.gl-svc .ic{width:38px;height:38px;border-radius:10px;background:#EAF2EC;display:grid;place-items:center;font-size:19px;margin-bottom:14px}
+.gl-svc b{display:block;font-size:15px;margin-bottom:6px}
+.gl-svc span{font-size:12.5px;color:#6A7A72;line-height:1.6;display:block}
+.gl-about{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.gl-about p{margin-top:14px;color:#566860;line-height:1.75;font-size:14px;max-width:460px}
+.gl-vis{border-radius:16px;min-height:260px;background:linear-gradient(135deg,#2E6B4F,#17402F);display:grid;place-items:center;position:relative;overflow:hidden}
+.gl-vis svg{width:70%;max-width:300px}
+.gl-stats{margin:72px 6vw 0;background:#17402F;color:#fff;border-radius:16px;display:grid;grid-template-columns:1.1fr repeat(3,1fr);overflow:hidden}
+.gl-stats>div{padding:34px 28px}
+.gl-stats .first{background:#0F2A20}
+.gl-stats .first small{color:#F5B82E;font-size:12px}
+.gl-stats .first h3{font-size:24px;margin-top:6px}
+.gl-stats .n{font-size:40px;font-weight:800;color:#fff;letter-spacing:-.02em}
+.gl-stats .l{font-size:12px;color:#B6CCBF;margin-top:4px}
+.gl-foot{padding:36px 6vw;color:#6A7A72;font-size:12px;text-align:center}
+@media(max-width:900px){.gl-grid{grid-template-columns:1fr;gap:34px;padding-top:34px}.gl-cards{grid-template-columns:1fr 1fr}.gl-about{grid-template-columns:1fr;gap:28px}.gl-stats{grid-template-columns:1fr 1fr 1fr}.gl-stats .first{grid-column:1/-1}}
+@media(max-width:560px){.gl-links a:not(.gl-cta){display:none}.gl-cards{grid-template-columns:1fr}.gl-stats>div{padding:22px 16px}.gl-stats .n{font-size:30px}.gl-sec{padding-top:52px}}
+</style>
+<header class="gl-hero">
+ <svg class="gl-court" viewBox="0 0 800 500" preserveAspectRatio="xMidYMid slice" fill="none" stroke="#fff" stroke-width="3"><rect x="40" y="40" width="720" height="420"/><rect x="290" y="40" width="220" height="190"/><circle cx="400" cy="230" r="70"/><path d="M130 40v120a270 270 0 0 0 540 0V40"/><circle cx="400" cy="70" r="22"/></svg>
+ <nav class="gl-nav"><div class="gl-logo"><i>🏀</i>PJOK Smart</div>
+  <div class="gl-links"><a onclick="glGo('gl-fitur')">Fitur</a><a onclick="glGo('gl-tentang')">Tentang</a><a onclick="glGo('gl-angka')">Isi Media</a><a class="gl-cta" onclick="openGuruLogin()">Masuk Guru</a></div></nav>
+ <div class="gl-grid">
+  <div class="gl-copy"><h1>Kuasai dribbling basket dengan media belajar pintar</h1>
+   <p class="lead">Pelajari teknik, uji pemahaman lewat kuis, lalu praktikkan lewat proyek. Semua ada dalam satu aplikasi untuk siswa kelas XI.</p>
+   <div class="gl-btns"><button class="gl-b y" onclick="document.getElementById('input-nama').focus()">Mulai Belajar</button><button class="gl-b o" onclick="glGo('gl-fitur')">Lihat Fitur</button></div></div>
+  <div class="gl-card"><h3>Selamat datang!</h3><div class="sub">Isi data kamu untuk mulai belajar dribbling bola basket.</div>
+   <div class="form-group"><label class="form-label">Nama Lengkap</label><input id="input-nama" type="text" class="form-input" placeholder="Contoh: Ahmad Fauzi" autocomplete="off"></div>
+   <div class="form-group"><label class="form-label">Kelas</label><select id="input-kelas" class="form-select"><option value="" disabled selected>Pilih kelas kamu...</option><option>XI A</option><option>XI B</option><option>XI C</option><option>XI D</option><option>XI E</option><option>XI F</option><option>XI G</option><option>XI H</option><option>XI I</option></select></div>
+   <button class="btn-primary" onclick="doLogin()">Mulai Belajar →</button>
+   <a onclick="openGuruLogin()">👨‍🏫 Masuk sebagai Guru</a></div>
+ </div>
+</header>
+<section class="gl-sec" id="gl-fitur"><div class="gl-eyebrow">Yang kamu dapat</div><h2>Fitur Belajar</h2>
+ <div class="gl-cards">
+  <div class="gl-svc" onclick="glNeed()"><div class="ic">📖</div><b>Materi</b><span>Pengertian, jenis, teknik, dan kesalahan umum dribbling, lengkap dengan diagram postur.</span></div>
+  <div class="gl-svc" onclick="glNeed()"><div class="ic">🎯</div><b>Panduan Proyek</b><span>Pilih proyek video atau game modifikasi, dengan checklist dan rubrik penilaian.</span></div>
+  <div class="gl-svc" onclick="glNeed()"><div class="ic">✏️</div><b>Kuis</b><span>Soal pilihan ganda dengan umpan balik langsung dan review jawaban di akhir.</span></div>
+  <div class="gl-svc" onclick="glNeed()"><div class="ic">📊</div><b>Rekap Nilai</b><span>Lihat nilai kuis dan peringkat yang tersimpan di perangkat ini.</span></div>
+ </div></section>
+<section class="gl-sec gl-about" id="gl-tentang"><div class="gl-vis"><svg viewBox="0 0 200 200" fill="none" stroke="#F5B82E" stroke-width="4"><circle cx="100" cy="100" r="80"/><path d="M20 100h160M100 20v160M42 42c40 30 40 86 0 116M158 42c-40 30-40 86 0 116"/></svg></div>
+ <div><div class="gl-eyebrow">Tentang media</div><h2>Belajar dribbling jadi lebih terarah</h2><p>PJOK Smart membantu siswa memahami teknik dribbling bola basket secara mandiri. Baca materinya, cek pemahaman lewat kuis, lalu terapkan dalam proyek bersama kelompok. Kamu bisa membukanya lewat peramban di HP atau laptop.</p></div></section>
+<section class="gl-stats" id="gl-angka"><div class="first"><small>Isi media</small><h3>Apa yang ada di dalamnya</h3></div>
+ <div><div class="n">4</div><div class="l">Jenis dribbling</div></div><div><div class="n">10</div><div class="l">Soal tiap kuis</div></div><div><div class="n">2</div><div class="l">Pilihan proyek</div></div></section>
+<footer class="gl-foot">© Nurul Habibah · PJKR 2023 B</footer>
+<script>
+function glGo(id){document.getElementById(id).scrollIntoView({behavior:'smooth',block:'start'})}
+function glNeed(){window.scrollTo({top:0,behavior:'smooth'});setTimeout(function(){document.getElementById('input-nama').focus()},400)}
+</script>
+</div>
+
+<!-- ══════════════════ SCREEN: HOME ══════════════════ -->
+<div id="screen-home" class="screen">
+  <div class="topbar">
+    <div class="topbar-left">
+      <div class="topbar-logo">🏀</div>
+      <div class="topbar-title">PJOK Smart</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px"><div class="topbar-user">Hai, <span id="user-name-top"></span></div><button class="topbar-out" onclick="logoutToStart()">⎋ Keluar</button></div>
+  </div>
+
+  <div class="home-hero">
+    <div class="hero-greeting">🌟 Selamat Datang</div>
+    <div class="hero-name" id="hero-name">Siswa</div>
+    <div class="hero-kelas" id="hero-kelas">–</div>
+    <div class="hero-badge">📌 Materi Aktif: Dribbling Basket</div>
+    <div class="progress-bar-wrap">
+      <div class="progress-label">
+        <span>Progress Belajar</span>
+        <span id="progress-pct">0%</span>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+    </div>
+  </div>
+
+  <div class="home-section has-bottom-nav">
+    <div class="section-title">Menu Utama</div>
+    <div class="menu-grid">
+      <div class="menu-card highlight" onclick="goScreen('screen-materi')">
+        <div class="menu-icon">📖</div>
+        <div class="menu-label">Materi</div>
+        <div class="menu-desc">Pelajari teknik dribbling basket lengkap</div>
+      </div>
+      <div class="menu-card" onclick="goScreen('screen-proyek')">
+        <div class="menu-icon">🎯</div>
+        <div class="menu-label">Panduan Proyek</div>
+        <div class="menu-desc">Instruksi & checklist Basketball Showcase</div>
+        <div class="menu-badge-new">NEW</div>
+      </div>
+      <div class="menu-card" onclick="goScreen('screen-kuis')">
+        <div class="menu-icon">✏️</div>
+        <div class="menu-label">Kuis</div>
+        <div class="menu-desc">Uji pemahamanmu dengan soal interaktif</div>
+      </div>
+      <div class="menu-card" onclick="goScreen('screen-rekap')">
+        <div class="menu-icon">📊</div>
+        <div class="menu-label">Rekap Nilai</div>
+        <div class="menu-desc">Nilai kuis yang tersimpan di perangkat ini</div>
+      </div>
+    </div>
+
+    <div class="section-title" style="margin-top:22px;">Informasi Proyek</div>
+    <div class="menu-card menu-card-wide" onclick="goScreen('screen-proyek')">
+      <div class="menu-icon">🏆</div>
+      <div class="menu-card-wide-text">
+        <div class="menu-label">Basketball Dribbling Showcase</div>
+        <div class="menu-desc">2 pilihan proyek: <strong>Video Dribbling</strong> atau <strong>Game Modifikasi</strong>. Klik untuk lihat panduan lengkap!</div>
+      </div>
+      <span>›</span>
+    </div>
+    <div class="menu-card menu-card-wide" onclick="goScreen('screen-video')" style="margin-top:10px;">
+      <div class="menu-icon">🎬</div>
+      <div class="menu-card-wide-text">
+        <div class="menu-label">Panduan Rekam Video</div>
+        <div class="menu-desc">Tips merekam, sudut kamera, editing, dan struktur video proyek</div>
+      </div>
+      <span>›</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════ SCREEN: MATERI ══════════════════ -->
+<div id="screen-materi" class="screen">
+  <div class="topbar">
+    <button class="btn-back" onclick="goBack()">←</button>
+    <div style="flex:1;text-align:center;font-family:'Syne',sans-serif;font-weight:700;">Materi Basket</div>
+    <div style="width:40px;"></div>
+  </div>
+  <div class="materi-hero">
+    <h2>🏀 Dribbling Bola Basket</h2>
+    <p>Teknik dasar yang wajib dikuasai setiap pemain basket</p>
+  </div>
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTab(this,'tab-tujuan')">🎯 Tujuan</button>
+    <button class="tab-btn" onclick="switchTab(this,'tab-pengertian')">Pengertian</button>
+    <button class="tab-btn" onclick="switchTab(this,'tab-jenis')">Jenis Dribbling</button>
+    <button class="tab-btn" onclick="switchTab(this,'tab-teknik')">Teknik</button>
+    <button class="tab-btn" onclick="switchTab(this,'tab-diagram')">📐 Diagram</button>
+    <button class="tab-btn" onclick="switchTab(this,'tab-kesalahan')">Kesalahan</button>
+    <button class="tab-btn" onclick="switchTab(this,'tab-tips')">Tips</button>
+    <button class="tab-btn" onclick="switchTab(this,'tab-pemanasan')">🔥 Pemanasan</button>
+    <button class="tab-btn" onclick="switchTab(this,'tab-glosarium')">📖 Glosarium</button>
+  </div>
+  <div class="content-area has-bottom-nav">
+
+    <div class="tab-content active" id="tab-tujuan"><div class="info-card"><h3>🎯 Tujuan Pembelajaran</h3><p>Setelah menggunakan media ini, kamu diharapkan mampu:</p><ol><li>Menjelaskan pengertian, fungsi, dan aturan dasar dribbling.</li><li>Membedakan dribbling rendah, tinggi, crossover, dan behind-the-back serta situasi penggunaannya.</li><li>Mempraktikkan teknik dasar dribbling (posisi tubuh, pegangan, dorongan jari dan pergelangan, pandangan ke depan).</li><li>Mempraktikkan crossover dan behind-the-back dengan kontrol bola.</li><li>Mengenali dan memperbaiki kesalahan umum dribbling.</li></ol></div><div class="info-card"><h3>🧭 Petunjuk Penggunaan</h3><ol><li>Masuk dengan nama lengkap dan kelas. Gunakan nama dan kelas yang sama setiap kali agar progresmu tersimpan.</li><li>Baca tab Materi secara berurutan, lalu lakukan Pemanasan sebelum berlatih.</li><li>Latih teknik langkah demi langkah, lihat contoh gerak dan diagram.</li><li>Kerjakan Proyek sesuai pilihan kelompok dan centang checklist.</li><li>Kerjakan Kuis. Timer bersifat opsional.</li><li>Progres dan nilai tersimpan di perangkat ini saja.</li></ol></div><div class="info-card"><h3>📚 Referensi Aturan</h3><p>Aturan dribbling, carrying, double dribble, dan traveling mengacu pada <em>FIBA Official Basketball Rules</em> (Pasal Dribbling dan Traveling). Periksa edisi terbaru di fiba.basketball.</p></div></div><div class="tab-content" id="tab-pemanasan"><div class="info-card"><h3>🔥 Pemanasan (± 7 menit)</h3><ul><li>Jogging ringan 2 menit.</li><li>Mobilitas dinamis: putar pergelangan tangan, bahu, ayun lengan, leg swing, lunge ringan.</li><li>Ball handling di tempat: melingkarkan bola di pinggang, kepala, kaki (figure-8) 1 menit.</li><li>Dribbling di tempat tangan kanan dan kiri 1 menit.</li></ul></div><div class="info-card"><h3>🧊 Pendinginan (± 3 menit)</h3><ul><li>Jalan pelan 1 menit.</li><li>Regangan jari, pergelangan tangan, bahu, dan betis, tiap gerakan 15–20 detik.</li></ul></div><div class="info-card"><h3>🛡️ Keselamatan</h3><ul><li>Pastikan lantai kering dan bebas benda.</li><li>Pakai sepatu bertali dan baju olahraga, lepas jam tangan atau cincin, kuku pendek.</li><li>Beri jarak aman antarpemain minimal selebar rentangan lengan.</li><li>Pastikan bola cukup angin; hentikan latihan jika bola menggelinding ke area orang lain.</li><li>Berhenti jika nyeri, minum cukup, dan segera lapor guru bila ada cedera.</li></ul></div><div class="info-card"><h3>⏱️ Estimasi Waktu (perkiraan)</h3><ul><li>Baca materi: 15–20 menit</li><li>Pemanasan dan pendinginan: 10 menit</li><li>Latihan teknik: 20 menit</li><li>Kuis 10 soal: sekitar 10 menit</li><li>Proyek kelompok: dua pertemuan</li></ul></div></div><div class="tab-content" id="tab-glosarium"><div class="info-card"><h3>📖 Glosarium</h3><dl class="gloss"><dt>Dribbling</dt><dd>Menggiring bola dengan memantulkannya ke lantai.</dd><dt>Athletic stance</dt><dd>Posisi siap: kaki selebar bahu, lutut ditekuk, badan sedikit condong.</dd><dt>Flick</dt><dd>Dorongan pergelangan tangan dan jari untuk memantulkan bola.</dd><dt>Cushion</dt><dd>Gerakan tangan mengikuti bola ke atas sebentar agar bola tidak memantul liar.</dd><dt>Court vision</dt><dd>Kemampuan membaca situasi lapangan sambil tetap mendribble.</dd><dt>Dribbling rendah</dt><dd>Bola dipantulkan setinggi lutut atau lebih rendah.</dd><dt>Dribbling tinggi</dt><dd>Bola dipantulkan setinggi pinggang atau lebih.</dd><dt>Crossover</dt><dd>Memindahkan bola dari satu tangan ke tangan lain di depan tubuh.</dd><dt>Behind-the-back</dt><dd>Memindahkan bola ke tangan lain melewati belakang punggung.</dd><dt>Carrying (palming)</dt><dd>Pelanggaran: telapak tangan di bawah atau di sisi bola sehingga bola terbawa.</dd><dt>Double dribble</dt><dd>Pelanggaran: mendribble lagi setelah bola dipegang, atau dengan dua tangan sekaligus.</dd><dt>Traveling</dt><dd>Pelanggaran: melangkah lebih dari dua langkah sambil memegang bola.</dd><dt>Kaki pivot</dt><dd>Kaki yang tetap menapak saat pemain memegang bola dan memutar badan.</dd><dt>Ball feel</dt><dd>Kepekaan jari terhadap bola.</dd></dl></div></div>
+    <!-- TAB: Pengertian -->
+    <div class="tab-content" id="tab-pengertian">
+      <div class="info-card">
+        <h3>📌 Apa itu Dribbling?</h3>
+        <p>Dribbling adalah teknik menggiring bola basket dengan cara memantulkan bola ke lantai secara berulang menggunakan satu tangan. Dribbling memungkinkan pemain bergerak membawa bola tanpa melanggar peraturan.</p>
+      </div>
+      <div class="info-card">
+        <h3>⭐ Mengapa Dribbling Penting?</h3>
+        <p>Dribbling adalah <strong>fondasi utama permainan basket</strong>. Hampir semua gerakan ofensif dimulai dengan dribbling. Dribbling yang baik dapat:</p>
+        <ul>
+          <li>Membuka ruang untuk menembak atau mengoper</li>
+          <li>Melewati hadangan lawan (drive to the basket)</li>
+          <li>Mengontrol tempo permainan</li>
+          <li>Menghindari kehilangan bola secara cuma-cuma</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h3>📜 Aturan Dasar Dribbling</h3>
+        <ul>
+          <li>Hanya boleh menggunakan satu tangan saat memantulkan bola</li>
+          <li>Tidak boleh traveling: bergerak lebih dari dua langkah sambil memegang bola tanpa memantulkannya</li>
+          <li>Tidak boleh dribbling ganda (double dribble) — setelah dribbling berhenti (bola dipegang), tidak boleh mulai dribbling lagi; memantulkan bola dengan dua tangan sekaligus juga termasuk pelanggaran</li>
+          <li>Bola harus selalu dipantulkan ke lantai, bukan dipegang di udara</li>
+          <li>Tidak boleh carrying (palming): telapak tangan berada di bawah atau di sisi bola sehingga bola ikut terbawa atau tertahan sebelum didorong lagi ke lantai</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- TAB: Jenis Dribbling -->
+    <div class="tab-content" id="tab-jenis">
+      <div class="servis-type-card">
+        <div class="servis-type-header">🔵 Dribbling Rendah (Low Dribble)</div>
+        <div class="servis-type-body">
+          <p>Bola dipantulkan rendah setinggi lutut atau lebih rendah. Digunakan saat pemain sedang dijaga ketat oleh lawan.</p>
+          <div>
+            <span class="servis-badge">Kontrol Tinggi</span>
+            <span class="servis-badge">Saat Dijaga Ketat</span>
+          </div>
+          <p style="margin-top:8px"><strong>Tujuan:</strong> Menjaga bola tetap aman dari jangkauan lawan, mempertahankan penguasaan bola.</p>
+        </div>
+      </div>
+      <div class="servis-type-card">
+        <div class="servis-type-header">🔴 Dribbling Tinggi (High Dribble)</div>
+        <div class="servis-type-body">
+          <p>Bola dipantulkan setinggi pinggang atau lebih. Digunakan saat ruang terbuka dan pemain perlu bergerak cepat.</p>
+          <div>
+            <span class="servis-badge">Kecepatan</span>
+            <span class="servis-badge">Ruang Terbuka</span>
+          </div>
+          <p style="margin-top:8px"><strong>Tujuan:</strong> Mempercepat pergerakan, cocok untuk fast break atau berlari di lapangan terbuka.</p>
+        </div>
+      </div>
+      <div class="servis-type-card">
+        <div class="servis-type-header">🟡 Crossover Dribble</div>
+        <div class="servis-type-body">
+          <p>Bola dipindahkan dari satu tangan ke tangan lain dengan melewatkan bola di depan tubuh. Teknik untuk mengecoh lawan.</p>
+          <div>
+            <span class="servis-badge">Mengecoh Lawan</span>
+            <span class="servis-badge">Variasi Arah</span>
+          </div>
+        </div>
+      </div>
+      <div class="servis-type-card">
+        <div class="servis-type-header">⚪ Behind-the-Back Dribble</div>
+        <div class="servis-type-body">
+          <p>Bola dipindahkan dari satu tangan ke tangan lain dengan melewatkan bola di belakang punggung.</p>
+          <div>
+            <span class="servis-badge">Lanjutan</span>
+            <span class="servis-badge">Perlindungan Bola</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: Teknik -->
+    <div class="tab-content" id="tab-teknik">
+      <div class="info-card">
+        <h3>🎯 Teknik Dribbling Dasar – Step by Step</h3>
+      </div>
+      <div class="teknik-step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h4>Posisi Berdiri (Stance)</h4>
+          <p>Berdiri dengan kaki dibuka selebar bahu. Lutut sedikit ditekuk (athletic stance), badan condong ke depan. Berat badan merata di kedua kaki agar bisa bergerak cepat ke segala arah.</p>
+        </div>
+      </div>
+      <div class="teknik-step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h4>Cara Memegang Bola</h4>
+          <p>Jari-jari tangan terbuka lebar dan sedikit melengkung. Bola ditopang oleh jari-jari, <em>bukan telapak tangan</em>. Ini memberi kontrol dan kepekaan terhadap bola (ball feel).</p>
+        </div>
+      </div>
+      <div class="teknik-step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h4>Gerakan Memantulkan Bola</h4>
+          <p>Dorong bola ke lantai menggunakan jari-jari dengan gerakan pergelangan tangan ke bawah (flick). Jangan memukul bola — dorong secara terkontrol. Bola harus memantul kembali ke tangan secara alami.</p>
+        </div>
+      </div>
+      <div class="teknik-step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <h4>Posisi Tangan Saat Menerima Bola</h4>
+          <p>Ketika bola memantul ke atas, sambut dengan jari-jari yang rileks. Tangan mengikuti gerakan bola ke atas sebentar (cushion), lalu dorong kembali ke lantai. Ini menciptakan ritme dribbling yang mulus.</p>
+        </div>
+      </div>
+      <div class="teknik-step">
+        <div class="step-num">5</div>
+        <div class="step-body">
+          <h4>Pandangan Mata</h4>
+          <p>Latih untuk melihat ke depan (tidak ke bola) saat dribbling. Pandangan ke depan memungkinkan kamu melihat rekan, lawan, dan situasi lapangan secara keseluruhan — ini disebut <em>court vision</em>.</p>
+        </div>
+      </div><div class="info-card"><h3>🟡 Teknik Crossover Dribble</h3><p>Fungsi: mengubah arah sambil mengecoh lawan.</p></div><div class="teknik-step"><div class="step-num">1</div><div class="step-body"><h4>Mulai dari dribbling rendah</h4><p>Posisi athletic stance, bola dipantulkan setinggi lutut dengan tangan dominan di sisi luar badan. Pandangan ke depan.</p></div></div><div class="teknik-step"><div class="step-num">2</div><div class="step-body"><h4>Dorong bola secara diagonal</h4><p>Dengan jari dan pergelangan, dorong bola ke arah diagonal sehingga memantul rendah di depan tubuh, menuju sisi tangan yang lain.</p></div></div><div class="teknik-step"><div class="step-num">3</div><div class="step-body"><h4>Terima dengan tangan lawan</h4><p>Tangan lain menyambut bola setelah memantul (cushion), tubuh dan bahu menjadi pelindung antara bola dan lawan.</p></div></div><div class="teknik-step"><div class="step-num">4</div><div class="step-body"><h4>Ubah arah dengan langkah</h4><p>Tanam kaki di sisi awal, lalu dorong tubuh ke arah baru dan lanjutkan dribbling rendah. Pantulan tetap rendah agar tidak mudah dicuri.</p></div></div><div class="info-card"><h3>⚪ Teknik Behind-the-Back Dribble</h3><p>Fungsi: mengubah arah sambil menjaga bola jauh dari lawan di depan. Dipelajari setelah crossover dikuasai.</p></div><div class="teknik-step"><div class="step-num">1</div><div class="step-body"><h4>Dribbling dengan tangan dominan</h4><p>Dribbling di sisi tubuh, bola setinggi pinggang ke bawah, kaki berlawanan dengan tangan dribbling di depan.</p></div></div><div class="teknik-step"><div class="step-num">2</div><div class="step-body"><h4>Bawa bola ke belakang pinggang</h4><p>Pindahkan tangan ke sisi bola dan ayunkan pergelangan sehingga bola melewati belakang punggung menuju sisi sebaliknya. Jangan memutar badan.</p></div></div><div class="teknik-step"><div class="step-num">3</div><div class="step-body"><h4>Terima di sisi lain</h4><p>Tangan yang lain menerima bola di samping pinggang, lalu dorong kembali ke lantai dan lanjutkan dribbling.</p></div></div><div class="teknik-step"><div class="step-num">4</div><div class="step-body"><h4>Latih bertahap</h4><p>Mulai berdiri diam, lalu berjalan pelan, baru tambah kecepatan. Hindari melempar bola terlalu tinggi ke belakang.</p></div></div><div class="info-card"><h3>🎞️ Contoh Gerak Nyata</h3><div class="media-grid"><div class="media-slot" data-key="stance" data-label="Athletic stance"></div><div class="media-slot" data-key="lowhigh" data-label="Dribbling rendah & tinggi"></div><div class="media-slot" data-key="crossover" data-label="Crossover"></div><div class="media-slot" data-key="behind" data-label="Behind-the-back"></div></div></div>
+    </div>
+
+    <!-- TAB: DIAGRAM -->
+    <div class="tab-content" id="tab-diagram">
+      <div class="info-card" style="margin-bottom:14px;">
+        <h3>📐 Ilustrasi Postur Dribbling</h3>
+        <p>Geser antar diagram untuk melihat postur tubuh yang benar di setiap tahap dribbling dasar.</p>
+      </div>
+
+      <!-- Diagram Slider -->
+      <div id="diagram-slider">
+
+        <!-- Step 1: Posisi Berdiri -->
+        <div class="diagram-wrap" id="diag-0">
+          <div class="diagram-title">📍 Tahap 1 — Athletic Stance (Posisi Siap)</div>
+          <div class="diagram-body">
+            <svg viewBox="0 0 320 330" xmlns="http://www.w3.org/2000/svg">
+              <!-- Ground -->
+              <rect x="20" y="305" width="280" height="4" rx="2" fill="#2C3E50"/>
+              <!-- Feet -->
+              <ellipse cx="120" cy="307" rx="30" ry="7" fill="#FF6B2B" opacity="0.7"/>
+              <ellipse cx="200" cy="307" rx="30" ry="7" fill="#FF6B2B" opacity="0.7"/>
+              <text x="120" y="322" text-anchor="middle" fill="#FF6B2B" font-size="10" font-family="sans-serif">Kaki kiri</text>
+              <text x="200" y="322" text-anchor="middle" fill="#FF6B2B" font-size="10" font-family="sans-serif">Kaki kanan</text>
+              <!-- Legs bent -->
+              <line x1="125" y1="302" x2="140" y2="240" stroke="#AABBCC" stroke-width="11" stroke-linecap="round"/>
+              <line x1="195" y1="302" x2="180" y2="240" stroke="#AABBCC" stroke-width="11" stroke-linecap="round"/>
+              <!-- Knees (bent indicator) -->
+              <circle cx="140" cy="240" r="8" fill="#FF6B2B" opacity="0.5"/>
+              <circle cx="180" cy="240" r="8" fill="#FF6B2B" opacity="0.5"/>
+              <text x="110" y="235" fill="#FF6B2B" font-size="10" font-family="sans-serif">Lutut</text>
+              <text x="110" y="246" fill="#FF6B2B" font-size="10" font-family="sans-serif">ditekuk</text>
+              <!-- Upper legs -->
+              <line x1="140" y1="240" x2="155" y2="195" stroke="#AABBCC" stroke-width="11" stroke-linecap="round"/>
+              <line x1="180" y1="240" x2="165" y2="195" stroke="#AABBCC" stroke-width="11" stroke-linecap="round"/>
+              <!-- Hip -->
+              <ellipse cx="160" cy="193" rx="22" ry="11" fill="#8899AA"/>
+              <!-- Torso (lean forward) -->
+              <line x1="160" y1="190" x2="157" y2="120" stroke="#AABBCC" stroke-width="14" stroke-linecap="round"/>
+              <!-- Shoulders -->
+              <line x1="110" y1="130" x2="210" y2="130" stroke="#AABBCC" stroke-width="10" stroke-linecap="round"/>
+              <!-- Head -->
+              <circle cx="155" cy="100" r="24" fill="#AABBCC"/>
+              <circle cx="148" cy="98" r="3" fill="#0D1B2A"/>
+              <circle cx="162" cy="98" r="3" fill="#0D1B2A"/>
+              <!-- Forward lean arrow -->
+              <path d="M157 148 Q138 143 136 130" fill="none" stroke="#FF6B2B" stroke-width="1.5" stroke-dasharray="3,2"/>
+              <text x="100" y="148" fill="#FF6B2B" font-size="10" font-family="sans-serif">Condong</text>
+              <text x="100" y="159" fill="#FF6B2B" font-size="10" font-family="sans-serif">ke depan</text>
+              <!-- Width indicator -->
+              <line x1="55" y1="307" x2="55" y2="193" stroke="#F5C542" stroke-width="1.5"/>
+              <line x1="48" y1="307" x2="62" y2="307" stroke="#F5C542" stroke-width="1.5"/>
+              <line x1="48" y1="193" x2="62" y2="193" stroke="#F5C542" stroke-width="1.5"/>
+              <text x="10" y="255" fill="#F5C542" font-size="9" font-family="sans-serif" writing-mode="tb">Selebar bahu</text>
+            </svg>
+            <div class="diagram-caption">Athletic stance: kaki selebar bahu, lutut ditekuk, badan sedikit condong ke depan. Berat badan merata di kedua kaki.</div>
+          </div>
+        </div>
+
+        <!-- Step 2: Pegangan Bola -->
+        <div class="diagram-wrap" id="diag-1" style="display:none;">
+          <div class="diagram-title">✋ Tahap 2 — Cara Memegang Bola</div>
+          <div class="diagram-body">
+            <svg viewBox="0 0 320 260" xmlns="http://www.w3.org/2000/svg">
+              <!-- Basketball -->
+              <circle cx="160" cy="120" r="70" fill="none" stroke="#FF6B2B" stroke-width="3"/>
+              <circle cx="160" cy="120" r="70" fill="rgba(255,107,43,0.08)"/>
+              <!-- Basketball lines -->
+              <path d="M90,120 Q160,80 230,120" fill="none" stroke="#FF6B2B" stroke-width="1.5" opacity="0.5"/>
+              <path d="M90,120 Q160,160 230,120" fill="none" stroke="#FF6B2B" stroke-width="1.5" opacity="0.5"/>
+              <line x1="160" y1="50" x2="160" y2="190" stroke="#FF6B2B" stroke-width="1.5" opacity="0.5"/>
+              <!-- Hand on ball (fingers spread) -->
+              <path d="M110,100 Q120,85 140,82 Q158,80 175,85 Q195,92 205,108 Q210,120 205,135 Q195,148 178,152 Q160,155 142,148 Q122,140 112,125 Q105,113 110,100 Z" fill="#C8A882" opacity="0.9"/>
+              <!-- Fingers -->
+              <path d="M128,82 Q125,60 130,48 Q135,38 140,45 Q143,55 138,80" fill="#C8A882"/>
+              <path d="M148,80 Q147,57 153,45 Q158,35 163,42 Q165,52 160,78" fill="#C8A882"/>
+              <path d="M167,83 Q170,60 177,50 Q183,41 187,49 Q187,60 180,82" fill="#C8A882"/>
+              <path d="M183,92 Q190,72 198,66 Q205,61 207,70 Q205,80 197,92" fill="#C8A882"/>
+              <!-- Thumb -->
+              <path d="M110,100 Q96,95 90,104 Q87,115 95,122 Q104,128 114,122" fill="#C8A882"/>
+              <!-- NOT flat palm indicator -->
+              <line x1="55" y1="175" x2="55" y2="205" stroke="#FF4757" stroke-width="1.5"/>
+              <line x1="48" y1="175" x2="62" y2="175" stroke="#FF4757" stroke-width="1.5"/>
+              <line x1="48" y1="205" x2="62" y2="205" stroke="#FF4757" stroke-width="1.5"/>
+              <text x="30" y="193" fill="#FF4757" font-size="9" font-family="sans-serif" writing-mode="tb">Bukan telapak</text>
+              <!-- Note box -->
+              <rect x="45" y="215" width="230" height="36" rx="8" fill="rgba(255,107,43,0.1)" stroke="rgba(255,107,43,0.3)" stroke-width="1"/>
+              <text x="160" y="236" text-anchor="middle" fill="#FF6B2B" font-size="12" font-family="sans-serif" font-weight="bold">💡 Gunakan jari-jari, bukan telapak tangan!</text>
+            </svg>
+            <div class="diagram-caption">Jari-jari terbuka lebar dan melengkung — bola bertumpu pada jari, bukan di tengah telapak. Ini meningkatkan kontrol dan kepekaan bola.</div>
+          </div>
+        </div>
+
+        <!-- Step 3: Gerakan Dribble -->
+        <div class="diagram-wrap" id="diag-2" style="display:none;">
+          <div class="diagram-title">🏀 Tahap 3 — Gerakan Dorong & Pantul</div>
+          <div class="diagram-body">
+            <svg viewBox="0 0 320 300" xmlns="http://www.w3.org/2000/svg">
+              <!-- Ground -->
+              <rect x="20" y="270" width="280" height="4" rx="2" fill="#2C3E50"/>
+              <!-- Body silhouette -->
+              <circle cx="140" cy="40" r="22" fill="#8899AA"/>
+              <line x1="140" y1="62" x2="140" y2="155" stroke="#8899AA" stroke-width="14" stroke-linecap="round"/>
+              <line x1="90" y1="85" x2="190" y2="85" stroke="#8899AA" stroke-width="10" stroke-linecap="round"/>
+              <!-- Legs -->
+              <line x1="128" y1="153" x2="112" y2="220" stroke="#8899AA" stroke-width="10" stroke-linecap="round"/>
+              <line x1="152" y1="153" x2="168" y2="220" stroke="#8899AA" stroke-width="10" stroke-linecap="round"/>
+              <!-- Feet -->
+              <ellipse cx="108" cy="223" rx="22" ry="6" fill="#FF6B2B" opacity="0.5"/>
+              <ellipse cx="172" cy="223" rx="22" ry="6" fill="#FF6B2B" opacity="0.5"/>
+              <!-- Right arm dribbling -->
+              <line x1="190" y1="85" x2="230" y2="130" stroke="#AABBCC" stroke-width="9" stroke-linecap="round"/>
+              <!-- Ball at mid position -->
+              <circle cx="242" cy="155" r="20" fill="rgba(255,107,43,0.2)" stroke="#FF6B2B" stroke-width="2"/>
+              <path d="M225,155 Q242,148 258,155" fill="none" stroke="#FF6B2B" stroke-width="1" opacity="0.6"/>
+              <path d="M225,155 Q242,162 258,155" fill="none" stroke="#FF6B2B" stroke-width="1" opacity="0.6"/>
+              <!-- Ball shadow on floor -->
+              <ellipse cx="242" cy="273" rx="20" ry="5" fill="rgba(255,107,43,0.3)"/>
+              <!-- Bounce arrow (down) -->
+              <line x1="242" y1="175" x2="242" y2="258" stroke="#FF6B2B" stroke-width="2" stroke-dasharray="5,3"/>
+              <polygon points="242,262 237,252 247,252" fill="#FF6B2B"/>
+              <!-- Bounce arrow (up) -->
+              <line x1="252" y1="258" x2="252" y2="180" stroke="#F5C542" stroke-width="2" stroke-dasharray="5,3"/>
+              <polygon points="252,176 247,186 257,186" fill="#F5C542"/>
+              <!-- Labels -->
+              <text x="260" y="220" fill="#FF6B2B" font-size="10" font-family="sans-serif">Dorong</text>
+              <text x="262" y="232" fill="#FF6B2B" font-size="10" font-family="sans-serif">ke lantai</text>
+              <text x="270" y="190" fill="#F5C542" font-size="10" font-family="sans-serif">Pantul</text>
+              <text x="270" y="202" fill="#F5C542" font-size="10" font-family="sans-serif">kembali</text>
+              <!-- Wrist flick indicator -->
+              <path d="M220,125 Q215,110 222,100" fill="none" stroke="#FF6B2B" stroke-width="2"/>
+              <polygon points="224,97 218,107 228,106" fill="#FF6B2B"/>
+              <text x="155" y="108" fill="#FF6B2B" font-size="10" font-family="sans-serif">Flick pergelangan</text>
+              <text x="155" y="120" fill="#FF6B2B" font-size="10" font-family="sans-serif">tangan ke bawah</text>
+            </svg>
+            <div class="diagram-caption">Dorong bola ke lantai dengan flick pergelangan tangan. Bola memantul kembali — sambut dengan jari-jari rileks (cushion), lalu dorong lagi.</div>
+          </div>
+        </div>
+
+        <!-- Step 4: Pandangan mata -->
+        <div class="diagram-wrap" id="diag-3" style="display:none;">
+          <div class="diagram-title">👁️ Tahap 4 — Pandangan Mata (Court Vision)</div>
+          <div class="diagram-body">
+            <svg viewBox="0 0 320 280" xmlns="http://www.w3.org/2000/svg">
+              <!-- Court floor lines -->
+              <rect x="0" y="220" width="320" height="60" fill="rgba(255,107,43,0.03)"/>
+              <line x1="0" y1="220" x2="320" y2="220" stroke="#2C3E50" stroke-width="2"/>
+              <!-- Player (dribbling) -->
+              <circle cx="80" cy="65" r="20" fill="#FF6B2B" opacity="0.8"/>
+              <!-- Eyes looking forward (not down) -->
+              <circle cx="73" cy="62" r="3" fill="white"/>
+              <circle cx="87" cy="62" r="3" fill="white"/>
+              <circle cx="75" cy="62" r="2" fill="#0D1B2A"/>
+              <circle cx="89" cy="62" r="2" fill="#0D1B2A"/>
+              <line x1="80" y1="85" x2="80" y2="155" stroke="#FF6B2B" stroke-width="13" stroke-linecap="round"/>
+              <line x1="40" y1="100" x2="120" y2="100" stroke="#FF6B2B" stroke-width="9" stroke-linecap="round"/>
+              <!-- Dribbling arm -->
+              <line x1="120" y1="100" x2="148" y2="140" stroke="#FFBB99" stroke-width="8" stroke-linecap="round"/>
+              <!-- Ball low -->
+              <circle cx="152" cy="155" r="14" fill="rgba(255,107,43,0.3)" stroke="#FF6B2B" stroke-width="1.5"/>
+              <!-- Legs -->
+              <line x1="70" y1="153" x2="62" y2="215" stroke="#FF6B2B" stroke-width="9" stroke-linecap="round"/>
+              <line x1="90" y1="153" x2="100" y2="215" stroke="#FF6B2B" stroke-width="9" stroke-linecap="round"/>
+              <!-- Vision cone (looking forward) -->
+              <path d="M80,65 L220,30 L220,80 Z" fill="rgba(255,107,43,0.08)" stroke="rgba(255,107,43,0.25)" stroke-width="1"/>
+              <text x="185" y="60" fill="#FF6B2B" font-size="11" font-family="sans-serif">Pandangan</text>
+              <text x="175" y="73" fill="#FF6B2B" font-size="11" font-family="sans-serif">ke depan ✓</text>
+              <!-- Wrong way (looking down) - crossed -->
+              <path d="M80,80 L100,165" fill="none" stroke="#FF4757" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.6"/>
+              <text x="105" y="165" fill="#FF4757" font-size="10" font-family="sans-serif">❌ Jangan</text>
+              <text x="105" y="177" fill="#FF4757" font-size="10" font-family="sans-serif">lihat bola</text>
+              <!-- Teammate icon -->
+              <circle cx="230" cy="55" r="18" fill="#8899AA" opacity="0.8"/>
+              <text x="219" y="85" fill="#8899AA" font-size="10" font-family="sans-serif">Rekan tim</text>
+              <!-- Defender icon -->
+              <circle cx="240" cy="130" r="15" fill="#FF4757" opacity="0.6"/>
+              <text x="228" y="157" fill="#FF4757" font-size="10" font-family="sans-serif">Lawan</text>
+              <!-- Court vision note -->
+              <rect x="30" y="235" width="260" height="32" rx="8" fill="rgba(255,107,43,0.08)" stroke="rgba(255,107,43,0.25)" stroke-width="1"/>
+              <text x="160" y="253" text-anchor="middle" fill="#FF6B2B" font-size="11" font-family="sans-serif" font-weight="bold">💡 Court Vision: lihat ke depan, bukan ke bola!</text>
+            </svg>
+            <div class="diagram-caption">Latih pandangan ke depan saat dribbling. Dengan court vision, kamu bisa melihat rekan tim, lawan, dan situasi lapangan secara keseluruhan.</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Navigation dots -->
+      <div class="diagram-nav">
+        <button class="diagram-dot active" onclick="showDiag(0)"></button>
+        <button class="diagram-dot" onclick="showDiag(1)"></button>
+        <button class="diagram-dot" onclick="showDiag(2)"></button>
+        <button class="diagram-dot" onclick="showDiag(3)"></button>
+      </div>
+      <div style="display:flex;gap:10px;margin-top:14px;">
+        <button onclick="prevDiag()" style="flex:1;padding:10px;background:#F1F5F9;border:1px solid #CBD5E1;border-radius:10px;color:#1A202C;cursor:pointer;font-family:'DM Sans',sans-serif;">← Sebelumnya</button>
+        <button onclick="nextDiag()" style="flex:1;padding:10px;background:rgba(255,107,43,0.15);border:1px solid rgba(255,107,43,0.3);border-radius:10px;color:var(--orange);cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:600;">Selanjutnya →</button>
+      </div>
+
+      <div class="info-card" style="margin-top:16px;">
+        <h3>💡 Cara Membaca Diagram</h3>
+        <ul>
+          <li><span style="color:#FF6B2B">Oranye</span> = posisi/gerakan yang benar</li>
+          <li><span style="color:#FF4757">Merah/putus-putus</span> = batas yang tidak boleh dilewati</li>
+          <li><span style="color:#F5C542">Kuning</span> = arah gerak / perhatian khusus</li>
+          <li><span style="color:#8899AA">Abu-abu</span> = posisi referensi / awal</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- TAB: Kesalahan -->
+    <div class="tab-content" id="tab-kesalahan">
+      <div class="info-card">
+        <h3>⚠️ Kesalahan Umum yang Harus Dihindari</h3>
+        <p>Pelajari dan hindari kesalahan-kesalahan ini saat berlatih!</p>
+      </div>
+      <div class="warning-card">
+        <span style="font-size:22px;flex-shrink:0;">❌</span>
+        <div>
+          <p><strong>Memukul Bola dengan Telapak Tangan</strong><br>Menggunakan telapak (bukan jari) mengurangi kontrol dan rasa bola. Hasilnya dribbling jadi kaku dan mudah dicuri lawan.</p>
+        </div>
+      </div>
+      <div class="warning-card">
+        <span style="font-size:22px;flex-shrink:0;">❌</span>
+        <div>
+          <p><strong>Selalu Melihat ke Bola (Kepala Tertunduk)</strong><br>Pemain tidak bisa membaca situasi lapangan, melihat lawan, atau mencari rekan yang bebas. Latih dribbling tanpa melihat bola.</p>
+        </div>
+      </div>
+      <div class="warning-card">
+        <span style="font-size:22px;flex-shrink:0;">❌</span>
+        <div>
+          <p><strong>Carrying (Menahan Bola)</strong><br>Meletakkan tangan di bawah bola saat memindahkannya adalah pelanggaran. Bola harus selalu didorong dari atas ke bawah.</p>
+        </div>
+      </div>
+      <div class="warning-card">
+        <span style="font-size:22px;flex-shrink:0;">❌</span>
+        <div>
+          <p><strong>Double Dribble</strong><br>Setelah dribbling berhenti (bola dipegang dua tangan), tidak boleh mulai dribbling lagi. Ini pelanggaran yang langsung memberi bola ke lawan.</p>
+        </div>
+      </div>
+      <div class="warning-card">
+        <span style="font-size:22px;flex-shrink:0;">❌</span>
+        <div>
+          <p><strong>Posisi Tubuh Terlalu Tegak</strong><br>Berdiri tegak lurus membuat pemain lambat bergerak dan mudah kehilangan keseimbangan saat dribbling sambil bergerak.</p>
+        </div>
+      </div>
+      <div class="warning-card">
+        <span style="font-size:22px;flex-shrink:0;">❌</span>
+        <div>
+          <p><strong>Dribbling Terlalu Tinggi Saat Dijaga</strong><br>Dribbling tinggi di dekat lawan memudahkan bola dicuri. Selalu turunkan posisi dribbling saat ada tekanan dari lawan.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: Tips -->
+    <div class="tab-content" id="tab-tips">
+      <div class="info-card">
+        <h3>💡 Tips dan Strategi</h3>
+        <p>Jadikan dribbling senjatamu di lapangan!</p>
+      </div>
+      <div class="tip-card">
+        <span style="font-size:22px;flex-shrink:0;">💪</span>
+        <p><strong>Latihan Rutin dengan Tangan Lemah</strong> — Kebanyakan pemain hanya nyaman dengan satu tangan. Latih tangan kirimu (atau tangan non-dominan) secara rutin agar lawan tidak bisa membacamu.</p>
+      </div>
+      <div class="tip-card">
+        <span style="font-size:22px;flex-shrink:0;">👁️</span>
+        <p><strong>Latih Dribbling Tanpa Melihat Bola</strong> — Coba dribbling sambil membaca angka yang ditunjukkan temanmu, atau sambil menghitung mundur. Ini melatih court vision secara efektif.</p>
+      </div>
+      <div class="tip-card">
+        <span style="font-size:22px;flex-shrink:0;">🧘</span>
+        <p><strong>Jaga Ritme dan Ketenangan</strong> — Dribbling yang baik punya ritme konsisten. Jangan panik saat dijaga ketat — turunkan bola, jaga posisi badan, cari celah.</p>
+      </div>
+      <div class="tip-card">
+        <span style="font-size:22px;flex-shrink:0;">🔁</span>
+        <p><strong>Variasi Kecepatan & Arah</strong> — Jangan terlalu mudah ditebak. Kombinasikan dribbling lambat-cepat, rendah-tinggi, crossover — ini yang disebut "change of pace dan direction".</p>
+      </div>
+      <div class="tip-card">
+        <span style="font-size:22px;flex-shrink:0;">📹</span>
+        <p><strong>Rekam dan Evaluasi Gerakanmu</strong> — Minta teman merekam dribblingmu dari samping dan depan. Menonton ulang sangat membantu melihat postur dan kesalahan yang tidak terasa saat bermain.</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════ SCREEN: PANDUAN PROYEK ══════════════════ -->
+<div id="screen-proyek" class="screen">
+  <div class="topbar">
+    <button class="btn-back" onclick="goBack()">←</button>
+    <div style="flex:1;text-align:center;font-family:'Syne',sans-serif;font-weight:700;">Panduan Proyek</div>
+    <div style="width:40px;"></div>
+  </div>
+
+  <div class="proyek-header">
+    <div class="proyek-title-area">
+      <span style="font-size:28px;">🏆</span>
+      <h2>Basketball Dribbling Showcase</h2>
+    </div>
+    <p>Proyek kelompok teknik dribbling bola basket – 2 pilihan proyek</p>
+    <div class="deadline-chip">⏰ Deadline: Pertemuan 2</div>
+  </div>
+
+  <div class="content-area has-bottom-nav">
+
+    <!-- Pilihan Proyek Selector -->
+    <div class="info-card" style="background:rgba(255,107,43,0.06);border-color:rgba(255,107,43,0.2);margin-bottom:6px;">
+      <h3>📋 Deskripsi Proyek</h3>
+      <p>Berkelompok <strong>2–4 orang</strong>, pilih <strong>salah satu</strong> dari dua jenis proyek berikut, lalu presentasikan di Pertemuan 2.</p>
+    </div>
+
+    <!-- Pilihan Toggle -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px;">
+      <div id="btn-p1" onclick="switchProyek(1)" style="padding:14px 10px;border-radius:14px;border:2px solid var(--orange);background:rgba(255,107,43,0.15);cursor:pointer;text-align:center;">
+        <div style="font-size:24px;margin-bottom:6px;">🎬</div>
+        <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:13px;color:var(--orange);">Pilihan 1</div>
+        <div style="font-size:11px;color:#475569;margin-top:3px;">Video Dribbling</div>
+      </div>
+      <div id="btn-p2" onclick="switchProyek(2)" style="padding:14px 10px;border-radius:14px;border:2px solid rgba(23,64,47,0.08);background:#F8FAFC;cursor:pointer;text-align:center;">
+        <div style="font-size:24px;margin-bottom:6px;">🎮</div>
+        <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:13px;color:var(--gray);">Pilihan 2</div>
+        <div style="font-size:11px;color:#475569;margin-top:3px;">Game Modifikasi</div>
+      </div>
+    </div>
+
+    <!-- ── PILIHAN 1: VIDEO ── -->
+    <div id="panel-p1">
+      <div class="info-card" style="background:rgba(255,107,43,0.06);border-color:rgba(255,107,43,0.3);margin-bottom:14px;">
+        <h3>🎬 Pilihan 1 – Basketball Dribbling Showcase (Video)</h3>
+        <p>Buat <strong>video pendek 2–4 menit</strong> yang menampilkan teknik dribbling bola basket dengan 6 poin konten wajib.</p>
+      </div>
+
+      <div class="section-title">6 Fase Pengerjaan – Pilihan 1</div>
+
+      <div class="fase-card" onclick="toggleFase(this)">
+        <div class="fase-header">
+          <div class="fase-num">1</div>
+          <div class="fase-header-text">
+            <strong>Pertanyaan Pemantik</strong>
+            <span>Memahami masalah & konteks dribbling</span>
+          </div>
+          <span class="fase-chevron">›</span>
+        </div>
+        <div class="fase-body">
+          <div class="info-card" style="margin-bottom:0;">
+            <p>Diskusikan bersama kelompokmu:</p>
+            <ul>
+              <li>Kenapa dribbling dianggap teknik paling dasar dalam basket?</li>
+              <li>Apa yang terjadi kalau kita tidak bisa dribbling dengan baik?</li>
+              <li>Kapan sebaiknya dribbling rendah vs dribbling tinggi digunakan?</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="fase-card" onclick="toggleFase(this)">
+        <div class="fase-header">
+          <div class="fase-num">2</div>
+          <div class="fase-header-text">
+            <strong>Mendesain Perencanaan Proyek</strong>
+            <span>Pembagian peran & 6 poin isi video</span>
+          </div>
+          <span class="fase-chevron">›</span>
+        </div>
+        <div class="fase-body">
+          <div class="info-card" style="margin-bottom:10px;">
+            <h3>🎬 6 Poin Wajib Isi Video</h3>
+            <div id="checklist-isi"></div>
+          </div>
+          <div class="info-card" style="margin-bottom:0;">
+            <h3>👥 Pembagian Peran</h3>
+            <ul>
+              <li>Siapa yang memeragakan teknik dribbling?</li>
+              <li>Siapa yang menjadi narator/pembaca naskah?</li>
+              <li>Siapa yang merekam video?</li>
+              <li>Siapa yang mengedit video?</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="fase-card" onclick="toggleFase(this)">
+        <div class="fase-header">
+          <div class="fase-num">3</div>
+          <div class="fase-header-text">
+            <strong>Menyusun Jadwal</strong>
+            <span>Timeline pengerjaan video</span>
+          </div>
+          <span class="fase-chevron">›</span>
+        </div>
+        <div class="fase-body">
+          <div class="info-card" style="margin-bottom:0;">
+            <div class="teknik-step">
+              <div class="step-num" style="background:var(--gold);color:var(--navy);">H0</div>
+              <div class="step-body"><h4>Hari ini</h4><p>Pahami tugas, bagi peran, diskusi konsep video kelompokmu</p></div>
+            </div>
+            <div class="teknik-step">
+              <div class="step-num" style="background:var(--gold);color:var(--navy);">H+1</div>
+              <div class="step-body"><h4>H+1 s/d H+2</h4><p>Latihan teknik dribbling, tulis naskah narasi video</p></div>
+            </div>
+            <div class="teknik-step">
+              <div class="step-num" style="background:var(--gold);color:var(--navy);">H+2</div>
+              <div class="step-body"><h4>H+2 s/d H+3</h4><p>Rekam video sesuai panduan (durasi 2–4 menit)</p></div>
+            </div>
+            <div class="teknik-step">
+              <div class="step-num" style="background:var(--red);">H-1</div>
+              <div class="step-body"><h4>Sehari sebelum P2</h4><p>Pastikan video sudah selesai, simpan di HP, siap presentasi!</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fase-card" onclick="toggleFase(this)">
+        <div class="fase-header">
+          <div class="fase-num">4</div>
+          <div class="fase-header-text">
+            <strong>Monitoring Kemajuan</strong>
+            <span>Pantau progress kelompokmu</span>
+          </div>
+          <span class="fase-chevron">›</span>
+        </div>
+        <div class="fase-body">
+          <div class="info-card" style="margin-bottom:0;">
+            <p>Gunakan checklist ini untuk memantau kemajuan proyekmu:</p>
+            <div id="checklist-monitoring"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fase-card" onclick="toggleFase(this)">
+        <div class="fase-header">
+          <div class="fase-num">5</div>
+          <div class="fase-header-text">
+            <strong>Presentasi Video</strong>
+            <span>Tayangkan & ulas videomu di kelas</span>
+          </div>
+          <span class="fase-chevron">›</span>
+        </div>
+        <div class="fase-body">
+          <div class="info-card" style="margin-bottom:10px;">
+            <h3>📺 Cara Presentasi</h3>
+            <ul>
+              <li>Sambungkan HP ke TV/proyektor di kelas</li>
+              <li>Tayangkan video kelompokmu</li>
+              <li>Setelah video selesai, siapkan diri untuk menjawab pertanyaan</li>
+              <li>Berikan komentar konstruktif untuk kelompok lain</li>
+            </ul>
+          </div>
+          <div class="info-card" style="margin-bottom:0;">
+            <h3>📊 Rubrik Penilaian</h3>
+            <p style="margin-bottom:6px;font-size:12px;color:#475569;">Rumus: (Total Skor / 16) × 100 &nbsp;|&nbsp; Berlaku untuk kedua pilihan proyek</p>
+            <div style="overflow-x:auto;">
+              <table class="rubrik-table">
+                <thead>
+                  <tr><th>Aspek</th><th>Skor 4</th><th>Skor 3</th><th>Skor 2</th><th>Skor 1</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Teknik dribbling (dalam video)</strong></td><td>Semua tahapan benar & jelas</td><td>Sebagian besar benar</td><td>Hanya beberapa benar</td><td>Tidak sesuai teknik</td></tr>
+                  <tr><td><strong>Kelengkapan isi (6 poin)</strong></td><td>Semua 6 poin ada</td><td>4–5 poin ada</td><td>2–3 poin ada</td><td>Kurang dari 2 poin</td></tr>
+                  <tr><td><strong>Kerja sama kelompok</strong></td><td>Semua anggota terlibat</td><td>Sebagian besar terlibat</td><td>Hanya 1–2 orang aktif</td><td>Dikerjakan 1 orang</td></tr>
+                  <tr><td><strong>Kreativitas penyajian</strong></td><td>Sangat menarik & kreatif</td><td>Cukup menarik</td><td>Biasa saja</td><td>Tidak ada usaha kreatif</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fase-card" onclick="toggleFase(this)">
+        <div class="fase-header">
+          <div class="fase-num">6</div>
+          <div class="fase-header-text">
+            <strong>Refleksi & Evaluasi</strong>
+            <span>Apa yang kamu pelajari?</span>
+          </div>
+          <span class="fase-chevron">›</span>
+        </div>
+        <div class="fase-body">
+          <div class="info-card" style="margin-bottom:0;">
+            <p>Setelah semua kelompok presentasi, refleksikan:</p>
+            <ul>
+              <li>Apa yang paling kamu pelajari dari proyek ini?</li>
+              <li>Apa kesulitan terbesar yang dihadapi saat berlatih dribbling?</li>
+              <li>Apa yang akan kamu lakukan berbeda jika mengulang proyek ini?</li>
+              <li>Bagaimana kerjasama dalam kelompokmu berjalan?</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── PILIHAN 2: GAME MODIFIKASI ── -->
+    <div id="panel-p2" style="display:none;">
+      <div class="info-card" style="background:rgba(245,197,66,0.07);border-color:rgba(245,197,66,0.3);margin-bottom:14px;">
+        <h3 style="color:var(--gold);">🎮 Pilihan 2 – Game Modifikasi Dribbling</h3>
+        <p>Rancang sendiri sebuah <strong>permainan modifikasi</strong> yang melatih teknik dribbling, lalu demonstrasikan langsung di depan kelas. Lebih menantang, lebih kreatif!</p>
+      </div>
+
+      <div class="section-title">6 Fase Pengerjaan – Pilihan 2</div>
+
+      <div class="fase-card" onclick="toggleFase(this)">
+        <div class="fase-header">
+          <div class="fase-num">1</div>
+          <div class="fase-header-text">
+            <strong>Pertanyaan Pemantik</strong>
+            <span>Memancing ide game kreatif</span>
+          </div>
+          <span class="fase-chevron">›</span>
+        </div>
+        <div class="fase-body">
+          <div class="info-card" style="margin-bottom:0;">
+            <p>Diskusikan bersama kelompokmu:</p>
+            <ul>
+              <li>Kenapa dribbling dianggap teknik paling dasar dalam basket?</li>
+              <li>Bagaimana caranya membuat latihan dribbling terasa seru dan tidak membosankan?</li>
+              <li>Permainan apa yang bisa kalian bayangkan untuk melatih dribbling secara menyenangkan?</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="fase-card" onclick="toggleFase(this)">
+        <div class="fase-header">
+          <div class="fase-num">2</div>
+          <div class="fase-header-text">
+            <strong>Mendesain Perencanaan Proyek</strong>
+            <span>Rancang konsep permainan modifikasi</span>
+          </div>
+          <span class="fase-chevron">›</span>
+        </div>
+        <div class="fase-body">
+          <!-- Contoh inspirasi -->
+          <div class="tip-card" style="margin-bottom:12px;">
+            <span style="font-size:22px;flex-shrink:0;">💡</span>
+            <p><strong>Contoh Inspirasi:</strong> "Dribbling Zig-Zag Race" — pemain dribbling melewati rintangan (cone), yang paling cepat tanpa kehilangan bola menang. Kamu bebas menciptakan permainan apapun, asalkan ada unsur dribblingnya!</p>
+          </div>
+
+          <!-- 5 Poin Wajib Game -->
+          <div class="info-card" style="margin-bottom:10px;background:rgba(245,197,66,0.05);border-color:rgba(245,197,66,0.2);">
+            <h3 style="color:var(--gold);">📋 5 Poin Wajib Presentasi Game</h3>
+            <div id="checklist-game"></div>
+          </div>
+
+          <!-- Panduan Merancang -->
+          <div class="info-card" style="margin-bottom:10px;">
+            <h3>🛠️ Panduan Merancang Permainan</h3>
+            <div class="teknik-step">
+              <div class="step-num" style="background:#9B59B6;">A</div>
+              <div class="step-body">
+                <h4>Nama & Konsep</h4>
+                <p>Beri nama permainan yang menarik dan jelaskan ide dasarnya. Misal: "Dribble Tag", "Cone Slalom Race", "Dribble Freeze", dll.</p>
+              </div>
+            </div>
+            <div class="teknik-step">
+              <div class="step-num" style="background:#9B59B6;">B</div>
+              <div class="step-body">
+                <h4>Alat yang Dibutuhkan</h4>
+                <p>Sebutkan alat yang diperlukan. Gunakan yang tersedia di sekolah: bola basket, cone, tali, kapur, kursi, dan lain-lain.</p>
+              </div>
+            </div>
+            <div class="teknik-step">
+              <div class="step-num" style="background:#9B59B6;">C</div>
+              <div class="step-body">
+                <h4>Aturan Main yang Jelas</h4>
+                <p>Jelaskan: cara bermain, berapa pemain, bagaimana kondisi menang/kalah, apakah ada giliran atau tim.</p>
+              </div>
+            </div>
+            <div class="teknik-step">
+              <div class="step-num" style="background:#9B59B6;">D</div>
+              <div class="step-body">
+                <h4>Keterkaitan dengan Dribbling</h4>
+                <p>Jelaskan secara eksplisit: bagian mana dari permainan ini yang <strong>secara langsung melatih teknik dribbling</strong>? (pegangan bola, posisi tubuh, pandangan mata, dll.)</p>
+              </div>
+            </div>
+            <div class="teknik-step" style="margin-bottom:0;">
+              <div class="step-num" style="background:#9B59B6;">E</div>
+              <div class="step-body">
+                <h4>Demonstrasi Langsung</h4>
+                <p>Mainkan permainannya di depan kelas bersama teman-teman kelompokmu. Kelas juga boleh ikut mencoba!</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Inspirasi Contoh Game -->
+          <div class="info-card" style="margin-bottom:0;">
+            <h3>🎲 Ide-Ide Game yang Bisa Dikembangkan</h3>
+            <p style="font-size:12px;color:var(--gray);margin-bottom:12px;">Pilih salah satu, modifikasi, atau gabungkan sesuai kreativitas kelompokmu!</p>
+
+            <!-- Kategori 1: Individual/Relay -->
+            <div style="font-size:11px;font-weight:700;color:var(--orange);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">⚡ Individual / Relay</div>
+
+            <div class="servis-type-card" style="margin-bottom:10px;">
+              <div class="servis-type-header" style="background:linear-gradient(90deg,rgba(255,107,43,0.15),transparent);">🏁 Dribbling Zig-Zag Race</div>
+              <div class="servis-type-body">
+                <p>Susun cone membentuk zig-zag. Pemain dribbling melewati cone dari start ke finish. Yang paling cepat tanpa kehilangan bola menang.</p>
+                <p style="margin-top:6px;"><strong>Syarat khusus:</strong> Jika bola lepas, pemain harus kembali ke cone terakhir yang dilewati sebelum melanjutkan — tidak boleh langsung lanjut.</p>
+                <div style="margin-top:8px;">
+                  <span class="servis-badge">Individual/Tim</span>
+                  <span class="servis-badge">Alat: Bola, Cone</span>
+                  <span class="servis-badge" style="background:rgba(0,193,106,0.12);color:#047857;">Mudah</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="servis-type-card" style="margin-bottom:10px;">
+              <div class="servis-type-header" style="background:linear-gradient(90deg,rgba(255,107,43,0.15),transparent);">🔄 Dribbling Relay Estafet</div>
+              <div class="servis-type-body">
+                <p>2 tim berlomba. Pemain pertama dribbling ke ujung lapangan dan kembali, lalu operkan bola ke pemain berikutnya. Tim yang semua anggotanya selesai lebih dulu menang.</p>
+                <p style="margin-top:6px;"><strong>Syarat khusus:</strong> Setiap pemain harus melakukan minimal <em>3 dribbling rendah</em> sebelum berbalik arah. Kalau dilanggar, harus ulang dari garis tengah.</p>
+                <div style="margin-top:8px;">
+                  <span class="servis-badge">2 Tim Berlawanan</span>
+                  <span class="servis-badge">Alat: Bola, Cone</span>
+                  <span class="servis-badge" style="background:rgba(0,193,106,0.12);color:#047857;">Mudah</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Kategori 2: Kompetisi Tim -->
+            <div style="font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin:14px 0 8px;">🏆 Kompetisi Antar Tim (1 vs 1 / 2 vs 2)</div>
+
+            <div class="servis-type-card" style="margin-bottom:10px;">
+              <div class="servis-type-header" style="background:linear-gradient(90deg,rgba(245,197,66,0.15),transparent);">👑 Dribbling King of the Court</div>
+              <div class="servis-type-body">
+                <p>2 tim berdiri di sisi berlawanan. Satu tim menyerang (dribbling masuk ke zona lawan), satu tim bertahan. Penyerang menang jika berhasil dribbling melewati garis zona lawan tanpa bola direbut.</p>
+                <p style="margin-top:6px;"><strong>Syarat khusus:</strong> (1) Penyerang wajib dribbling — tidak boleh berdiri diam. (2) Bertahan hanya boleh mencuri bola, tidak boleh mendorong. (3) Jika bola direbut, tim berganti peran.</p>
+                <div style="margin-top:8px;">
+                  <span class="servis-badge" style="background:rgba(245,197,66,0.15);color:var(--gold);">2 Tim Berlawanan</span>
+                  <span class="servis-badge" style="background:rgba(245,197,66,0.15);color:var(--gold);">Alat: Bola, Kapur/Tali</span>
+                  <span class="servis-badge" style="background:rgba(255,107,43,0.12);color:#9A3412;">Sedang</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="servis-type-card" style="margin-bottom:10px;">
+              <div class="servis-type-header" style="background:linear-gradient(90deg,rgba(245,197,66,0.15),transparent);">🎯 Dribbling Bom & Jinak</div>
+              <div class="servis-type-body">
+                <p>Lapangan dibagi 2 zona. Tiap tim punya 3–4 bola di zonanya ("bom"). Tujuan: pindahkan semua "bom" ke zona lawan dengan cara dribbling, sementara tim lawan melakukan hal sama.</p>
+                <p style="margin-top:6px;"><strong>Syarat khusus:</strong> (1) Wajib dribbling saat membawa bola ke zona lawan. (2) Pemain hanya boleh membawa 1 bola sekaligus. (3) Setelah waktu habis (3 menit), tim dengan bola paling sedikit di zonanya menang.</p>
+                <div style="margin-top:8px;">
+                  <span class="servis-badge" style="background:rgba(245,197,66,0.15);color:var(--gold);">2 Tim Berlawanan</span>
+                  <span class="servis-badge" style="background:rgba(245,197,66,0.15);color:var(--gold);">Alat: 6–8 Bola, Kapur</span>
+                  <span class="servis-badge" style="background:rgba(255,107,43,0.12);color:#9A3412;">Sedang</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="servis-type-card" style="margin-bottom:10px;">
+              <div class="servis-type-header" style="background:linear-gradient(90deg,rgba(245,197,66,0.15),transparent);">🔐 Dribble & Protect (Jaga Bola)</div>
+              <div class="servis-type-body">
+                <p>Semua pemain punya bola masing-masing dalam area terbatas. Sambil dribbling sendiri, pemain berusaha menepis bola milik lawan keluar area. Yang bolanya keluar, gugur. Pemain terakhir menang.</p>
+                <p style="margin-top:6px;"><strong>Syarat khusus:</strong> (1) Tidak boleh berhenti dribbling — jika berhenti otomatis gugur. (2) Hanya boleh menepis bola lawan dengan tangan bebas (bukan tangan yang dribbling). (3) Tidak boleh mendorong badan lawan.</p>
+                <div style="margin-top:8px;">
+                  <span class="servis-badge" style="background:rgba(245,197,66,0.15);color:var(--gold);">Semua Lawan Semua</span>
+                  <span class="servis-badge" style="background:rgba(245,197,66,0.15);color:var(--gold);">Alat: Bola (tiap orang 1)</span>
+                  <span class="servis-badge" style="background:rgba(255,107,43,0.12);color:#9A3412;">Sedang</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Kategori 3: Tantangan & Kreativitas -->
+            <div style="font-size:11px;font-weight:700;color:#C39BD3;text-transform:uppercase;letter-spacing:1px;margin:14px 0 8px;">🎨 Tantangan & Kreativitas</div>
+
+            <div class="servis-type-card" style="margin-bottom:10px;">
+              <div class="servis-type-header" style="background:linear-gradient(90deg,rgba(155,89,182,0.2),transparent);">🧊 Dribble Freeze</div>
+              <div class="servis-type-body">
+                <p>Semua pemain dribbling bebas dalam area. Ketika wasit berteriak "FREEZE!" semua harus berhenti. Siapa yang kehilangan bola atau masih bergerak, keluar.</p>
+                <p style="margin-top:6px;"><strong>Variasi seru:</strong> Tambahkan perintah seperti "TANGAN KIRI!" — semua harus langsung ganti dribbling dengan tangan kiri. Yang gagal ganti dalam 3 detik, keluar.</p>
+                <div style="margin-top:8px;">
+                  <span class="servis-badge" style="background:rgba(155,89,182,0.15);color:#C39BD3;">Individual</span>
+                  <span class="servis-badge" style="background:rgba(155,89,182,0.15);color:#C39BD3;">Alat: Bola</span>
+                  <span class="servis-badge" style="background:rgba(0,193,106,0.12);color:#047857;">Mudah</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="servis-type-card" style="margin-bottom:10px;">
+              <div class="servis-type-header" style="background:linear-gradient(90deg,rgba(155,89,182,0.2),transparent);">🏷️ Dribble Tag (Kejar-kejaran)</div>
+              <div class="servis-type-body">
+                <p>1 pemain jadi pengejar (tanpa bola). Pemain lain dribbling sambil menghindari disentuh. Yang tersentuh, ganti jadi pengejar.</p>
+                <p style="margin-top:6px;"><strong>Syarat khusus:</strong> (1) Semua pemain wajib dribbling terus — tidak boleh berdiri diam. (2) Tidak boleh keluar area. (3) Jika bola lepas saat dikejar, pemain tersebut langsung ganti jadi pengejar.</p>
+                <div style="margin-top:8px;">
+                  <span class="servis-badge" style="background:rgba(155,89,182,0.15);color:#C39BD3;">Individual</span>
+                  <span class="servis-badge" style="background:rgba(155,89,182,0.15);color:#C39BD3;">Alat: Bola</span>
+                  <span class="servis-badge" style="background:rgba(0,193,106,0.12);color:#047857;">Mudah</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="servis-type-card" style="margin-bottom:0;">
+              <div class="servis-type-header" style="background:linear-gradient(90deg,rgba(155,89,182,0.2),transparent);">🎵 Dribbling Musical Chairs</div>
+              <div class="servis-type-body">
+                <p>Kursi/cone disusun seperti permainan kursi musik. Semua pemain dribbling mengelilingi kursi. Ketika musik berhenti, semua berebut duduk/menyentuh kursi. Siapa yang tidak kebagian, gugur. Satu kursi diambil tiap ronde.</p>
+                <p style="margin-top:6px;"><strong>Syarat khusus:</strong> Selama bergerak wajib dribbling. Tidak boleh berlari tanpa dribbling. Siapa yang ketahuan tidak dribbling, langsung gugur untuk ronde itu.</p>
+                <div style="margin-top:8px;">
+                  <span class="servis-badge" style="background:rgba(155,89,182,0.15);color:#C39BD3;">Individual/Seru</span>
+                  <span class="servis-badge" style="background:rgba(155,89,182,0.15);color:#C39BD3;">Alat: Bola, Kursi/Cone, Musik</span>
+                  <span class="servis-badge" style="background:rgba(255,71,87,0.12);color:#B91C1C;">Kreatif</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Kategori 4: Hanya Bola -->
+            <div style="font-size:11px;font-weight:700;color:#5DADE2;text-transform:uppercase;letter-spacing:1px;margin:16px 0 8px;">🏀 Hanya Butuh Bola — Tanpa Alat Lain!</div>
+
+            <div class="servis-type-card" style="margin-bottom:10px;">
+              <div class="servis-type-header" style="background:linear-gradient(90deg,rgba(93,173,226,0.18),transparent);">👣 Dribble Shadow (Ikuti Gerak)</div>
+              <div class="servis-type-body">
+                <p>Berpasangan (1 vs 1). Satu orang jadi "bayangan" yang harus meniru semua gerakan dribbling pemain depan — ke kiri, kanan, maju, mundur. Setelah 1 menit, ganti peran.</p>
+                <p style="margin-top:6px;"><strong>Syarat khusus:</strong> (1) Keduanya wajib dribbling terus selama permainan. (2) Bayangan harus selalu dalam jarak 1–2 langkah. (3) Jika bayangan tertinggal jauh atau bola lepas, pemain depan mendapat poin.</p>
+                <div style="margin-top:8px;">
+                  <span class="servis-badge" style="background:rgba(93,173,226,0.15);color:#5DADE2;">Berpasangan 1 vs 1</span>
+                  <span class="servis-badge" style="background:rgba(93,173,226,0.15);color:#5DADE2;">Hanya Bola ✅</span>
+                  <span class="servis-badge" style="background:rgba(0,193,106,0.12);color:#047857;">Mudah</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="servis-type-card" style="margin-bottom:10px;">
+              <div class="servis-type-header" style="background:linear-gradient(90deg,rgba(93,173,226,0.18),transparent);">🔢 Dribble Hitung Mundur</div>
+              <div class="servis-type-body">
+                <p>Semua pemain dribbling di tempat. Guru/wasit menyebut angka acak (misal "3!"). Dalam 3 detik, pemain harus membentuk kelompok berjumlah 3 orang sambil tetap dribbling. Yang tidak dapat kelompok atau bolanya lepas, keluar satu putaran lalu bergabung lagi (tanpa hukuman fisik).</p>
+                <p style="margin-top:6px;"><strong>Syarat khusus:</strong> (1) Wajib dribbling terus — tidak boleh berhenti saat mencari kelompok. (2) Tidak boleh mendorong teman. (3) Semakin kecil angka yang disebut, semakin seru!</p>
+                <div style="margin-top:8px;">
+                  <span class="servis-badge" style="background:rgba(93,173,226,0.15);color:#5DADE2;">Semua Pemain</span>
+                  <span class="servis-badge" style="background:rgba(93,173,226,0.15);color:#5DADE2;">Hanya Bola ✅</span>
+                  <span class="servis-badge" style="background:rgba(0,193,106,0.12);color:#047857;">Mudah</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="servis-type-card" style="margin-bottom:10px;">
+              <div class="servis-type-header" style="background:linear-gradient(90deg,rgba(93,173,226,0.18),transparent);">🤺 Dribble Battle (1 vs 1 di Kotak Bayangan)</div>
+              <div class="servis-type-body">
+                <p>Dua pemain berhadapan dalam area kecil (bayangkan kotak 3×3 langkah, tanpa perlu ditandai). Keduanya dribbling sambil berusaha menepis bola lawan keluar area atau membuat bola lawan tidak terkontrol.</p>
+                <p style="margin-top:6px;"><strong>Syarat khusus:</strong> (1) Wajib dribbling terus — berhenti = kalah otomatis. (2) Hanya boleh menepis bola, tidak boleh menyentuh badan lawan. (3) Bola keluar area atau tidak terkontrol dalam 3 detik = kalah ronde. Main best of 3.</p>
+                <div style="margin-top:8px;">
+                  <span class="servis-badge" style="background:rgba(93,173,226,0.15);color:#5DADE2;">1 vs 1</span>
+                  <span class="servis-badge" style="background:rgba(93,173,226,0.15);color:#5DADE2;">Hanya Bola ✅</span>
+                  <span class="servis-badge" style="background:rgba(255,107,43,0.12);color:#9A3412;">Sedang</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="servis-type-card" style="margin-bottom:10px;">
+              <div class="servis-type-header" style="background:linear-gradient(90deg,rgba(93,173,226,0.18),transparent);">🐍 Dribble Ular Naga</div>
+              <div class="servis-type-body">
+                <p>Semua pemain berbaris sambil dribbling. Pemain paling belakang berlari melewati sisi kiri/kanan barisan untuk jadi "kepala" — sambil tetap dribbling. Setelah sampai di depan, pemain berikutnya giliran.</p>
+                <p style="margin-top:6px;"><strong>Syarat khusus:</strong> (1) Seluruh barisan terus dribbling di tempat selama menunggu giliran. (2) Yang sedang berlari ke depan tidak boleh berhenti dribbling. (3) Jika bola lepas saat berlari, harus ambil bola, kembali ke posisi paling belakang, dan mulai lagi.</p>
+                <div style="margin-top:8px;">
+                  <span class="servis-badge" style="background:rgba(93,173,226,0.15);color:#5DADE2;">Tim / Kelompok</span>
+                  <span class="servis-badge" style="background:rgba(93,173,226,0.15);color:#5DADE2;">Hanya Bola ✅</span>
+                  <span class="servis-badge" style="background:rgba(255,107,43,0.12);color:#9A3412;">Sedang</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="servis-type-card" style="margin-bottom:10px;">
+              <div class="servis-type-header" style="background:linear-gradient(90deg,rgba(93,173,226,0.18),transparent);">🗣️ Dribble Simon Says</div>
+              <div class="servis-type-body">
+                <p>Seperti "Simon Says" — semua pemain dribbling sambil mendengar perintah. "Simon says: tangan kiri!" → semua ganti. Tapi kalau tanpa "Simon says", yang ikut perintah itu gugur.</p>
+                <p style="margin-top:6px;"><strong>Contoh perintah:</strong> "Simon says: jongkok!", "Simon says: tangan kiri!", "Berhenti!" (jebakan), "Simon says: putar badan!", "Simon says: lihat ke depan!"</p>
+                <p style="margin-top:6px;"><strong>Syarat khusus:</strong> Wajib dribbling terus sepanjang permainan. Bola lepas = gugur otomatis, terlepas dari apakah perintahnya benar atau salah.</p>
+                <div style="margin-top:8px;">
+                  <span class="servis-badge" style="background:rgba(93,173,226,0.15);color:#5DADE2;">Semua Pemain</span>
+                  <span class="servis-badge" style="background:rgba(93,173,226,0.15);color:#5DADE2;">Hanya Bola ✅</span>
+                  <span class="servis-badge" style="background:rgba(255,71,87,0.12);color:#B91C1C;">Seru & Kreatif</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="servis-type-card" style="margin-bottom:0;">
+              <div class="servis-type-header" style="background:linear-gradient(90deg,rgba(93,173,226,0.18),transparent);">🤝 Dribble Tim Kompak (2 vs 2 Tanpa Area)</div>
+              <div class="servis-type-body">
+                <p>2 tim masing-masing 2 orang. Tim A berusaha "mengapit" pemain Tim B (berdiri di kiri-kanan pemain lawan) sambil semua tetap dribbling. Jika berhasil mengapit dalam 5 detik, Tim A dapat poin. Lalu berganti peran.</p>
+                <p style="margin-top:6px;"><strong>Syarat khusus:</strong> (1) Semua 4 pemain wajib dribbling terus. (2) Tidak boleh menyentuh badan lawan. (3) Tim yang diapit boleh lari menghindar — tapi tetap harus dribbling. (4) Bola lepas = tim tersebut kehilangan 1 poin.</p>
+                <div style="margin-top:8px;">
+                  <span class="servis-badge" style="background:rgba(93,173,226,0.15);color:#5DADE2;">2 vs 2</span>
+                  <span class="servis-badge" style="background:rgba(93,173,226,0.15);color:#5DADE2;">Hanya Bola ✅</span>
+                  <span class="servis-badge" style="background:rgba(255,71,87,0.12);color:#B91C1C;">Menantang</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="fase-card" onclick="toggleFase(this)">
+        <div class="fase-header">
+          <div class="fase-num">3</div>
+          <div class="fase-header-text">
+            <strong>Menyusun Jadwal</strong>
+            <span>Timeline persiapan game modifikasi</span>
+          </div>
+          <span class="fase-chevron">›</span>
+        </div>
+        <div class="fase-body">
+          <div class="info-card" style="margin-bottom:0;">
+            <div class="teknik-step">
+              <div class="step-num" style="background:var(--gold);color:var(--navy);">H0</div>
+              <div class="step-body"><h4>Hari ini</h4><p>Diskusi konsep game, tentukan nama permainan dan aturan dasarnya</p></div>
+            </div>
+            <div class="teknik-step">
+              <div class="step-num" style="background:var(--gold);color:var(--navy);">H+1</div>
+              <div class="step-body"><h4>H+1 s/d H+2</h4><p>Coba dan uji coba permainan, sempurnakan aturan, siapkan alat yang dibutuhkan</p></div>
+            </div>
+            <div class="teknik-step">
+              <div class="step-num" style="background:var(--gold);color:var(--navy);">H+2</div>
+              <div class="step-body"><h4>H+2 s/d H+3</h4><p>Latihan presentasi, pastikan semua anggota bisa menjelaskan dan memimpin permainan</p></div>
+            </div>
+            <div class="teknik-step">
+              <div class="step-num" style="background:var(--red);">H-1</div>
+              <div class="step-body"><h4>Sehari sebelum P2</h4><p>Catat semua detail game (nama, alat, aturan, keterkaitan dribbling), siap presentasi!</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fase-card" onclick="toggleFase(this)">
+        <div class="fase-header">
+          <div class="fase-num">4</div>
+          <div class="fase-header-text">
+            <strong>Monitoring Kemajuan</strong>
+            <span>Pantau progress persiapan game</span>
+          </div>
+          <span class="fase-chevron">›</span>
+        </div>
+        <div class="fase-body">
+          <div class="info-card" style="margin-bottom:0;">
+            <p>Gunakan checklist ini untuk memantau kemajuan proyekmu:</p>
+            <div id="checklist-monitoring-game"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fase-card" onclick="toggleFase(this)">
+        <div class="fase-header">
+          <div class="fase-num">5</div>
+          <div class="fase-header-text">
+            <strong>Presentasi & Demo Game</strong>
+            <span>Jelaskan & mainkan di depan kelas</span>
+          </div>
+          <span class="fase-chevron">›</span>
+        </div>
+        <div class="fase-body">
+          <div class="info-card" style="margin-bottom:10px;">
+            <h3>🎤 Urutan Presentasi Game</h3>
+            <div class="teknik-step">
+              <div class="step-num" style="background:#3498DB;">1</div>
+              <div class="step-body"><h4>Perkenalan (1 menit)</h4><p>Sebutkan nama kelompok dan nama permainan yang kalian ciptakan.</p></div>
+            </div>
+            <div class="teknik-step">
+              <div class="step-num" style="background:#9B59B6;">2</div>
+              <div class="step-body"><h4>Jelaskan Konsep & Aturan (2 menit)</h4><p>Jelaskan cara bermain, jumlah pemain, kondisi menang/kalah, dan alat yang digunakan.</p></div>
+            </div>
+            <div class="teknik-step">
+              <div class="step-num" style="background:var(--orange);">3</div>
+              <div class="step-body"><h4>Hubungan dengan Dribbling (1 menit)</h4><p>Jelaskan bagian mana dari permainan ini yang secara langsung melatih teknik dribbling yang benar.</p></div>
+            </div>
+            <div class="teknik-step" style="margin-bottom:0;">
+              <div class="step-num" style="background:var(--gold);color:var(--navy);">4</div>
+              <div class="step-body"><h4>Demonstrasi Langsung (3–5 menit)</h4><p>Mainkan permainannya bersama kelompok di depan kelas. Ajak teman lain untuk ikut mencoba!</p></div>
+            </div>
+          </div>
+          <div class="info-card" style="margin-bottom:0;">
+            <h3>📊 Rubrik Penilaian</h3>
+            <p style="margin-bottom:6px;font-size:12px;color:#475569;">Rumus: (Total Skor / 16) × 100 &nbsp;|&nbsp; Berlaku untuk kedua pilihan proyek</p>
+            <div style="overflow-x:auto;">
+              <table class="rubrik-table">
+                <thead>
+                  <tr><th>Aspek</th><th>Skor 4</th><th>Skor 3</th><th>Skor 2</th><th>Skor 1</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Teknik dribbling (dalam game)</strong></td><td>Semua tahapan benar & jelas</td><td>Sebagian besar benar</td><td>Hanya beberapa benar</td><td>Tidak sesuai teknik</td></tr>
+                  <tr><td><strong>Kelengkapan isi (5 poin game)</strong></td><td>Semua 5 poin terpenuhi</td><td>4 poin ada</td><td>2–3 poin ada</td><td>Kurang dari 2 poin</td></tr>
+                  <tr><td><strong>Kerja sama kelompok</strong></td><td>Semua anggota terlibat</td><td>Sebagian besar terlibat</td><td>Hanya 1–2 orang aktif</td><td>Dikerjakan 1 orang</td></tr>
+                  <tr><td><strong>Kreativitas desain game</strong></td><td>Sangat menarik & kreatif</td><td>Cukup menarik</td><td>Biasa saja</td><td>Tidak ada usaha kreatif</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fase-card" onclick="toggleFase(this)">
+        <div class="fase-header">
+          <div class="fase-num">6</div>
+          <div class="fase-header-text">
+            <strong>Refleksi & Evaluasi</strong>
+            <span>Apa yang kamu pelajari dari proyek ini?</span>
+          </div>
+          <span class="fase-chevron">›</span>
+        </div>
+        <div class="fase-body">
+          <div class="info-card" style="margin-bottom:0;">
+            <p>Setelah semua kelompok presentasi, refleksikan:</p>
+            <ul>
+              <li>Apa yang paling kamu pelajari dari merancang permainan ini?</li>
+              <li>Apa kesulitan terbesar saat membuat aturan permainan?</li>
+              <li>Apakah permainan yang kamu ciptakan benar-benar melatih dribbling? Mengapa?</li>
+              <li>Bagaimana kerjasama dalam kelompokmu berjalan?</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end panel-p2 -->
+
+  </div>
+</div>
+
+<!-- ══════════════════ SCREEN: PANDUAN VIDEO ══════════════════ -->
+<div id="screen-video" class="screen">
+  <div class="topbar">
+    <button class="btn-back" onclick="goBack()">←</button>
+    <div style="flex:1;text-align:center;font-family:'Syne',sans-serif;font-weight:700;">Panduan Rekam Video</div>
+    <div style="width:40px;"></div>
+  </div>
+  <div class="video-guide-header">
+    <h2>🎬 Panduan Merekam Video Proyek</h2>
+    <p>Tips praktis agar videomu terlihat profesional & dapat nilai bagus</p>
+  </div>
+  <div class="content-area has-bottom-nav">
+
+    <div class="vg-card">
+      <div class="vg-card-header">📱 Peralatan yang Dibutuhkan</div>
+      <div class="vg-card-body">
+        <div class="vg-row">
+          <span class="vg-icon">📱</span>
+          <div class="vg-text"><strong>HP/Kamera</strong><span>HP apapun cukup. Gunakan kamera belakang karena resolusinya lebih baik dari kamera depan.</span></div>
+        </div>
+        <div class="vg-row">
+          <span class="vg-icon">🦯</span>
+          <div class="vg-text"><strong>Tripod / Sandaran</strong><span>Gunakan tripod mini, tumpuk buku, atau minta teman megang HP agar video tidak goyang.</span></div>
+        </div>
+        <div class="vg-row">
+          <span class="vg-icon">🏀</span>
+          <div class="vg-text"><strong>Bola Basket</strong><span>Siapkan bola basket yang cukup angin sebelum mulai merekam agar tidak ada kendala teknis.</span></div>
+        </div>
+        <div class="vg-row">
+          <span class="vg-icon">👕</span>
+          <div class="vg-text"><strong>Pakaian Olahraga</strong><span>Pakai baju olahraga yang kontras dengan latar belakang agar gerakan tubuh terlihat jelas.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="vg-card">
+      <div class="vg-card-header">☀️ Pencahayaan & Lokasi</div>
+      <div class="vg-card-body">
+        <div class="do-dont">
+          <div class="do-box">
+            <div class="label">✅ LAKUKAN</div>
+            <ul>
+              <li>Rekam di lapangan basket siang hari</li>
+              <li>Cahaya dari depan atau samping</li>
+              <li>Lantai lapangan terlihat di frame</li>
+              <li>Ruangan/gym terang dengan lantai kayu</li>
+            </ul>
+          </div>
+          <div class="dont-box">
+            <div class="label">❌ HINDARI</div>
+            <ul>
+              <li>Cahaya dari belakang (backlight)</li>
+              <li>Rekam malam tanpa lampu cukup</li>
+              <li>Latar belakang terlalu ramai</li>
+              <li>Lantai licin/berbahaya</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="vg-card">
+      <div class="vg-card-header">🎥 Sudut & Posisi Kamera</div>
+      <div class="vg-card-body">
+        <div class="shot-list">
+          <div class="shot-item">
+            <span class="shot-badge">WAJIB</span>
+            <span><strong>Dari samping (side view)</strong> — posisi ideal untuk merekam dribbling agar postur tubuh, posisi tangan, dan tinggi pantulan bola terlihat jelas</span>
+          </div>
+          <div class="shot-item">
+            <span class="shot-badge">BAGUS</span>
+            <span><strong>Dari depan (front view)</strong> — untuk crossover dribble agar perpindahan bola antar tangan terlihat jelas</span>
+          </div>
+          <div class="shot-item">
+            <span class="shot-badge">CLOSE-UP</span>
+            <span><strong>Zoom ke tangan & bola</strong> — rekam close-up cara jari-jari menyentuh bola dan posisi pergelangan tangan</span>
+          </div>
+          <div class="shot-item">
+            <span class="shot-badge">BONUS</span>
+            <span><strong>Full body shot sambil bergerak</strong> — rekam dribbling sambil berjalan/berlari agar gerakan natural terlihat</span>
+          </div>
+        </div>
+        <div class="tip-card" style="margin-top:10px;">
+          <span style="font-size:18px;flex-shrink:0;">📐</span>
+          <p><strong>Orientasi HP:</strong> Rekam <strong>landscape (horizontal)</strong> agar video tidak ada pinggiran hitam saat ditayangkan di TV/proyektor kelas.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="vg-card">
+      <div class="vg-card-header">🗂️ Struktur Video (Urutan Isi)</div>
+      <div class="vg-card-body">
+        <div class="teknik-step" style="margin-bottom:10px;">
+          <div class="step-num" style="background:#3498DB;">1</div>
+          <div class="step-body"><h4>Opening (15–20 detik)</h4><p>"Halo, kami kelompok [X] dari kelas [Y]. Kami akan menampilkan teknik dribbling bola basket."</p></div>
+        </div>
+        <div class="teknik-step" style="margin-bottom:10px;">
+          <div class="step-num" style="background:#9B59B6;">2</div>
+          <div class="step-body"><h4>Penjelasan Dribbling (20–30 detik)</h4><p>Narasi singkat: "Dribbling adalah... Fungsinya adalah... Ada empat jenis dribbling: rendah, tinggi, crossover, dan behind-the-back..."</p></div>
+        </div>
+        <div class="teknik-step" style="margin-bottom:10px;">
+          <div class="step-num" style="background:var(--orange);">3</div>
+          <div class="step-body"><h4>Demo Cara Memegang Bola (20–30 detik)</h4><p>Tunjukkan close-up cara jari-jari menyentuh bola sambil narasi "gunakan jari, bukan telapak".</p></div>
+        </div>
+        <div class="teknik-step" style="margin-bottom:10px;">
+          <div class="step-num" style="background:var(--orange);">4</div>
+          <div class="step-body"><h4>Demo Posisi Tubuh / Athletic Stance (15–20 detik)</h4><p>Tunjukkan posisi siap: lutut ditekuk, badan condong, dari sudut samping.</p></div>
+        </div>
+        <div class="teknik-step" style="margin-bottom:10px;">
+          <div class="step-num" style="background:var(--orange);">5</div>
+          <div class="step-body"><h4>Demo Dribbling Lengkap (30–60 detik)</h4><p>Rekam dribbling rendah & tinggi dari samping. Pelan-pelan dulu, lalu normal speed.</p></div>
+        </div>
+        <div class="teknik-step" style="margin-bottom:10px;">
+          <div class="step-num" style="background:var(--red);">6</div>
+          <div class="step-body"><h4>2 Kesalahan yang Harus Dihindari (20–30 detik)</h4><p>Tunjukkan contoh gerakan SALAH (misal memakai telapak), lalu koreksi yang BENAR.</p></div>
+        </div>
+        <div class="teknik-step">
+          <div class="step-num" style="background:#F5C542;color:#0D1B2A;">7</div>
+          <div class="step-body"><h4>Penutup (10–15 detik)</h4><p>"Sekian dari kelompok kami, terima kasih!" Senyum, salam.</p></div>
+        </div>
+        <div class="info-card" style="margin-top:12px;margin-bottom:0;background:rgba(245,197,66,0.06);border-color:rgba(245,197,66,0.2);">
+          <h3 style="color:var(--gold);">⏱️ Total Durasi Target</h3>
+          <p style="color:#475569;">Gabung semua bagian = <strong>2–4 menit</strong>. Jangan terlalu panjang agar tidak membosankan saat presentasi.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="vg-card">
+      <div class="vg-card-header">✂️ Tips Editing Sederhana</div>
+      <div class="vg-card-body">
+        <div class="vg-row">
+          <span class="vg-icon">📲</span>
+          <div class="vg-text"><strong>Aplikasi Gratis</strong><span>CapCut (mudah, banyak template), VN (profesional), InShot, atau editor bawaan HP sudah cukup.</span></div>
+        </div>
+        <div class="vg-row">
+          <span class="vg-icon">✂️</span>
+          <div class="vg-text"><strong>Potong Bagian Kosong</strong><span>Hapus bagian awal/akhir yang tidak perlu, serta momen diam terlalu lama (lebih dari 3 detik).</span></div>
+        </div>
+        <div class="vg-row">
+          <span class="vg-icon">🔤</span>
+          <div class="vg-text"><strong>Tambah Teks/Subtitle</strong><span>Kasih teks keterangan singkat tiap bagian, misal "Dribbling Rendah" atau "Kesalahan Umum". Ini nilai tambah kreativitas!</span></div>
+        </div>
+        <div class="vg-row">
+          <span class="vg-icon">🎵</span>
+          <div class="vg-text"><strong>Musik Latar (Opsional)</strong><span>Boleh tambah musik latar yang pelan. Pastikan suara narasi tetap terdengar jelas — volume musik lebih kecil dari suara orang.</span></div>
+        </div>
+        <div class="vg-row">
+          <span class="vg-icon">💾</span>
+          <div class="vg-text"><strong>Simpan & Backup</strong><span>Export dalam kualitas HD (720p atau 1080p). Simpan di dua tempat: HP dan Google Drive/WhatsApp sendiri.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-card" style="background:rgba(255,107,43,0.06);border-color:rgba(255,107,43,0.25);">
+      <h3>✅ Checklist Sebelum Dikumpulkan</h3>
+      <ul>
+        <li>Semua 6 poin isi video sudah ada</li>
+        <li>Durasi 2–4 menit</li>
+        <li>Suara narasi terdengar jelas</li>
+        <li>Gerakan dribbling terlihat dari samping</li>
+        <li>Semua anggota kelompok muncul di video</li>
+        <li>Video bisa dibuka & diputar di HP lain</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════ SCREEN: KUIS ══════════════════ -->
+<div id="screen-kuis" class="screen">
+  <div class="topbar">
+    <button class="btn-back" onclick="goBack()">←</button>
+    <div style="flex:1;text-align:center;font-family:'Syne',sans-serif;font-weight:700;">Kuis Basket</div>
+    <div style="width:40px;"></div>
+  </div>
+
+  <div id="kuis-start" style="padding:32px 20px;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;">
+    <div style="font-size:64px;margin-bottom:16px;">✏️</div>
+    <h2 style="font-family:'Syne',sans-serif;font-size:24px;font-weight:800;margin-bottom:10px;">Kuis Dribbling Basket</h2>
+    <p style="color:var(--gray);font-size:14px;margin-bottom:24px;line-height:1.6;">Uji pemahamanmu dengan 10 soal pilihan ganda. Kerjakan sendiri ya!</p>
+    <div class="result-stats" style="width:100%;max-width:300px;">
+      <div class="result-stat"><div class="val" style="font-size:20px;">10</div><div class="lbl">Soal</div></div>
+      <div class="result-stat"><div class="val" style="font-size:20px;">~5</div><div class="lbl">Menit</div></div>
+    </div>
+    <label style="display:flex;gap:8px;align-items:center;justify-content:center;font-size:13px;color:#475569;margin:14px 0 4px;"><input type="checkbox" id="opt-timer"> Aktifkan timer 30 detik per soal (opsional)</label>
+    <details style="max-width:340px;width:100%;text-align:left;margin:8px 0 14px;font-size:12px;color:#475569;"><summary style="cursor:pointer;font-weight:600;">Kisi-kisi soal</summary><div id="kisi-wrap" style="margin-top:8px;"></div></details>
+    <button class="btn-primary" style="max-width:300px;" onclick="startKuis()">Mulai Kuis 🚀</button>
+  </div>
+
+  <div id="kuis-area" style="display:none;flex:1;flex-direction:column;">
+    <div class="kuis-header">
+      <h2 id="kuis-q-title">Soal 1 / 10</h2>
+      <p>Pilih jawaban yang paling tepat!</p>
+      <div class="kuis-progress">
+        <div class="kuis-progress-bar"><div class="kuis-progress-fill" id="kuis-prog" style="width:10%"></div></div>
+        <div class="kuis-num" id="kuis-num-lbl">1/10</div>
+      </div>
+    </div>
+    <div class="content-area has-bottom-nav" id="kuis-content"></div>
+  </div>
+
+  <div id="kuis-result" style="display:none;flex:1;">
+    <div class="result-screen">
+      <div class="result-circle">
+        <div class="result-score" id="result-score-val">0</div>
+        <div class="result-label">Nilai</div>
+      </div>
+      <div class="result-title" id="result-title">Bagus!</div>
+      <div class="result-desc" id="result-desc">Kamu sudah mengerjakan kuis dengan baik.</div>
+      <div class="result-stats">
+        <div class="result-stat"><div class="val green" id="result-benar">0</div><div class="lbl">Benar</div></div>
+        <div class="result-stat"><div class="val red" id="result-salah">0</div><div class="lbl">Salah</div></div>
+      </div>
+      <div id="result-grade" style="font-size:14px;font-weight:600;margin-bottom:20px;"></div>
+      <button class="btn-primary" style="max-width:300px;" onclick="resetKuis()">Ulangi Kuis 🔄</button>
+    </div>
+    <!-- Review Jawaban -->
+    <div style="padding:0 20px 20px;">
+      <div style="font-family:Syne,sans-serif;font-size:14px;font-weight:700;color:var(--gray);text-transform:uppercase;letter-spacing:1px;margin-bottom:14px;">📋 Review Jawaban</div>
+      <div id="review-wrap"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════ SCREEN: REKAP (IMPROVED) ══════════════════ -->
+<div id="screen-rekap" class="screen">
+  <div class="topbar">
+    <button class="btn-back" onclick="goBack()">←</button>
+    <div style="flex:1;text-align:center;font-family:'Syne',sans-serif;font-weight:700;">Rekap Nilai Kuis</div>
+    <div style="width:40px;"></div>
+  </div>
+
+  <!-- Nilai saya -->
+  <div id="rekap-my-score-wrap" style="display:none;padding-top:16px;">
+    <div class="rekap-my-score">
+      <div class="rekap-my-circle">
+        <div class="rekap-my-val" id="rekap-my-val">–</div>
+        <div class="rekap-my-lbl">Nilai</div>
+      </div>
+      <div class="rekap-my-info">
+        <h4 id="rekap-my-nama">–</h4>
+        <p id="rekap-my-kelas">–</p>
+        <p id="rekap-my-grade" style="margin-top:4px;"></p>
+      </div>
+      <div class="rekap-rank-badge" id="rekap-my-rank">#–</div>
+    </div>
+  </div>
+
+  <!-- Filter kelas -->
+  <div class="rekap-header-bar">
+    <span style="font-size:13px;color:var(--gray);">Semua peserta</span>
+    <button onclick="clearRekap()" style="background:none;border:none;color:var(--red);font-size:12px;cursor:pointer;padding:4px 8px;">🗑 Hapus data</button>
+  </div>
+  <div class="filter-bar" style="padding:8px 20px 0;" id="rekap-filter-bar">
+    <button class="filter-chip active" onclick="filterRekap('semua',this)">Semua</button>
+  </div>
+
+  <div class="rekap-list has-bottom-nav" id="rekap-list">
+    <div class="info-card" style="text-align:center;">
+      <p style="color:var(--gray);">Belum ada nilai kuis.<br>Selesaikan kuis untuk melihat hasil!</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════ SCREEN: GURU LOGIN ══════════════════ -->
+<div id="screen-guru-login" class="screen">
+  <div style="background:linear-gradient(135deg,#EAF2EC,#DDEBE2);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;">
+    <div class="login-card" style="max-width:380px;">
+      <div class="logo-area">
+        <div class="logo-icon" style="background:linear-gradient(135deg,#17402F,#0F2A20);">👨‍🏫</div>
+        <div class="app-title" style="background:linear-gradient(135deg,var(--gold),#FFE082);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Dashboard Guru</div>
+        <div class="app-sub">Masukkan PIN untuk mengakses data siswa</div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">PIN Guru</label>
+        <input id="guru-pin-input" type="password" class="form-input" placeholder="Masukkan PIN 4 digit..." maxlength="6"
+          style="border-color:rgba(23,64,47,0.3);letter-spacing:4px;font-size:20px;text-align:center;"
+          onkeydown="if(event.key==='Enter')doGuruLogin()">
+      </div>
+      <div id="guru-pin-error" style="display:none;background:rgba(255,71,87,0.12);border:1px solid rgba(255,71,87,0.3);border-radius:10px;padding:10px 14px;font-size:12px;color:#B91C1C;text-align:center;margin-bottom:10px;"></div>
+      <button class="btn-primary" style="background:linear-gradient(135deg,#17402F,#0F2A20);" onclick="doGuruLogin()">Masuk sebagai Guru →</button>
+      <div style="text-align:center;margin-top:14px;">
+        <button onclick="logoutToStart()" style="background:none;border:none;color:var(--gray);font-size:13px;cursor:pointer;">← Kembali ke Aplikasi Siswa</button>
+      </div>
+      <p style="text-align:center;margin-top:10px;font-size:11px;color:#475569;">© Nurul Habibah / PJKR 2023 B</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════ SCREEN: DASHBOARD GURU ══════════════════ -->
+<div id="screen-guru" class="screen">
+  <div class="topbar" style="border-bottom-color:rgba(23,64,47,0.15);">
+    <div class="topbar-left">
+      <div class="topbar-logo" style="background:linear-gradient(135deg,#17402F,#0F2A20);">👨‍🏫</div>
+      <div class="topbar-title" style="color:#17402F;">Dashboard Guru</div>
+    </div>
+    <button onclick="guruLogout()" style="background:rgba(255,71,87,0.1);border:1px solid rgba(255,71,87,0.25);border-radius:10px;color:#B91C1C;font-size:12px;padding:6px 12px;cursor:pointer;">Keluar</button>
+  </div>
+
+  <div class="guru-hero">
+    <div class="guru-hero-label">📊 Rekap Kelas</div>
+    <div class="guru-hero-title">PJOK Smart – Dribbling Basket</div>
+    <div class="guru-hero-sub" id="guru-sub-info">Memuat data...</div>
+    <div class="guru-stat-row">
+      <div class="guru-stat"><div class="g-val" id="g-total">0</div><div class="g-lbl">Total Peserta</div></div>
+      <div class="guru-stat"><div class="g-val" id="g-avg">–</div><div class="g-lbl">Rata-rata</div></div>
+      <div class="guru-stat"><div class="g-val" id="g-tuntas">0%</div><div class="g-lbl">Tuntas (≥75)</div></div>
+    </div>
+  </div>
+
+  <div class="guru-section">
+
+    <!-- Filter kelas -->
+    <div class="guru-section-title">Filter Kelas</div>
+    <div class="filter-bar" id="guru-filter-bar">
+      <button class="filter-chip active" onclick="guruFilter('semua',this)">Semua Kelas</button>
+    </div>
+
+    <!-- Distribusi nilai -->
+    <div class="guru-section-title" style="margin-top:4px;">Distribusi Nilai</div>
+    <div style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:14px;padding:16px;margin-bottom:18px;">
+      <div class="dist-row">
+        <div class="dist-label" style="color:#047857;">A</div>
+        <div class="dist-bar-wrap"><div class="dist-bar" id="dist-A" style="background:rgba(0,193,106,0.6);width:0%"></div></div>
+        <div class="dist-count" id="cnt-A">0</div>
+      </div>
+      <div class="dist-row">
+        <div class="dist-label" style="color:#92400E;">B</div>
+        <div class="dist-bar-wrap"><div class="dist-bar" id="dist-B" style="background:rgba(255,193,7,0.6);width:0%"></div></div>
+        <div class="dist-count" id="cnt-B">0</div>
+      </div>
+      <div class="dist-row">
+        <div class="dist-label" style="color:#9A3412;">C</div>
+        <div class="dist-bar-wrap"><div class="dist-bar" id="dist-C" style="background:rgba(255,107,43,0.6);width:0%"></div></div>
+        <div class="dist-count" id="cnt-C">0</div>
+      </div>
+      <div class="dist-row" style="margin-bottom:0;">
+        <div class="dist-label" style="color:#B91C1C;">D</div>
+        <div class="dist-bar-wrap"><div class="dist-bar" id="dist-D" style="background:rgba(255,71,87,0.6);width:0%"></div></div>
+        <div class="dist-count" id="cnt-D">0</div>
+      </div>
+      <div style="margin-top:12px;font-size:11px;color:var(--gray);line-height:1.7;">
+        A = 90–100 &nbsp;·&nbsp; B = 75–89 &nbsp;·&nbsp; C = 60–74 &nbsp;·&nbsp; D = &lt;60
+      </div>
+    </div>
+
+    <!-- Tabel nilai -->
+    <div class="guru-section-title">
+      <span>Daftar Nilai Siswa</span>
+      <button class="btn-export" onclick="exportCSV()" style="margin-bottom:0;padding:6px 12px;font-size:12px;">⬇ Export CSV</button>
+    </div>
+
+    <div id="guru-empty" style="text-align:center;padding:32px 20px;color:var(--gray);font-size:14px;display:none;">
+      Belum ada siswa yang mengerjakan kuis.
+    </div>
+
+    <div class="guru-table-wrap" id="guru-table-wrap">
+      <table class="guru-table">
+        <thead>
+          <tr>
+            <th style="width:32px;">#</th>
+            <th>Nama</th>
+            <th>Kelas</th>
+            <th>Nilai</th>
+            <th>Grade</th>
+            <th style="min-width:110px;">Waktu</th>
+          </tr>
+        </thead>
+        <tbody id="guru-tbody"></tbody>
+      </table>
+    </div>
+
+    <!-- Nilai per kelas -->
+    <div class="guru-section-title" style="margin-top:22px;">Rekapitulasi per Kelas</div>
+    <div id="guru-kelas-wrap" style="margin-bottom:80px;"></div>
+
+  </div>
+</div>
+<!-- ══════════════════ BOTTOM NAV ══════════════════ -->
+<nav class="bottom-nav" id="bottom-nav">
+  <button class="nav-item active" onclick="navTo('home',this)">
+    <span class="nav-icon">🏠</span><span class="nav-label">Home</span>
+  </button>
+  <button class="nav-item" onclick="navTo('materi',this)">
+    <span class="nav-icon">📖</span><span class="nav-label">Materi</span>
+  </button>
+  <button class="nav-item" onclick="navTo('proyek',this)">
+    <span class="nav-icon">🎯</span><span class="nav-label">Proyek</span>
+  </button>
+  <button class="nav-item" onclick="navTo('kuis',this)">
+    <span class="nav-icon">✏️</span><span class="nav-label">Kuis</span>
+  </button>
+</nav>
+
+<div class="watermark" id="watermark">© Dibuat oleh Nurul Habibah / PJKR 2023 B</div>
+
+<script>
+// ════════════════════════════════════
+// STATE
+// ════════════════════════════════════
+let currentUser = { nama: '', kelas: '' };
+let currentScreen = 'login';
+let prevScreen = 'home';
+let curQ = 0, correct = 0, wrong = 0;
+let userAnswers = [];
+let timerInterval = null;
+let timeLeft = 0;
+let guruFilterKelas = 'semua';
+let rekapFilterKelas = 'semua';
+const GURU_PIN = '1234';
+const APP_VERSION='1.1.0', APP_DATE='29 Okt 2026';
+function kKey(s){return ((s.kelas||'')+'|'+(s.nama||'')).toLowerCase().trim().replace(/\s+/g,' ');}
+
+function lsGet(key, fallback) {
+  try { return JSON.parse(localStorage.getItem(key) || fallback); } catch(e) { return JSON.parse(fallback); }
+}
+function lsSet(key, val) {
+  try { localStorage.setItem(key, JSON.stringify(val)); } catch(e) {}
+}
+
+let allScores = lsGet('pjok_basket_scores', '[]');
+let checklistIsi = [false,false,false,false,false,false];
+let checklistMon = [false,false,false,false,false];
+let checklistGame = [false,false,false,false,false];
+let checklistMonGame = [false,false,false,false,false];
+
+// ════════════════════════════════════
+// QUIZ QUESTIONS – bank 15 soal, ambil 10 acak
+// ════════════════════════════════════
+const questionBank = [
+  {
+    q: "Apa yang dimaksud dengan dribbling dalam permainan bola basket?",
+    opts: ["Teknik menembak bola ke ring","Teknik mengoper bola ke rekan setim","Teknik menggiring bola dengan memantulkannya ke lantai menggunakan satu tangan","Teknik bertahan dari serangan lawan"],
+    ans: 2,
+    fb: "Dribbling adalah teknik menggiring bola basket dengan cara memantulkan bola ke lantai secara berulang menggunakan satu tangan, sehingga pemain bisa bergerak membawa bola."
+  },
+  {
+    q: "Bagian tangan yang benar digunakan untuk menyentuh bola saat dribbling adalah...",
+    opts: ["Telapak tangan (seluruh telapak)","Jari-jari tangan yang terbuka lebar","Punggung tangan","Pergelangan tangan"],
+    ans: 1,
+    fb: "Bola harus ditopang dan didorong dengan jari-jari (bukan telapak tangan). Penggunaan jari memberi kontrol lebih baik dan kepekaan terhadap bola."
+  },
+  {
+    q: "Posisi lutut yang benar saat melakukan dribbling adalah...",
+    opts: ["Lurus sepenuhnya","Ditekuk sedikit (athletic stance)","Salah satu lutut menyentuh lantai","Dikunci rapat-rapat"],
+    ans: 1,
+    fb: "Lutut harus sedikit ditekuk dalam posisi athletic stance. Ini memberi kestabilan dan memudahkan pergerakan ke segala arah."
+  },
+  {
+    q: "Jenis dribbling yang tepat digunakan ketika pemain sedang dijaga ketat oleh lawan adalah...",
+    opts: ["Dribbling tinggi","Behind-the-back dribble","Dribbling rendah","Crossover dribble"],
+    ans: 2,
+    fb: "Dribbling rendah (bola setinggi lutut atau lebih rendah) digunakan saat dijaga ketat karena bola lebih sulit dijangkau dan dicuri lawan."
+  },
+  {
+    q: "Apa yang dimaksud dengan 'double dribble' dalam basket?",
+    opts: ["Mendribble bola dengan satu tangan secara cepat","Memulai dribbling kembali setelah bola sudah dipegang dua tangan","Mendribble bola dua kali sebelum mengoper","Memantulkan bola dua kali ke lantai"],
+    ans: 1,
+    fb: "Double dribble terjadi ketika pemain berhenti mendribble lalu memulai dribbling lagi. Ini langsung memberi bola ke lawan."
+  },
+  {
+    q: "Ke mana seharusnya pandangan mata pemain diarahkan saat dribbling?",
+    opts: ["Ke bola yang dipantulkan","Ke lantai","Ke depan (lapangan dan pemain lain)","Ke ring basket"],
+    ans: 2,
+    fb: "Pandangan harus ke depan (court vision) agar pemain bisa melihat rekan tim, membaca posisi lawan, dan mengambil keputusan taktis."
+  },
+  {
+    q: "Teknik dribbling crossover digunakan untuk tujuan...",
+    opts: ["Memperlambat tempo permainan","Memindahkan bola ke tangan lain untuk mengecoh lawan dan mengubah arah","Melindungi bola dari belakang","Menambah kecepatan lari"],
+    ans: 1,
+    fb: "Crossover dribble memindahkan bola dari satu tangan ke tangan lain di depan tubuh. Tujuannya mengecoh lawan dan mengubah arah secara tiba-tiba."
+  },
+  {
+    q: "Manakah yang termasuk pelanggaran 'carrying' saat dribbling?",
+    opts: ["Mendribble bola terlalu tinggi","Mendribble bola terlalu cepat","Meletakkan tangan di bawah bola dan membawanya seperti nampan","Mendribble bola sambil berlari"],
+    ans: 2,
+    fb: "Carrying terjadi ketika telapak tangan berada di bawah bola — bola tidak didorong dari atas tapi diangkat. Ini adalah pelanggaran dalam basket."
+  },
+  {
+    q: "Apa yang disebut 'court vision' dalam konteks dribbling basket?",
+    opts: ["Kemampuan melihat garis lapangan dengan jelas","Kemampuan membaca situasi lapangan sambil tetap mendribble bola","Teknik melihat ke bola saat dribbling","Cara memilih posisi yang bagus di lapangan"],
+    ans: 1,
+    fb: "Court vision adalah kemampuan pemain melihat dan membaca keseluruhan situasi lapangan sambil tetap mendribble tanpa melihat ke bawah."
+  },
+  {
+    q: "Dalam proyek Basketball Showcase, berapa lama durasi video kelompok yang harus dibuat?",
+    opts: ["1–2 menit","2–4 menit","5–7 menit","8–10 menit"],
+    ans: 1,
+    fb: "Sesuai panduan proyek Basketball Showcase, video kelompok harus berdurasi 2–4 menit berisi 6 poin konten wajib tentang teknik dribbling."
+  },
+  {
+    q: "Mengapa dribbling tinggi sebaiknya TIDAK digunakan saat dijaga lawan?",
+    opts: ["Karena membutuhkan lebih banyak tenaga","Karena pantulan bola lebih tinggi sehingga mudah dijangkau dan dicuri lawan","Karena melanggar peraturan basket","Karena memperlambat gerak pemain"],
+    ans: 1,
+    fb: "Saat dijaga ketat, dribbling tinggi berbahaya karena bola berada di ketinggian yang mudah dijangkau lawan. Gunakan dribbling rendah untuk melindungi bola."
+  },
+  {
+    q: "Posisi siku yang benar saat melakukan dribbling adalah...",
+    opts: ["Lurus sepenuhnya ke samping","Sedikit ditekuk dan rileks di sisi badan","Diangkat setinggi bahu","Dirapatkan ke dada"],
+    ans: 1,
+    fb: "Siku harus sedikit ditekuk dan rileks. Posisi ini memungkinkan gerakan pergelangan tangan yang fleksibel untuk mengontrol pantulan bola."
+  },
+  {
+    q: "Fungsi utama 'flick' pergelangan tangan saat dribbling adalah...",
+    opts: ["Menambah kecepatan berlari","Mendorong bola ke lantai dengan kontrol yang baik","Mengunci posisi bola agar tidak lepas","Mengarahkan bola ke rekan tim"],
+    ans: 1,
+    fb: "Gerakan flick (sentak) pergelangan tangan ke bawah adalah mekanisme utama mendorong bola ke lantai dengan kontrol dan ritme yang konsisten."
+  },
+  {
+    q: "Teknik behind-the-back dribble digunakan untuk situasi...",
+    opts: ["Saat pemain ingin memperlambat permainan","Saat pemain ingin melindungi bola sambil mengubah arah dari jangkauan lawan yang ada di depan","Saat pemain sedang berlari kencang ke depan tanpa halangan","Saat pemain ingin mengoper ke rekan tim"],
+    ans: 1,
+    fb: "Behind-the-back dribble memindahkan bola dari satu tangan ke tangan lain melewati belakang tubuh. Digunakan untuk melindungi bola dari lawan yang menghalangi di depan."
+  },
+  {
+    q: "Apa yang terjadi jika pemain mengangkat kaki pivot saat memegang bola setelah berhenti dribbling?",
+    opts: ["Tidak ada masalah selama bola tidak dijatuhkan","Pelanggaran traveling — bola diberikan ke lawan","Pemain mendapat 2 langkah tambahan","Pemain harus mengoper dalam 3 detik"],
+    ans: 1,
+    fb: "Setelah berhenti dribbling, pemain harus menetapkan kaki pivot. Mengangkat kaki pivot sebelum mengoper/menembak adalah pelanggaran traveling."
+  }
+];
+
+let questions = [];
+function shuffleQuestions() {
+  const shuffled = [...questionBank].sort(() => Math.random() - 0.5);
+  questions = shuffled.slice(0, 10);
+}
+
+// ════════════════════════════════════
+// HELPERS
+// ════════════════════════════════════
+function getGrade(v) {
+  if (v >= 90) return 'A';
+  if (v >= 75) return 'B';
+  if (v >= 60) return 'C';
+  return 'D';
+}
+function getGradeLabel(v) {
+  if (v >= 90) return 'Sangat Baik';
+  if (v >= 75) return 'Baik';
+  if (v >= 60) return 'Cukup';
+  return 'Perlu Perbaikan';
+}
+function getGradeColor(g) {
+  return {A:'#047857', B:'#92400E', C:'#9A3412', D:'#B91C1C'}[g] || '#1A202C';
+}
+
+// ════════════════════════════════════
+// PROYEK SWITCHER
+// ════════════════════════════════════
+function switchProyek(n) {
+  const p1 = document.getElementById('panel-p1');
+  const p2 = document.getElementById('panel-p2');
+  const b1 = document.getElementById('btn-p1');
+  const b2 = document.getElementById('btn-p2');
+  if (!p1 || !p2) return;
+  if (n === 1) {
+    p1.style.display = 'block'; p2.style.display = 'none';
+    b1.style.border = '2px solid var(--orange)'; b1.style.background = 'rgba(255,107,43,0.15)';
+    b1.querySelector('div:nth-child(2)').style.color = 'var(--orange)';
+    b2.style.border = '2px solid rgba(23,64,47,0.08)'; b2.style.background = 'rgba(23,64,47,0.03)';
+    b2.querySelector('div:nth-child(2)').style.color = 'var(--gray)';
+  } else {
+    p2.style.display = 'block'; p1.style.display = 'none';
+    b2.style.border = '2px solid var(--gold)'; b2.style.background = 'rgba(245,197,66,0.12)';
+    b2.querySelector('div:nth-child(2)').style.color = 'var(--gold)';
+    b1.style.border = '2px solid rgba(23,64,47,0.08)'; b1.style.background = 'rgba(23,64,47,0.03)';
+    b1.querySelector('div:nth-child(2)').style.color = 'var(--gray)';
+    buildGameChecklists();
+  }
+}
+
+// ════════════════════════════════════
+// DIAGRAM SLIDER
+// ════════════════════════════════════
+let curDiag = 0;
+const totalDiag = 4;
+function showDiag(i) {
+  for (let j = 0; j < totalDiag; j++) {
+    const el = document.getElementById('diag-' + j);
+    if (el) el.style.display = j === i ? 'block' : 'none';
+  }
+  document.querySelectorAll('.diagram-dot').forEach((d, j) => {
+    d.classList.toggle('active', j === i);
+  });
+  curDiag = i;
+}
+function nextDiag() { showDiag((curDiag + 1) % totalDiag); }
+function prevDiag() { showDiag((curDiag - 1 + totalDiag) % totalDiag); }
+
+// ════════════════════════════════════
+// LOGIN
+// ════════════════════════════════════
+function showLoginError(msg) {
+  let errEl = document.getElementById('login-error');
+  if (!errEl) {
+    errEl = document.createElement('div');
+    errEl.id = 'login-error';
+    errEl.style.cssText = 'background:rgba(255,71,87,0.15);border:1px solid rgba(255,71,87,0.4);border-radius:10px;padding:10px 14px;font-size:13px;color:#B91C1C;margin-bottom:12px;text-align:center;';
+    const btn = document.querySelector('#screen-login .btn-primary');
+    btn.parentNode.insertBefore(errEl, btn);
+  }
+  errEl.textContent = msg;
+  errEl.style.display = 'block';
+}
+
+function doLogin() {
+  const nama = document.getElementById('input-nama').value.trim();
+  const kelas = document.getElementById('input-kelas').value;
+  const errEl = document.getElementById('login-error');
+  if (errEl) errEl.style.display = 'none';
+  if (!nama) { showLoginError('⚠️ Masukkan nama kamu dulu ya!'); return; }
+  if (!kelas) { showLoginError('⚠️ Pilih kelas kamu!'); return; }
+  currentUser = { nama, kelas };
+  document.getElementById('user-name-top').textContent = nama.split(' ')[0];
+  document.getElementById('hero-name').textContent = nama;
+  document.getElementById('hero-kelas').textContent = kelas;
+  updateProgress();
+  buildChecklists();
+  buildRekap();
+  goScreen('screen-home');
+  document.getElementById('bottom-nav').classList.add('show');
+  document.getElementById('watermark').style.display = 'block';
+}
+
+// ════════════════════════════════════
+// NAVIGATION
+// ════════════════════════════════════
+function goScreen(id) {
+  prevScreen = currentScreen;
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  const el = document.getElementById(id);
+  if (el) el.classList.add('active');
+  currentScreen = id;
+  window.scrollTo(0, 0);
+  const map = {'screen-home':'home','screen-materi':'materi','screen-proyek':'proyek','screen-kuis':'kuis'};
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  const key = map[id];
+  if (key) {
+    document.querySelectorAll('.nav-item').forEach(n => {
+      if (n.getAttribute('onclick') && n.getAttribute('onclick').includes(`'${key}'`)) n.classList.add('active');
+    });
+  }
+  // Hide bottom nav on guru screens
+  const guruScreens = ['screen-guru-login','screen-guru'];
+  document.getElementById('bottom-nav').style.display = guruScreens.includes(id) ? 'none' : '';
+  if (id === 'screen-materi') markProgress('materi');
+  if (id === 'screen-rekap') buildRekap();
+  if (id === 'screen-guru') buildGuruDashboard();
+}
+
+function goBack() { goScreen(prevScreen || 'screen-home'); }
+
+function navTo(key, el) {
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  el.classList.add('active');
+  const map = {'home':'screen-home','materi':'screen-materi','proyek':'screen-proyek','kuis':'screen-kuis'};
+  goScreen(map[key]);
+}
+
+// ════════════════════════════════════
+// TAB SWITCHING
+// ════════════════════════════════════
+function switchTab(btn, id) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(id).classList.add('active');
+}
+
+// ════════════════════════════════════
+// FASE TOGGLE
+// ════════════════════════════════════
+function toggleFase(card) { card.classList.toggle('open'); }
+
+// ════════════════════════════════════
+// PROGRESS
+// ════════════════════════════════════
+let progressFlags = { materi: false, proyek: false, kuis: false };
+function markProgress(key) {
+  progressFlags[key] = true;
+  updateProgress();
+}
+function updateProgress() {
+  const keys = Object.keys(progressFlags);
+  const done = keys.filter(k => progressFlags[k]).length;
+  const pct = Math.round((done / keys.length) * 100);
+  const fill = document.getElementById('progress-fill');
+  const pctEl = document.getElementById('progress-pct');
+  if (fill) fill.style.width = pct + '%';
+  if (pctEl) pctEl.textContent = pct + '%';
+}
+
+// ════════════════════════════════════
+// CHECKLISTS
+// ════════════════════════════════════
+const isiItems = [
+  "Perkenalan anggota kelompok",
+  "Penjelasan singkat apa itu dribbling dan fungsinya",
+  "Demo cara memegang bola (penggunaan jari-jari)",
+  "Demo posisi tubuh / athletic stance yang benar",
+  "Demo gerakan dribbling lengkap dari awal sampai akhir",
+  "Sebutkan 2 kesalahan dribbling yang harus dihindari"
+];
+const monItems = [
+  "Sudah diskusi kelompok & bagi peran",
+  "Naskah narasi sudah ditulis",
+  "Rekaman video sudah dilakukan",
+  "Video sudah diedit",
+  "Video siap ditayangkan di kelas"
+];
+const gameItems = [
+  "Nama permainan & konsepnya sudah ditentukan",
+  "Alat-alat yang dibutuhkan sudah dicatat",
+  "Aturan main sudah jelas (cara bermain, menang/kalah)",
+  "Keterkaitan dengan teknik dribbling sudah dijelaskan",
+  "Demonstrasi langsung di depan kelas siap dilakukan"
+];
+const monGameItems = [
+  "Sudah diskusi kelompok & tentukan konsep game",
+  "Aturan main sudah dirancang dan dicoba",
+  "Alat yang dibutuhkan sudah disiapkan",
+  "Latihan presentasi dan demo sudah dilakukan",
+  "Siap presentasi di Pertemuan 2"
+];
+
+function buildChecklists() {
+  const isiEl = document.getElementById('checklist-isi');
+  if (isiEl) isiEl.innerHTML = isiItems.map((item, i) => `
+    <div class="checklist-item" onclick="event.stopPropagation()">
+      <div class="check-box ${checklistIsi[i]?'checked':''}" onclick="event.stopPropagation();toggleCheck('isi',${i},this)"></div>
+      <div class="checklist-text ${checklistIsi[i]?'checked-text':''}" id="isi-text-${i}">${item}</div>
+    </div>`).join('');
+  const monEl = document.getElementById('checklist-monitoring');
+  if (monEl) monEl.innerHTML = monItems.map((item, i) => `
+    <div class="checklist-item" onclick="event.stopPropagation()">
+      <div class="check-box ${checklistMon[i]?'checked':''}" onclick="event.stopPropagation();toggleCheck('mon',${i},this)"></div>
+      <div class="checklist-text ${checklistMon[i]?'checked-text':''}" id="mon-text-${i}">${item}</div>
+    </div>`).join('');
+}
+function buildGameChecklists() {
+  const gameEl = document.getElementById('checklist-game');
+  if (gameEl) gameEl.innerHTML = gameItems.map((item, i) => `
+    <div class="checklist-item" onclick="event.stopPropagation()">
+      <div class="check-box ${checklistGame[i]?'checked':''}" onclick="event.stopPropagation();toggleCheck('game',${i},this)"></div>
+      <div class="checklist-text ${checklistGame[i]?'checked-text':''}" id="game-text-${i}">${item}</div>
+    </div>`).join('');
+  const monGEl = document.getElementById('checklist-monitoring-game');
+  if (monGEl) monGEl.innerHTML = monGameItems.map((item, i) => `
+    <div class="checklist-item" onclick="event.stopPropagation()">
+      <div class="check-box ${checklistMonGame[i]?'checked':''}" onclick="event.stopPropagation();toggleCheck('mongame',${i},this)"></div>
+      <div class="checklist-text ${checklistMonGame[i]?'checked-text':''}" id="mongame-text-${i}">${item}</div>
+    </div>`).join('');
+}
+function toggleCheck(type, i, el) {
+  el.classList.toggle('checked');
+  const textEl = document.getElementById(`${type}-text-${i}`);
+  if (textEl) textEl.classList.toggle('checked-text');
+  if (type === 'isi') checklistIsi[i] = !checklistIsi[i];
+  else if (type === 'mon') checklistMon[i] = !checklistMon[i];
+  else if (type === 'game') checklistGame[i] = !checklistGame[i];
+  else if (type === 'mongame') checklistMonGame[i] = !checklistMonGame[i];
+  if (checklistIsi.some(v=>v)||checklistMon.some(v=>v)||checklistGame.some(v=>v)||checklistMonGame.some(v=>v)) markProgress('proyek');
+}
+
+// ════════════════════════════════════
+// KUIS – dengan timer & acak soal
+// ════════════════════════════════════
+function startKuis() {
+  curQ = 0; correct = 0; wrong = 0; userAnswers = [];
+  shuffleQuestions();
+  document.getElementById('kuis-start').style.display = 'none';
+  document.getElementById('kuis-area').style.display = 'flex';
+  document.getElementById('kuis-area').style.flexDirection = 'column';
+  renderQuestion();
+}
+
+function startTimer() {
+  clearInterval(timerInterval);
+  timeLeft = 30;
+  updateTimerDisplay();
+  timerInterval = setInterval(() => {
+    timeLeft--;
+    updateTimerDisplay();
+    if (timeLeft <= 0) {
+      clearInterval(timerInterval);
+      autoSelectTimeout();
+    }
+  }, 1000);
+}
+
+function updateTimerDisplay() {
+  const tc = document.getElementById('timer-circle');
+  const tl = document.getElementById('timer-label');
+  if (!tc || !tl) return;
+  const warn = timeLeft <= 10;
+  tc.className = 'timer-circle' + (warn ? ' warn' : '');
+  tl.textContent = timeLeft;
+  const timerWrap = document.getElementById('kuis-timer-wrap');
+  if (timerWrap) timerWrap.className = 'kuis-timer' + (warn ? ' warn' : '');
+}
+
+function autoSelectTimeout() {
+  // Time's up — mark as wrong, show answer
+  const q = questions[curQ];
+  const opts = document.querySelectorAll('.option-btn');
+  opts.forEach(b => b.disabled = true);
+  if (opts[q.ans]) opts[q.ans].classList.add('correct');
+  const fb = document.getElementById('feedback-box');
+  if (fb) { fb.classList.add('show','wrong'); fb.innerHTML = '⏰ Waktu habis! Jawaban: ' + q.opts[q.ans] + '<br><small>' + q.fb + '</small>'; }
+  const nextBtn = document.getElementById('btn-next');
+  if (nextBtn) nextBtn.classList.add('show');
+  userAnswers.push({ q: curQ, pick: -1, correct: false });
+  wrong++;
+}
+
+function renderQuestion() {
+  const q = questions[curQ];
+  document.getElementById('kuis-q-title').textContent = `Soal ${curQ+1} / ${questions.length}`;
+  document.getElementById('kuis-num-lbl').textContent = `${curQ+1}/${questions.length}`;
+  document.getElementById('kuis-prog').style.width = `${((curQ+1)/questions.length)*100}%`;
+  const letters = ['A','B','C','D'];
+  let html = `<div class="question-card">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
+      <span style="font-size:11px;color:var(--gray);">Soal ${curQ+1} dari ${questions.length}</span>
+      <div class="kuis-timer" id="kuis-timer-wrap">
+        <div class="timer-circle" id="timer-circle"><span id="timer-label">30</span></div>
+        <span style="font-size:12px;">detik</span>
+      </div>
+    </div>
+    <div class="question-text">${q.q}</div>
+    ${q.opts.map((o,i)=>`
+      <button class="option-btn" onclick="selectAnswer(${i},this)" id="opt-${i}">
+        <span class="option-letter">${letters[i]}</span>${o}
+      </button>`).join('')}
+    <div class="feedback-box" id="feedback-box"></div>
+    <button class="btn-next" id="btn-next" onclick="nextQuestion()">
+      ${curQ < questions.length-1 ? 'Soal Berikutnya →' : 'Lihat Hasil 🏆'}
+    </button>
+  </div>`;
+  document.getElementById('kuis-content').innerHTML = html;
+  startTimer();
+}
+
+function selectAnswer(idx, btn) {
+  clearInterval(timerInterval);
+  const q = questions[curQ];
+  const opts = document.querySelectorAll('.option-btn');
+  opts.forEach(b => b.disabled = true);
+  const fb = document.getElementById('feedback-box');
+  const nextBtn = document.getElementById('btn-next');
+  const isCorrect = idx === q.ans;
+  userAnswers.push({ q: curQ, pick: idx, correct: isCorrect });
+  if (isCorrect) {
+    btn.classList.add('correct');
+    fb.classList.add('show','correct');
+    fb.innerHTML = '✅ Benar! ' + q.fb;
+    correct++;
+  } else {
+    btn.classList.add('wrong');
+    opts[q.ans].classList.add('correct');
+    fb.classList.add('show','wrong');
+    fb.innerHTML = '❌ Kurang tepat. ' + q.fb;
+    wrong++;
+  }
+  nextBtn.classList.add('show');
+}
+
+function nextQuestion() {
+  curQ++;
+  if (curQ >= questions.length) showResult();
+  else renderQuestion();
+}
+
+function showResult() {
+  clearInterval(timerInterval);
+  const val = Math.round((correct / questions.length) * 100);
+  document.getElementById('kuis-area').style.display = 'none';
+  document.getElementById('kuis-result').style.display = 'flex';
+  document.getElementById('result-score-val').textContent = val;
+  document.getElementById('result-benar').textContent = correct;
+  document.getElementById('result-salah').textContent = wrong;
+  const grade = getGrade(val);
+  let title, desc;
+  if (val >= 90) { title = '🌟 Luar Biasa!'; desc = 'Pemahaman kamu tentang dribbling basket sangat baik!'; }
+  else if (val >= 75) { title = '👍 Tuntas!'; desc = 'Kamu sudah memahami materi dengan baik. Pertahankan!'; }
+  else if (val >= 60) { title = '📚 Cukup Baik'; desc = 'Perlu lebih banyak latihan. Baca ulang materi dan coba lagi!'; }
+  else { title = '💪 Semangat!'; desc = 'Yuk pelajari lagi materinya, kamu pasti bisa lebih baik!'; }
+  document.getElementById('result-title').textContent = title;
+  document.getElementById('result-desc').textContent = desc;
+
+  // Show grade
+  const gradeEl = document.getElementById('result-grade');
+  if (gradeEl) { gradeEl.textContent = grade + ' – ' + getGradeLabel(val); gradeEl.style.color = getGradeColor(grade); }
+
+  // Build review
+  buildReview();
+
+  // Save score – deduplicate: keep best score per user per session
+  const entry = { nama: currentUser.nama, kelas: currentUser.kelas, nilai: val, grade, waktu: new Date().toLocaleString('id-ID') };
+  allScores.push(entry);
+  lsSet('pjok_basket_scores', allScores);
+  buildRekap();
+  markProgress('kuis');
+}
+
+function buildReview() {
+  const wrap = document.getElementById('review-wrap');
+  if (!wrap) return;
+  wrap.innerHTML = questions.map((q, qi) => {
+    const ua = userAnswers[qi];
+    const letters = ['A','B','C','D'];
+    const optsHtml = q.opts.map((o, oi) => {
+      let cls = 'neutral';
+      if (oi === q.ans) cls = 'correct';
+      else if (ua && ua.pick === oi && !ua.correct) cls = 'wrong-pick';
+      return `<div class="review-ans ${cls}">
+        <strong style="flex-shrink:0;">${letters[oi]}.</strong> ${o}
+        ${oi === q.ans ? '<span style="margin-left:auto;color:#047857;flex-shrink:0;">✓</span>' : ''}
+        ${ua && ua.pick === oi && !ua.correct ? '<span style="margin-left:auto;color:#B91C1C;flex-shrink:0;">✗</span>' : ''}
+      </div>`;
+    }).join('');
+    const icon = ua && ua.correct ? '✅' : (ua && ua.pick === -1 ? '⏰' : '❌');
+    return `<div class="review-card">
+      <div class="review-q">${icon} <strong>Soal ${qi+1}:</strong> ${q.q}</div>
+      ${optsHtml}
+      <div class="review-fb">💡 ${q.fb}</div>
+    </div>`;
+  }).join('');
+}
+
+function resetKuis() {
+  document.getElementById('kuis-result').style.display = 'none';
+  document.getElementById('kuis-start').style.display = 'flex';
+  document.getElementById('kuis-start').style.flexDirection = 'column';
+}
+
+// ════════════════════════════════════
+// REKAP SISWA (improved)
+// ════════════════════════════════════
+function buildRekap() {
+  const el = document.getElementById('rekap-list');
+  if (!el) return;
+
+  // My best score
+  const myScores = allScores.filter(s => kKey(s) === kKey(currentUser));
+  const myBest = myScores.length ? myScores.reduce((a,b) => a.nilai>b.nilai?a:b) : null;
+  const myWrap = document.getElementById('rekap-my-score-wrap');
+  if (myWrap && myBest) {
+    myWrap.style.display = 'block';
+    document.getElementById('rekap-my-val').textContent = myBest.nilai;
+    document.getElementById('rekap-my-nama').textContent = currentUser.nama;
+    document.getElementById('rekap-my-kelas').textContent = currentUser.kelas;
+    const g = getGrade(myBest.nilai);
+    document.getElementById('rekap-my-grade').innerHTML = `<span style="color:${getGradeColor(g)}">Grade ${g} – ${getGradeLabel(myBest.nilai)}</span>`;
+    // rank
+    const sorted = getUniqueBestScores().sort((a,b)=>b.nilai-a.nilai);
+    const rank = sorted.findIndex(s=>kKey(s)===kKey(currentUser))+1;
+    const rankEl = document.getElementById('rekap-my-rank');
+    if (rankEl) rankEl.textContent = rank ? `#${rank}` : '#–';
+  }
+
+  // Build kelas filter chips
+  buildRekapFilterBar();
+
+  // Filter & display
+  renderRekapList();
+}
+
+function getUniqueBestScores() {
+  const map = {};
+  allScores.forEach(s => {
+    if (!map[kKey(s)] || s.nilai > map[kKey(s)].nilai) map[kKey(s)] = s;
+  });
+  return Object.values(map);
+}
+
+function buildRekapFilterBar() {
+  const bar = document.getElementById('rekap-filter-bar');
+  if (!bar) return;
+  const classes = [...new Set(allScores.map(s=>s.kelas))].sort();
+  bar.innerHTML = `<button class="filter-chip ${rekapFilterKelas==='semua'?'active':''}" onclick="filterRekap('semua',this)">Semua</button>` +
+    classes.map(k=>`<button class="filter-chip ${rekapFilterKelas===k?'active':''}" onclick="filterRekap('${k}',this)">${k}</button>`).join('');
+}
+
+function filterRekap(kelas, btn) {
+  rekapFilterKelas = kelas;
+  document.querySelectorAll('#rekap-filter-bar .filter-chip').forEach(b=>b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  renderRekapList();
+}
+
+function renderRekapList() {
+  const el = document.getElementById('rekap-list');
+  if (!el) return;
+  let data = getUniqueBestScores();
+  if (rekapFilterKelas !== 'semua') data = data.filter(s=>s.kelas===rekapFilterKelas);
+  if (!data.length) {
+    el.innerHTML = `<div class="info-card" style="text-align:center;"><p style="color:var(--gray);">Belum ada nilai kuis.<br>Selesaikan kuis untuk melihat hasil!</p></div>`;
+    return;
+  }
+  const sorted = data.sort((a,b)=>b.nilai-a.nilai);
+  el.innerHTML = sorted.map((s,i) => {
+    const g = getGrade(s.nilai);
+    const isMe = kKey(s) === kKey(currentUser);
+    return `<div class="rekap-item anim" style="animation-delay:${i*0.05}s;${isMe?'border-color:rgba(23,64,47,0.4);background:rgba(23,64,47,0.06);':''}">
+      <div style="width:28px;text-align:center;font-weight:800;font-size:13px;color:${i===0?'var(--gold)':i===1?'#CCC':i===2?'#CD7F32':'var(--gray)'};">${i<3?['🥇','🥈','🥉'][i]:(i+1)}</div>
+      <div class="rekap-avatar">${s.nama[0].toUpperCase()}</div>
+      <div class="rekap-info">
+        <div class="rekap-name">${s.nama}${isMe?'<span style="font-size:10px;color:var(--orange);margin-left:6px;">(Kamu)</span>':''}</div>
+        <div class="rekap-sub">${s.kelas} · ${s.waktu}</div>
+      </div>
+      <div>
+        <div class="rekap-score">${s.nilai}</div>
+        <div class="score-pill ${g}" style="margin-top:4px;">${g}</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function clearRekap() {
+  if (!confirm('Hapus semua data nilai? Tindakan ini tidak bisa dibatalkan.')) return;
+  allScores = [];
+  lsSet('pjok_basket_scores', allScores);
+  buildRekap();
+}
+
+// ════════════════════════════════════
+// GURU LOGIN
+// ════════════════════════════════════
+function openGuruLogin() {
+  goScreen('screen-guru-login');
+}
+
+function doGuruLogin() {
+  const pin = document.getElementById('guru-pin-input').value;
+  const errEl = document.getElementById('guru-pin-error');
+  errEl.style.display = 'none';
+  if (pin === GURU_PIN) {
+    document.getElementById('guru-pin-input').value = '';
+    goScreen('screen-guru');
+  } else {
+    errEl.textContent = '⚠️ PIN salah! Coba lagi.';
+    errEl.style.display = 'block';
+    document.getElementById('guru-pin-input').value = '';
+    document.getElementById('guru-pin-input').focus();
+  }
+}
+
+function guruLogout() {
+  goScreen('screen-home');
+  document.getElementById('bottom-nav').style.display = '';
+}
+
+// ════════════════════════════════════
+// DASHBOARD GURU
+// ════════════════════════════════════
+function buildGuruDashboard() {
+  // Apply current filter
+  let data = allScores;
+  if (guruFilterKelas !== 'semua') data = data.filter(s=>s.kelas===guruFilterKelas);
+
+  const unique = (() => {
+    const map = {};
+    data.forEach(s=>{ if(!map[kKey(s)]||s.nilai>map[kKey(s)].nilai) map[kKey(s)]=s; });
+    return Object.values(map);
+  })();
+
+  const total = unique.length;
+  const avg = total ? Math.round(unique.reduce((a,b)=>a+b.nilai,0)/total) : 0;
+  const tuntas = total ? Math.round(unique.filter(s=>s.nilai>=75).length/total*100) : 0;
+
+  document.getElementById('g-total').textContent = total;
+  document.getElementById('g-avg').textContent = total ? avg : '–';
+  document.getElementById('g-tuntas').textContent = total ? tuntas+'%' : '–';
+  document.getElementById('guru-sub-info').textContent = `Update: ${new Date().toLocaleString('id-ID')}`;
+
+  // Distribusi
+  const counts = {A:0,B:0,C:0,D:0};
+  unique.forEach(s=>counts[getGrade(s.nilai)]++);
+  const maxC = Math.max(...Object.values(counts),1);
+  ['A','B','C','D'].forEach(g=>{
+    const bar = document.getElementById('dist-'+g);
+    const cnt = document.getElementById('cnt-'+g);
+    if(bar) bar.style.width = (counts[g]/maxC*100)+'%';
+    if(cnt) cnt.textContent = counts[g]+'人';
+  });
+
+  // Filter bar
+  buildGuruFilterBar();
+
+  // Table
+  const sorted = [...unique].sort((a,b)=>b.nilai-a.nilai);
+  const empty = document.getElementById('guru-empty');
+  const tableWrap = document.getElementById('guru-table-wrap');
+  if (!sorted.length) {
+    if(empty) empty.style.display = 'block';
+    if(tableWrap) tableWrap.style.display = 'none';
+    document.getElementById('guru-kelas-wrap').innerHTML = '';
+    return;
+  }
+  if(empty) empty.style.display = 'none';
+  if(tableWrap) tableWrap.style.display = 'block';
+
+  const tbody = document.getElementById('guru-tbody');
+  if (tbody) tbody.innerHTML = sorted.map((s,i)=>{
+    const g = getGrade(s.nilai);
+    const rankClass = i===0?'gold':i===1?'silver':i===2?'bronze':'normal';
+    return `<tr>
+      <td><div class="rank-badge ${rankClass}">${i+1}</div></td>
+      <td style="font-weight:600;">${s.nama}</td>
+      <td style="color:var(--gray);">${s.kelas}</td>
+      <td><strong style="font-family:'Syne',sans-serif;font-size:16px;color:${getGradeColor(g)};">${s.nilai}</strong></td>
+      <td><span class="score-pill ${g}">${g}</span></td>
+      <td style="color:var(--gray);font-size:11px;">${s.waktu}</td>
+    </tr>`;
+  }).join('');
+
+  // Per-kelas summary
+  buildKelasSummary(data);
+}
+
+function buildGuruFilterBar() {
+  const bar = document.getElementById('guru-filter-bar');
+  if (!bar) return;
+  const classes = [...new Set(allScores.map(s=>s.kelas))].sort();
+  bar.innerHTML = `<button class="filter-chip ${guruFilterKelas==='semua'?'active':''}" onclick="guruFilter('semua',this)">Semua Kelas</button>` +
+    classes.map(k=>`<button class="filter-chip ${guruFilterKelas===k?'active':''}" onclick="guruFilter('${k}',this)">${k}</button>`).join('');
+}
+
+function guruFilter(kelas, btn) {
+  guruFilterKelas = kelas;
+  document.querySelectorAll('#guru-filter-bar .filter-chip').forEach(b=>b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  buildGuruDashboard();
+}
+
+function buildKelasSummary(data) {
+  const wrap = document.getElementById('guru-kelas-wrap');
+  if (!wrap) return;
+  const classes = [...new Set(data.map(s=>s.kelas))].sort();
+  if (!classes.length) { wrap.innerHTML = ''; return; }
+
+  wrap.innerHTML = classes.map(kelas => {
+    const siswa = (() => {
+      const m={};
+      data.filter(s=>s.kelas===kelas).forEach(s=>{ if(!m[kKey(s)]||s.nilai>m[kKey(s)].nilai)m[kKey(s)]=s; });
+      return Object.values(m);
+    })();
+    const avg = siswa.length ? Math.round(siswa.reduce((a,b)=>a+b.nilai,0)/siswa.length) : 0;
+    const tuntas = siswa.filter(s=>s.nilai>=75).length;
+    const belumTuntas = siswa.length - tuntas;
+    const g = getGrade(avg);
+    return `<div style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:14px;padding:16px;margin-bottom:10px;">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+        <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:16px;">${kelas}</div>
+        <div class="score-pill ${g}" style="font-size:13px;">${avg}</div>
+        <div style="font-size:12px;color:var(--gray);">${siswa.length} siswa</div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;text-align:center;">
+        <div style="background:rgba(0,193,106,0.08);border-radius:10px;padding:10px;">
+          <div style="font-family:'Syne',sans-serif;font-size:18px;font-weight:800;color:#047857;">${tuntas}</div>
+          <div style="font-size:10px;color:var(--gray);">Tuntas</div>
+        </div>
+        <div style="background:rgba(255,71,87,0.08);border-radius:10px;padding:10px;">
+          <div style="font-family:'Syne',sans-serif;font-size:18px;font-weight:800;color:#B91C1C;">${belumTuntas}</div>
+          <div style="font-size:10px;color:var(--gray);">Belum Tuntas</div>
+        </div>
+        <div style="background:rgba(255,107,43,0.08);border-radius:10px;padding:10px;">
+          <div style="font-family:'Syne',sans-serif;font-size:18px;font-weight:800;color:var(--orange);">${Math.round(tuntas/siswa.length*100)}%</div>
+          <div style="font-size:10px;color:var(--gray);">Ketuntasan</div>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function exportCSV() {
+  let data = allScores;
+  if (guruFilterKelas !== 'semua') data = data.filter(s=>s.kelas===guruFilterKelas);
+  const unique = (() => {
+    const m={};
+    data.forEach(s=>{if(!m[kKey(s)]||s.nilai>m[kKey(s)].nilai)m[kKey(s)]=s;});
+    return Object.values(m);
+  })();
+  if (!unique.length) { alert('Tidak ada data untuk diekspor.'); return; }
+  const sorted = [...unique].sort((a,b)=>b.nilai-a.nilai);
+  const header = 'No,Nama,Kelas,Nilai,Grade,Keterangan,Waktu\n';
+  const rows = sorted.map((s,i)=>`${i+1},"${s.nama}",${s.kelas},${s.nilai},${getGrade(s.nilai)},"${getGradeLabel(s.nilai)}","${s.waktu}"`).join('\n');
+  const blob = new Blob(['\uFEFF'+header+rows], {type:'text/csv;charset=utf-8;'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `nilai_pjok_basket_${new Date().toLocaleDateString('id-ID').replace(/\//g,'-')}.csv`;
+  a.click();
+}
+
+// ════════════════════════════════════
+// INIT
+// ════════════════════════════════════
+document.addEventListener('DOMContentLoaded', ()=>{
+  const ni = document.getElementById('input-nama');
+  if (ni) ni.addEventListener('keydown', e => {
+    if (e.key === 'Enter') document.getElementById('input-kelas').focus();
+  });
+  const pi = document.getElementById('guru-pin-input');
+  if (pi) pi.addEventListener('keydown', e => { if(e.key==='Enter') doGuruLogin(); });
+  buildRekap();
+});
+
+window.addEventListener('load', function() {
+  document.getElementById('watermark').style.display = 'none';
+});
+</script>
+<style>
+#screen-guru{background:#F7F8F3}
+.gd-shell{display:grid;grid-template-columns:208px minmax(0,1fr) 300px;width:100%;min-height:100vh;font-family:'Inter','DM Sans',sans-serif;color:#1E2342}
+.gd-side{background:#17402F;color:#CFE3D7;padding:26px 14px;display:flex;flex-direction:column;gap:6px;position:sticky;top:0;height:100vh}
+.gd-brand{display:flex;align-items:center;gap:10px;color:#fff;font-weight:800;font-size:16px;padding:0 10px 22px}
+.gd-brand i{width:34px;height:34px;border-radius:10px;background:#F5B82E;display:grid;place-items:center;font-style:normal}
+.gd-nav{display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:10px;font-size:13px;cursor:pointer;border:0;background:none;color:inherit;text-align:left;font-family:inherit;width:100%}
+.gd-nav:hover{background:rgba(255,255,255,.07)}
+.gd-nav.on{background:rgba(255,255,255,.12);color:#fff;font-weight:600}
+.gd-nav.out{margin-top:auto;color:#FDA4AF}
+.gd-main{padding:28px 26px 60px;display:flex;flex-direction:column;gap:18px;min-width:0}
+.gd-card{background:#fff;border-radius:16px;padding:20px 22px;box-shadow:0 4px 20px rgba(30,35,66,.06)}
+.gd-card h3{font-size:15px;font-weight:700;margin-bottom:14px;display:flex;justify-content:space-between;align-items:center}
+.gd-card h3 small{font-size:12px;font-weight:500;color:#6B7194}
+.gd-hero{display:flex;align-items:center;justify-content:space-between;gap:12px;overflow:hidden;position:relative;min-height:150px}
+.gd-hero h2{font-size:24px;font-weight:700;line-height:1.25}
+.gd-hero h2 b{color:#17402F}
+.gd-hero p{font-size:15px;color:#6B7194;margin-top:12px}
+.gd-hero p b{font-weight:700}
+.gd-art{font-size:92px;line-height:1;opacity:.95;margin-right:14px;flex-shrink:0}
+.gd-row2{display:grid;grid-template-columns:1.1fr 1fr;gap:18px}
+.gd-stu{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.gd-av{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:700;font-size:13px;flex-shrink:0}
+.gd-stu span.n{font-size:13px;font-weight:600;width:110px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gd-bar{flex:1;height:5px;background:#E8EAF4;border-radius:4px;overflow:hidden}
+.gd-bar i{display:block;height:100%;border-radius:4px}
+.gd-stu b{font-size:13px;width:34px;text-align:right}
+.gd-ringwrap{display:flex;flex-direction:column;align-items:center;gap:16px}
+.gd-ring{width:140px;height:140px;border-radius:50%;display:grid;place-items:center}
+.gd-ring div{width:106px;height:106px;border-radius:50%;background:#fff;display:grid;place-items:center;font-size:26px;font-weight:700}
+.gd-leg{display:flex;gap:22px;font-size:12px;color:#6B7194}
+.gd-leg i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px}
+.gd-list{display:flex;flex-direction:column;gap:10px}
+.gd-item{display:grid;grid-template-columns:40px 1fr auto auto;gap:14px;align-items:center;background:#fff;border-radius:12px;padding:12px 16px;box-shadow:0 4px 20px rgba(30,35,66,.06);font-size:13px}
+.gd-badge{width:36px;height:36px;border-radius:9px;display:grid;place-items:center;font-weight:800;font-size:12px}
+.gd-item .m{color:#8A90AE;font-size:12px}
+.gd-chips{display:flex;gap:8px;flex-wrap:wrap}
+.gd-chip{border:1px solid #D9DCEE;background:#fff;border-radius:20px;padding:6px 14px;font-size:12px;cursor:pointer;font-family:inherit;color:#6B7194}
+.gd-chip.on{background:#17402F;border-color:#17402F;color:#fff;font-weight:600}
+.gd-tw{overflow-x:auto}
+.gd-tb{width:100%;border-collapse:collapse;font-size:13px}
+.gd-tb th{text-align:left;color:#6B7194;font-weight:600;padding:8px 10px;border-bottom:1px solid #E8EAF4;white-space:nowrap}
+.gd-tb td{padding:10px;border-bottom:1px solid #F0F1F8}
+.gd-pill{display:inline-block;padding:2px 10px;border-radius:10px;font-weight:700;font-size:12px}
+.gd-exp{border:0;background:#17402F;color:#fff;border-radius:10px;padding:8px 14px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit}
+.gd-right{padding:28px 22px;display:flex;flex-direction:column;gap:18px;background:#fff;border-left:1px solid #ECEEF7}
+.gd-cal{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;text-align:center;font-size:11px;color:#6B7194}
+.gd-cal b{font-weight:600;color:#A3A8C4;padding:4px 0}
+.gd-cal span{padding:6px 0;border-radius:50%}
+.gd-cal .td{background:#E5484D;color:#fff;font-weight:700}
+.gd-les{border-left:3px solid;border-radius:10px;background:#F7F8FD;padding:10px 12px;margin-bottom:10px;font-size:12px}
+.gd-les b{display:block;font-size:13px;margin-bottom:2px}
+.gd-les span{color:#8A90AE}
+.gd-empty{text-align:center;color:#8A90AE;padding:24px;font-size:13px}
+@media(max-width:1100px){.gd-shell{grid-template-columns:208px minmax(0,1fr)}.gd-right{grid-column:2;border-left:0;background:none;padding-top:0}}
+@media(max-width:760px){.gd-shell{grid-template-columns:1fr}.gd-side{position:static;height:auto;flex-direction:row;overflow-x:auto;padding:12px;align-items:center}.gd-brand{padding:0 8px}.gd-nav{width:auto;white-space:nowrap}.gd-nav.out{margin-top:0}.gd-right{grid-column:1}.gd-row2{grid-template-columns:1fr}.gd-art{display:none}.gd-item{grid-template-columns:40px 1fr auto}.gd-item .m2{display:none}.gd-main{padding:18px 14px}}
+</style>
+<script>
+(function(){
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const COL=['#17402F','#F5B82E','#2E6B4F','#C98A12'];
+const BG=[['#FEF3C7','#B45309'],['#FEE2E2','#B91C1C'],['#EDE9FE','#6D28D9'],['#DCFCE7','#15803D']];
+const GC={A:['#DCFCE7','#15803D'],B:['#FEF3C7','#B45309'],C:['#FFEDD5','#C2410C'],D:['#FEE2E2','#B91C1C']};
+document.getElementById('screen-guru').innerHTML=`
+<div class="gd-shell">
+ <aside class="gd-side">
+  <div class="gd-brand"><i>🏀</i>PJOK Smart</div>
+  <button class="gd-nav on" onclick="gdGo('gd-top',this)">🏠 Dashboard</button>
+  <button class="gd-nav" onclick="gdGo('gd-kelas',this)">📊 Analisis Kelas</button>
+  <button class="gd-nav" onclick="gdGo('gd-tabel',this)">👥 Daftar Siswa</button>
+  <button class="gd-nav" onclick="exportCSV()">⬇ Ekspor CSV</button>
+  <button class="gd-nav out" onclick="guruLogout()">⎋ Keluar</button>
+ </aside>
+ <main class="gd-main" id="gd-top">
+  <section class="gd-card gd-hero"><div><h2>Selamat datang kembali, <b>Guru PJOK!</b></h2><p id="gd-l1"></p><p id="gd-l2" style="margin-top:6px"></p></div><div class="gd-art">👨‍🏫</div></section>
+  <div class="gd-chips" id="guru-filter-bar"></div>
+  <div class="gd-row2">
+   <section class="gd-card"><h3>Siswa Terbaik <small id="gd-n"></small></h3><div id="gd-top4"></div></section>
+   <section class="gd-card"><h3>Ketuntasan Kuis</h3><div class="gd-ringwrap"><div class="gd-ring" id="gd-ring"><div id="gd-pct">–</div></div><div class="gd-leg"><span><i style="background:#17402F"></i>Tuntas (≥75)</span><span><i style="background:#F5C542"></i>Belum</span></div></div></section>
+  </div>
+  <section id="gd-kelas"><h3 style="font-size:15px;font-weight:700;margin-bottom:12px">Rekapitulasi per Kelas</h3><div class="gd-list" id="guru-kelas-wrap"></div></section>
+  <section class="gd-card" id="gd-tabel"><h3>Daftar Nilai Siswa <button class="gd-exp" onclick="exportCSV()">⬇ Ekspor CSV</button></h3>
+   <div class="gd-empty" id="guru-empty" style="display:none">Belum ada siswa yang mengerjakan kuis.</div>
+   <div class="gd-tw" id="guru-table-wrap"><table class="gd-tb"><thead><tr><th>#</th><th>Nama</th><th>Kelas</th><th>Nilai</th><th>Grade</th><th>Waktu</th></tr></thead><tbody id="guru-tbody"></tbody></table></div>
+   <p style="font-size:11px;color:#8A90AE;margin-top:12px">A = 90–100 · B = 75–89 · C = 60–74 · D = &lt;60. Data tersimpan di perangkat ini.</p></section>
+ </main>
+ <aside class="gd-right">
+  <div><h3 style="font-size:14px;font-weight:700;margin-bottom:10px" id="gd-mon"></h3><div class="gd-cal" id="gd-cal"></div></div>
+  <div><h3 style="font-size:14px;font-weight:700;margin-bottom:10px">Sebaran Nilai</h3><div id="gd-dist"></div></div>
+ </aside>
+</div>`;
+window.gdGo=(id,b)=>{document.querySelectorAll('.gd-nav').forEach(x=>x.classList.remove('on'));if(b)b.classList.add('on');document.getElementById(id).scrollIntoView({behavior:'smooth',block:'start'})};
+window.guruFilter=function(k){guruFilterKelas=k;buildGuruDashboard()};
+const best=a=>{const m={};a.forEach(s=>{if(!m[kKey(s)]||s.nilai>m[kKey(s)].nilai)m[kKey(s)]=s});return Object.values(m)};
+window.buildGuruDashboard=function(){
+ const all=best(allScores),kls=[...new Set(allScores.map(s=>s.kelas))].sort();
+ const u=guruFilterKelas==='semua'?all:best(allScores.filter(s=>s.kelas===guruFilterKelas));
+ const n=u.length,avg=n?Math.round(u.reduce((a,b)=>a+b.nilai,0)/n):0,tun=n?Math.round(u.filter(s=>s.nilai>=75).length/n*100):0;
+ document.getElementById('guru-filter-bar').innerHTML=['semua',...kls].map(k=>`<button class="gd-chip ${guruFilterKelas===k?'on':''}" onclick="guruFilter('${esc(k)}')">${k==='semua'?'Semua Kelas':esc(k)}</button>`).join('');
+ const lab=avg>=90?['sangat baik','#15803D']:avg>=75?['baik','#15803D']:avg>=60?['cukup','#B45309']:['perlu perhatian','#E5484D'];
+ document.getElementById('gd-l1').innerHTML=n?`Siswa Anda menuntaskan <b style="color:#E5484D">${tun}%</b> dari kuis.`:'Belum ada siswa yang mengerjakan kuis.';
+ document.getElementById('gd-l2').innerHTML=n?`Rata-rata nilai ${avg}, hasilnya <b style="color:${lab[1]}">${lab[0]}!</b>`:'Data akan tampil setelah siswa menyelesaikan kuis.';
+ document.getElementById('gd-n').textContent=n+' siswa';
+ const top=[...u].sort((a,b)=>b.nilai-a.nilai).slice(0,4);
+ document.getElementById('gd-top4').innerHTML=top.length?top.map((s,i)=>`<div class="gd-stu"><div class="gd-av" style="background:${COL[i]}">${esc(s.nama[0]).toUpperCase()}</div><span class="n">${esc(s.nama)}</span><div class="gd-bar"><i style="width:${s.nilai}%;background:${COL[i]}"></i></div><b>${s.nilai}%</b></div>`).join(''):'<div class="gd-empty">Belum ada data</div>';
+ document.getElementById('gd-ring').style.background=n?`conic-gradient(#17402F 0 ${tun}%,#F5C542 ${tun}% 100%)`:'#E8EAF4';
+ document.getElementById('gd-pct').textContent=n?tun+'%':'–';
+ const byK={};u.forEach(s=>(byK[s.kelas]=byK[s.kelas]||[]).push(s));
+ document.getElementById('guru-kelas-wrap').innerHTML=Object.keys(byK).sort().map((k,i)=>{const a=byK[k],av=Math.round(a.reduce((x,y)=>x+y.nilai,0)/a.length),t=a.filter(s=>s.nilai>=75).length,c=BG[i%4];
+  return `<div class="gd-item"><div class="gd-badge" style="background:${c[0]};color:${c[1]}">${esc(k.replace('XI ',''))}</div><div><b>Kelas ${esc(k)}</b><div class="m">${a.length} siswa</div></div><div class="m m2">${t} tuntas · ${a.length-t} belum</div><b>${av}</b></div>`}).join('')||'<div class="gd-card gd-empty">Belum ada data kelas</div>';
+ const rows=[...u].sort((a,b)=>b.nilai-a.nilai),g=v=>v>=90?'A':v>=75?'B':v>=60?'C':'D';
+ document.getElementById('guru-empty').style.display=rows.length?'none':'block';
+ document.getElementById('guru-table-wrap').style.display=rows.length?'block':'none';
+ document.getElementById('guru-tbody').innerHTML=rows.map((s,i)=>{const G=g(s.nilai);return `<tr><td>${i+1}</td><td><b>${esc(s.nama)}</b></td><td>${esc(s.kelas)}</td><td><b>${s.nilai}</b></td><td><span class="gd-pill" style="background:${GC[G][0]};color:${GC[G][1]}">${G}</span></td><td style="color:#8A90AE;font-size:11px">${esc(s.waktu)}</td></tr>`}).join('');
+ const cnt={A:0,B:0,C:0,D:0};u.forEach(s=>cnt[g(s.nilai)]++);
+ document.getElementById('gd-dist').innerHTML=['A','B','C','D'].map(G=>`<div class="gd-stu" style="margin-bottom:10px"><span class="gd-pill" style="background:${GC[G][0]};color:${GC[G][1]};width:28px;text-align:center">${G}</span><div class="gd-bar"><i style="width:${n?cnt[G]/n*100:0}%;background:${GC[G][1]}"></i></div><b>${cnt[G]}</b></div>`).join('');
+ const d=new Date(),y=d.getFullYear(),m=d.getMonth(),f=new Date(y,m,1).getDay(),L=new Date(y,m+1,0).getDate();
+ document.getElementById('gd-mon').textContent=d.toLocaleDateString('id-ID',{month:'long',year:'numeric'});
+ document.getElementById('gd-cal').innerHTML=['Mi','Sn','Sl','Rb','Km','Jm','Sb'].map(x=>`<b>${x}</b>`).join('')+'<span></span>'.repeat(f)+Array.from({length:L},(_,i)=>`<span class="${i+1===d.getDate()?'td':''}">${i+1}</span>`).join('');
+};
+})();
+</script>
+
+<style>
+.topbar-out{border:1px solid #D5DDD7;background:#fff;color:#17402F;border-radius:10px;padding:6px 12px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit}
+.topbar-out:hover{background:#17402F;color:#fff}
+.watermark{bottom:88px!important}
+</style>
+<script>
+function logoutToStart(){
+ if(currentScreen!=='screen-guru-login'&&currentScreen!=='screen-guru'&&!confirm('Keluar dan kembali ke halaman awal?'))return;
+ clearInterval(timerInterval);
+ currentUser={nama:'',kelas:''};
+ Object.keys(progressFlags).forEach(function(k){progressFlags[k]=false});updateProgress();
+ var ka=document.getElementById('kuis-area'),kr=document.getElementById('kuis-result'),ks=document.getElementById('kuis-start');
+ if(ka)ka.style.display='none';if(kr)kr.style.display='none';if(ks){ks.style.display='flex';ks.style.flexDirection='column'}
+ document.getElementById('input-nama').value='';document.getElementById('input-kelas').selectedIndex=0;
+ var er=document.getElementById('login-error');if(er)er.style.display='none';
+ document.getElementById('bottom-nav').classList.remove('show');
+ document.getElementById('watermark').style.display='none';
+ goScreen('screen-login');
+}
+window.guruLogout=logoutToStart;
+</script>
+<style>
+.media-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}.media-slot{border:1.5px dashed #94A3B8;border-radius:12px;padding:10px;min-height:96px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;font-size:12px;color:#475569;background:#F8FAFC}.media-slot video,.media-slot img{width:100%;border-radius:8px}.gloss dt{font-weight:700;margin-top:10px;color:#17402F}.gloss dd{margin:2px 0 0;font-size:13px;color:#475569;line-height:1.5}.step-num{color:#fff!important}.rekap-avatar{color:#fff!important}.rekap-rank-badge{color:#92400E!important}.option-btn.correct .option-letter,.option-btn.wrong .option-letter{color:#fff!important}.ver-line{text-align:center;font-size:11px;color:#64748B;padding:14px 0 110px}.kisi-t{width:100%;border-collapse:collapse}.kisi-t td,.kisi-t th{border-bottom:1px solid #E2E8F0;padding:4px 6px;text-align:left}
+</style>
+<script>
+// ===== v1.1 patch =====
+const MEDIA={stance:'',lowhigh:'',crossover:'',behind:''}; // isi nama file, mis. 'media/crossover.mp4' atau 'media/crossover.gif'
+const ALL_TABS=['tab-tujuan','tab-pengertian','tab-jenis','tab-teknik','tab-diagram','tab-kesalahan','tab-tips','tab-pemanasan','tab-glosarium'];
+let tabsSeen=[],kuisDone=false,timerOn=false;
+questionBank[9]={q:"Pada crossover dribble yang benar, bola dipantulkan...",opts:["Rendah di depan tubuh, berpindah dari satu tangan ke tangan lain","Tinggi di atas kepala agar lawan sulit membaca","Di belakang punggung sambil memutar badan","Tepat di samping kaki belakang tanpa berpindah tangan"],ans:0,fb:"Pada crossover, bola dipantulkan rendah di depan tubuh dari satu tangan ke tangan lain. Pantulan rendah menyulitkan lawan merebut bola dan mempercepat perubahan arah."};
+const KISI=[['Pengertian dribbling','C1'],['Teknik dasar','C1'],['Teknik dasar','C1'],['Jenis dribbling','C2'],['Aturan & pelanggaran','C1'],['Teknik dasar','C1'],['Jenis dribbling','C2'],['Aturan & pelanggaran','C2'],['Teknik dasar','C2'],['Jenis dribbling','C2'],['Jenis dribbling','C2'],['Teknik dasar','C1'],['Teknik dasar','C2'],['Jenis dribbling','C2'],['Aturan & pelanggaran','C3']];
+function userKey(){return 'pjok_state_'+kKey(currentUser)}
+function saveState(){lsSet(userKey(),{isi:checklistIsi,mon:checklistMon,game:checklistGame,mongame:checklistMonGame,tabs:tabsSeen,kuis:kuisDone})}
+function loadState(){const s=lsGet(userKey(),'{}'),f=(a,n)=>Array.from({length:n},(_,i)=>!!(a&&a[i]));checklistIsi=f(s.isi,6);checklistMon=f(s.mon,5);checklistGame=f(s.game,5);checklistMonGame=f(s.mongame,5);tabsSeen=s.tabs||[];kuisDone=!!s.kuis}
+function recompute(){progressFlags.materi=ALL_TABS.every(x=>tabsSeen.includes(x));progressFlags.proyek=(checklistIsi.every(Boolean)&&checklistMon.every(Boolean))||(checklistGame.every(Boolean)&&checklistMonGame.every(Boolean));progressFlags.kuis=kuisDone;updateProgress()}
+function markProgress(k){if(k==='kuis'){kuisDone=true;saveState()}recompute()}
+function seenTab(id){if(id&&!tabsSeen.includes(id)){tabsSeen.push(id);saveState()}recompute()}
+const _bc=buildChecklists;buildChecklists=function(){loadState();_bc();recompute()};
+const _tc=toggleCheck;toggleCheck=function(a,b,c){_tc(a,b,c);saveState();recompute()};
+const _sw=switchTab;switchTab=function(btn,id){_sw(btn,id);seenTab(id)};
+const _go=goScreen;goScreen=function(id){_go(id);if(id==='screen-materi'){const a=document.querySelector('#screen-materi .tab-content.active');if(a)seenTab(a.id)}};
+function rnd(n){return Math.floor(Math.random()*n)}
+shuffleQuestions=function(){const a=[...questionBank];for(let i=a.length-1;i>0;i--){const j=rnd(i+1);[a[i],a[j]]=[a[j],a[i]]}questions=a.slice(0,10).map(q=>{const ix=q.opts.map((_,i)=>i);for(let i=ix.length-1;i>0;i--){const j=rnd(i+1);[ix[i],ix[j]]=[ix[j],ix[i]]}return{...q,opts:ix.map(i=>q.opts[i]),ans:ix.indexOf(q.ans)}})};
+const _sk=startKuis;startKuis=function(){const c=document.getElementById('opt-timer');timerOn=!!(c&&c.checked);_sk()};
+const _st=startTimer;startTimer=function(){if(!timerOn){clearInterval(timerInterval);const w=document.getElementById('kuis-timer-wrap');if(w)w.style.display='none';return}_st()};
+(function(){const w=document.getElementById('kisi-wrap');if(w){const g={};KISI.forEach((k,i)=>{(g[k[0]]=g[k[0]]||[]).push(k[1])});w.innerHTML='<table class="kisi-t"><tr><th>Indikator</th><th>Level</th><th>Soal</th></tr>'+Object.keys(g).map(n=>'<tr><td>'+n+'</td><td>'+[...new Set(g[n])].sort().join(', ')+'</td><td>'+g[n].length+'</td></tr>').join('')+'</table><p style="margin-top:6px">Bank 15 soal; tiap percobaan 10 soal acak dengan urutan opsi diacak.</p>'}
+document.querySelectorAll('.media-slot').forEach(s=>{const f=MEDIA[s.dataset.key];if(!f){s.innerHTML='🎞️ <b>'+s.dataset.label+'</b><br>Video contoh akan ditambahkan';return}s.innerHTML=/\.(mp4|webm)$/i.test(f)?'<video src="'+f+'" controls playsinline loop muted></video>':'<img src="'+f+'" alt="'+s.dataset.label+'">'});
+const v='v'+APP_VERSION+' · '+APP_DATE;['screen-login','screen-home'].forEach(i=>{const e=document.getElementById(i);if(e){const d=document.createElement('div');d.className='ver-line';d.textContent='PJOK Smart · versi '+APP_VERSION+' · '+APP_DATE;e.appendChild(d)}});
+try{const l=JSON.parse(localStorage.getItem('pjok_last')||'{}');if(l.nama)document.getElementById('input-nama').value=l.nama;if(l.kelas)document.getElementById('input-kelas').value=l.kelas}catch(e){}})();
+const _dl=doLogin;doLogin=function(){_dl();if(currentUser.nama)lsSet('pjok_last',currentUser)};
+</script>
+</body>
+</html>
